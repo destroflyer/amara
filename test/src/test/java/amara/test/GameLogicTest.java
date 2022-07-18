@@ -134,7 +134,7 @@ public class GameLogicTest {
 
     protected int createEntity(String template) {
         int entity = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, entity, template);
+        EntityTemplate.createReader().loadTemplate(entityWorld, entity, template);
         return entity;
     }
 }

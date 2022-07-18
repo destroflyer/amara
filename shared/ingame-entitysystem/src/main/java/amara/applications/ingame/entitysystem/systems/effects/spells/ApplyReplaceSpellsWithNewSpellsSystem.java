@@ -20,7 +20,7 @@ public class ApplyReplaceSpellsWithNewSpellsSystem implements EntitySystem {
             int oldSpellEntity = spellsEntities[replaceSpellWithNewSpellComponent.getSpellIndex()];
             CleanupUtil.tryCleanupEntity(entityWorld, oldSpellEntity);
             int[] newSpellsEntities = Util.cloneArray(spellsEntities);
-            int newSpellEntity = EntityTemplate.createFromTemplate(entityWorld, replaceSpellWithNewSpellComponent.getNewSpellTemplate()).getId();
+            int newSpellEntity = EntityTemplate.createReader().createFromTemplate(entityWorld, replaceSpellWithNewSpellComponent.getNewSpellTemplate()).getId();
             newSpellsEntities[replaceSpellWithNewSpellComponent.getSpellIndex()] = newSpellEntity;
             entityWorld.setComponent(targetEntity, new SpellsComponent(newSpellsEntities));
         }

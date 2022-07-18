@@ -25,7 +25,7 @@ public class CampSpawnSystem implements EntitySystem{
             for(int spawnInformationEntity : spawnInformationEntites){
                 String[] templateNames = entityWorld.getComponent(spawnInformationEntity, SpawnTemplateComponent.class).getTemplateNames();
                 int entity = entityWorld.createEntity();
-                EntityTemplate.loadTemplates(entityWorld, entity, templateNames);
+                EntityTemplate.createReader().loadTemplates(entityWorld, entity, templateNames);
                 Vector2f position = entityWorld.getComponent(entity, PositionComponent.class).getPosition();
                 Vector2f direction = entityWorld.getComponent(entity, DirectionComponent.class).getVector();
                 entityWorld.setComponent(entity, new CampComponent(campEntity, position, direction));

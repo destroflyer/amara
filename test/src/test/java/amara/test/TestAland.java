@@ -443,7 +443,7 @@ public class TestAland extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatWalkSpeedComponent(10));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/melee_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/melee_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         onLogicStart();
@@ -502,7 +502,7 @@ public class TestAland extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatWalkSpeedComponent(10));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/melee_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/melee_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         onLogicStart();
@@ -565,7 +565,7 @@ public class TestAland extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatWalkSpeedComponent(10));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/melee_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/melee_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         onLogicStart();

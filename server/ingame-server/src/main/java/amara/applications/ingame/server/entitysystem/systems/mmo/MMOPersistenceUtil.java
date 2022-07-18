@@ -165,7 +165,7 @@ public class MMOPersistenceUtil {
         int itemEntity = entityWorld.createEntity();
         String id = mmoItemState.getId();
         if (id != null) {
-            EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + id);
+            EntityTemplate.createReader().loadTemplate(entityWorld, itemEntity, "items/" + id);
         } else {
             String name = mmoItemState.getName();
             if (name != null) {

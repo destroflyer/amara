@@ -193,7 +193,7 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(10));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         onLogicStart();
@@ -234,7 +234,7 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(10));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         onLogicStart();
@@ -283,7 +283,7 @@ public class TestScarlet extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(10));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         onLogicStart();

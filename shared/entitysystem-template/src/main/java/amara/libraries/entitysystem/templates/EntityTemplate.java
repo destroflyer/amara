@@ -1,14 +1,13 @@
 package amara.libraries.entitysystem.templates;
 
-import amara.libraries.entitysystem.EntityWorld;
-import amara.libraries.entitysystem.EntityWrapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @AllArgsConstructor
 @Getter
@@ -59,26 +58,11 @@ public class EntityTemplate {
 
     // Static Utility
 
-    private static ArrayList<EntityTemplate_Loader> loaders = new ArrayList<>();
+    @Setter
+    private static Supplier<EntityTemplateReader> implementation;
 
-    public static void addLoader(EntityTemplate_Loader loader) {
-        loaders.add(loader);
-    }
-
-    public static EntityWrapper createFromTemplate(EntityWorld entityWorld, String... templateNames) {
-        int entity = entityWorld.createEntity();
-        loadTemplates(entityWorld, entity, templateNames);
-        return entityWorld.getWrapped(entity);
-    }
-
-    public static void loadTemplates(EntityWorld entityWorld, int entity, String... templateNames) {
-        for (String templateName : templateNames) {
-            loadTemplate(entityWorld, entity, templateName);
-        }
-    }
-
-    public static void loadTemplate(EntityWorld entityWorld, int entity, String template) {
-        loadTemplate(entityWorld, entity, parseTemplate(template));
+    public static EntityTemplateReader createReader() {
+        return implementation.get();
     }
 
     public static EntityTemplate parseTemplate(String template) {
@@ -122,11 +106,5 @@ public class EntityTemplate {
             }
         }
         return values;
-    }
-
-    public static void loadTemplate(EntityWorld entityWorld, int entity, EntityTemplate entityTemplate) {
-        for (EntityTemplate_Loader loader : loaders) {
-            loader.loadTemplate(entityWorld, entity, entityTemplate);
-        }
     }
 }

@@ -233,7 +233,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(50));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         entityWorld.removeComponent(character, IsAutoAttackEnabledComponent.class);
@@ -280,7 +280,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(50));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         entityWorld.removeComponent(character, IsAutoAttackEnabledComponent.class);
@@ -338,7 +338,7 @@ public class TestDwarfWarrior extends CommandingPlayerTest {
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackDamageComponent(50));
         entityWorld.setComponent(targetDummyBaseAttributes, new BonusFlatAttackSpeedComponent(1));
         int targetDummyAutoAttack = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
+        EntityTemplate.createReader().loadTemplate(entityWorld, targetDummyAutoAttack, "spells/ranged_autoattack");
         entityWorld.setComponent(targetDummy, new AutoAttackComponent(targetDummyAutoAttack));
         entityWorld.setComponent(targetDummy, new IsAutoAttackEnabledComponent());
         entityWorld.removeComponent(character, IsAutoAttackEnabledComponent.class);

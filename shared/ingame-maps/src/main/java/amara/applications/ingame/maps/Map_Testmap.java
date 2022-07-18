@@ -84,7 +84,7 @@ public class Map_Testmap extends Map {
                 unit.setComponent(new IsSilencableComponent());
                 unit.setComponent(new IsStunnableComponent());
                 unit.setComponent(new SightRangeComponent(30));
-                EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
+                EntityWrapper autoAttack = EntityTemplate.createReader().createFromTemplate(entityWorld, "spells/ranged_autoattack");
                 unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
                 unit.setComponent(new TeamComponent(0));
                 unit.setComponent(new BountyComponent(testUnitBounty.getId()));
@@ -135,7 +135,7 @@ public class Map_Testmap extends Map {
         forestMonsterCamp.setComponent(new CampRespawnDurationComponent(5));
         forestMonsterCamp.setComponent(new CampSpawnComponent());
         //Bush
-        EntityWrapper bush = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+        EntityWrapper bush = EntityTemplate.createReader().createFromTemplate(entityWorld, "other/bush");
         bush.setComponent(new PositionComponent(new Vector2f(47, 8.5f)));
         bush.setComponent(new HitboxComponent(new RegularCyclic(6, 6)));
         //Boss
@@ -179,9 +179,9 @@ public class Map_Testmap extends Map {
         boss.setComponent(new IsKnockupableComponent());
         boss.setComponent(new IsSilencableComponent());
         boss.setComponent(new IsStunnableComponent());
-        EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
+        EntityWrapper autoAttack = EntityTemplate.createReader().createFromTemplate(entityWorld, "spells/ranged_autoattack");
         boss.setComponent(new AutoAttackComponent(autoAttack.getId()));
-        EntityWrapper bodyslam = EntityTemplate.createFromTemplate(entityWorld, "spells/bodyslam");
+        EntityWrapper bodyslam = EntityTemplate.createReader().createFromTemplate(entityWorld, "spells/bodyslam");
         boss.setComponent(new SpellsComponent(bodyslam.getId()));
         boss.setComponent(new CastSpellOnCooldownWhileAttackingComponent(0));
         boss.setComponent(new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.BOSS));

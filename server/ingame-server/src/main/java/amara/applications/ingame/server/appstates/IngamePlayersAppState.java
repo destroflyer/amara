@@ -139,7 +139,7 @@ public class IngamePlayersAppState extends ServerBaseAppState {
     private int createCharacterEntity(EntityWorld entityWorld, String playerName, int characterId, int skinId) {
         DatabaseAppState databaseAppState = mainApplication.getMasterServer().getState(DatabaseAppState.class);
         String characterName = databaseAppState.getQueryResult("SELECT name FROM characters WHERE id = " + characterId + " LIMIT 1").nextString_Close();
-        int characterEntity = EntityTemplate.createFromTemplate(entityWorld, "units/" + characterName).getId();
+        int characterEntity = EntityTemplate.createReader().createFromTemplate(entityWorld, "units/" + characterName).getId();
         String skinName = ((skinId == 0) ? "default" : databaseAppState.getQueryResult("SELECT name FROM characters_skins WHERE id = " + skinId + " LIMIT 1").nextString_Close());
         entityWorld.setComponent(characterEntity, new TitleComponent(playerName));
         entityWorld.setComponent(characterEntity, new ModelComponent("Models/" + characterName + "/skin_" + skinName + ".xml"));
@@ -182,7 +182,7 @@ public class IngamePlayersAppState extends ServerBaseAppState {
                 int mapSpellIndex = ((mapSpellsIndices != null) ? mapSpellsIndices[i][r] : 0);
                 MapSpell mapSpell = mapSpellsGroup.getMapSpells()[mapSpellIndex];
                 int spellEntity = entityWorld.createEntity();
-                EntityTemplate.loadTemplate(entityWorld, spellEntity, mapSpell.getEntityTemplate());
+                EntityTemplate.createReader().loadTemplate(entityWorld, spellEntity, mapSpell.getEntityTemplate());
                 mapSpellsEntities.add(spellEntity);
             }
         }

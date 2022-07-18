@@ -73,7 +73,7 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<AddCollisionGroupsComponent>("addCollisionGroups"){
 
             @Override
-            public AddCollisionGroupsComponent construct(EntityWorld entityWorld, Element element){
+            public AddCollisionGroupsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
                 long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
                 return new AddCollisionGroupsComponent(targetOf, targets);
@@ -82,7 +82,7 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<RemoveCollisionGroupsComponent>("removeCollisionGroups"){
 
             @Override
-            public RemoveCollisionGroupsComponent construct(EntityWorld entityWorld, Element element){
+            public RemoveCollisionGroupsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
                 long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
                 return new RemoveCollisionGroupsComponent(targetOf, targets);
@@ -92,7 +92,7 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<HitboxComponent>("hitbox"){
 
             @Override
-            public HitboxComponent construct(EntityWorld entityWorld, Element element){
+            public HitboxComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 Shape shape = null;
                 Element childElement = element.getChildren().get(0);
                 String shapeType = childElement.getName();
@@ -107,25 +107,25 @@ public class CustomSerializer_Ingame{
                     y = Double.parseDouble(yText);
                 }
                 if(shapeType.equals("regularCyclic")){
-                    int edges = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("edges")));
-                    double radius = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("radius")));
+                    int edges = Integer.parseInt(templateReader.parseValue(entityWorld, childElement.getAttributeValue("edges")));
+                    double radius = Double.parseDouble(templateReader.parseValue(entityWorld, childElement.getAttributeValue("radius")));
                     shape = new RegularCyclic(edges, radius);
                 }
                 else if(shapeType.equals("circle")){
-                    double radius = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("radius")));
+                    double radius = Double.parseDouble(templateReader.parseValue(entityWorld, childElement.getAttributeValue("radius")));
                     shape = new Circle(x, y, radius);
                 }
                 else if(shapeType.equals("rectangle")){
-                    double width = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("width")));
-                    double height = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, childElement.getAttributeValue("height")));
+                    double width = Double.parseDouble(templateReader.parseValue(entityWorld, childElement.getAttributeValue("width")));
+                    double height = Double.parseDouble(templateReader.parseValue(entityWorld, childElement.getAttributeValue("height")));
                     shape = new Rectangle(x, y, width, height);
                 }
                 else if(shapeType.equals("point")){
                     Vector2D localPoint = new Vector2D();
                     String[] positionCoordinates = element.getText().split(",");
                     if(positionCoordinates.length > 1){
-                        double localPointX = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
-                        double localPointY = Double.parseDouble(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
+                        double localPointX = Double.parseDouble(templateReader.parseValue(entityWorld, positionCoordinates[0]));
+                        double localPointY = Double.parseDouble(templateReader.parseValue(entityWorld, positionCoordinates[1]));
                         localPoint = new Vector2D(localPointX, localPointY);
                     }
                     shape = new PointShape(localPoint);
@@ -140,10 +140,10 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<SpawnTemplateComponent>("spawnTemplate"){
 
             @Override
-            public SpawnTemplateComponent construct(EntityWorld entityWorld, Element element){
+            public SpawnTemplateComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] templates = element.getText().split("\\|");
                 for(int i=0;i<templates.length;i++){
-                    templates[i] = xmlTemplateManager.parseTemplate(entityWorld, templates[i]).getText();
+                    templates[i] = templateReader.parseTemplate(entityWorld, templates[i]).getText();
                 }
                 return new SpawnTemplateComponent(templates);
             }
@@ -152,16 +152,16 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<CastTypeComponent>("castType"){
 
             @Override
-            public CastTypeComponent construct(EntityWorld entityWorld, Element element){
+            public CastTypeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new CastTypeComponent(CastTypeComponent.CastType.valueOf(element.getText().toUpperCase()));
             }
         });
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<RangeComponent>("range"){
 
             @Override
-            public RangeComponent construct(EntityWorld entityWorld, Element element){
+            public RangeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 RangeComponent.RangeType type = RangeComponent.RangeType.valueOf(element.getAttributeValue("type").toUpperCase());
-                float distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("distance")));
+                float distance = Float.parseFloat(templateReader.parseValue(entityWorld, element.getAttributeValue("distance")));
                 return new RangeComponent(type, distance);
             }
         });
@@ -169,7 +169,7 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<CollisionGroupComponent>("collisionGroup"){
 
             @Override
-            public CollisionGroupComponent construct(EntityWorld entityWorld, Element element){
+            public CollisionGroupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 long targetOf = getCollisionGroupBitMask(element.getAttributeValue("targetOf"));
                 long targets = getCollisionGroupBitMask(element.getAttributeValue("targets"));
                 return new CollisionGroupComponent(targetOf, targets);
@@ -178,7 +178,7 @@ public class CustomSerializer_Ingame{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<HealthBarStyleComponent>("healthBarStyle"){
 
             @Override
-            public HealthBarStyleComponent construct(EntityWorld entityWorld, Element element){
+            public HealthBarStyleComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new HealthBarStyleComponent(HealthBarStyleComponent.HealthBarStyle.valueOf(element.getText().toUpperCase()));
             }
         });

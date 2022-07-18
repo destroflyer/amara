@@ -536,13 +536,13 @@ public class Map_Vegas extends Map {
         StackUtil.addStacks(entityWorld, characterEntity, freeBoardPlacesBuffs[playerIndex], boardPlaces);
 
         int spellSwap = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, spellSwap, "spells/vegas_swap_mark(spellIndex=0,putTargetBuff=" + putTargetBuffs[playerIndex]
+        EntityTemplate.createReader().loadTemplate(entityWorld, spellSwap, "spells/vegas_swap_mark(spellIndex=0,putTargetBuff=" + putTargetBuffs[playerIndex]
             + ",freeBenchPlacesBuff=" + freeBenchPlacesBuffs[playerIndex] + ",freeBenchPlaceBuff=" + freeBenchPlaceBuffs[playerIndex] + ",fullBenchPlaceBuff=" + fullBenchPlaceBuffs[playerIndex] + ",unitOnBenchBuff=" + unitOnBenchBuffs[playerIndex]
             + ",freeBoardPlacesBuff=" + freeBoardPlacesBuffs[playerIndex] + ",freeBoardPlaceBuff=" + freeBoardPlaceBuffs[playerIndex] + ",fullBoardPlaceBuff=" + fullBoardPlaceBuffs[playerIndex] + ",unitOnBoardBuff=" + unitOnBoardBuffs[playerIndex]
         + ")");
 
         int spellSell = entityWorld.createEntity();
-        EntityTemplate.loadTemplate(entityWorld, spellSell, "spells/vegas_sell(unitOnBenchBuff=" + unitOnBenchBuffs[playerIndex] + ",unitOnBoardBuff=" + unitOnBoardBuffs[playerIndex] + ")");
+        EntityTemplate.createReader().loadTemplate(entityWorld, spellSell, "spells/vegas_sell(unitOnBenchBuff=" + unitOnBenchBuffs[playerIndex] + ",unitOnBoardBuff=" + unitOnBoardBuffs[playerIndex] + ")");
         for (int unitIndex = 0; unitIndex < unitsCount; unitIndex++) {
             for (int level = 0; level < unitUpgradeLevels; level++) {
                 // Add gold

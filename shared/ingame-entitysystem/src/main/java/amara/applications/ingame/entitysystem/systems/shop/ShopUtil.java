@@ -74,7 +74,7 @@ public class ShopUtil {
         }
         if ((tmpItemEntities.size() <= ItemUtil.MAX_INVENTORY_SIZE) && CostUtil.isPayable(entityWorld, entity, costEntities)) {
             CostUtil.pay(entityWorld, entity, costEntities);
-            EntityTemplate.loadTemplate(entityWorld, itemEntity, "items/" + itemId);
+            EntityTemplate.createReader().loadTemplate(entityWorld, itemEntity, "items/" + itemId);
             map.initializeItem(entityWorld, itemEntity, entity);
             addToShopGoldExpenses(entityWorld, entity, itemEntity, costEntities);
             entityWorld.setComponent(entity, new InventoryComponent(Util.convertToArray_Integer(tmpItemEntities)));
@@ -91,7 +91,7 @@ public class ShopUtil {
 
     private static LinkedList<Integer> resolveItemRecipeCosts(EntityWorld entityWorld, String itemID, LinkedList<Integer> inventoryItemEntities, int tmpItemEntity, LinkedList<Integer> costEntities) {
         entityWorld.removeEntity(tmpItemEntity);
-        EntityTemplate.loadTemplate(entityWorld, tmpItemEntity, "items/" + itemID);
+        EntityTemplate.createReader().loadTemplate(entityWorld, tmpItemEntity, "items/" + itemID);
         ItemRecipeComponent itemRecipeComponent = entityWorld.getComponent(tmpItemEntity, ItemRecipeComponent.class);
         for (String ingredientID : itemRecipeComponent.getItemIDs()) {
             boolean ingredientHasToBeBought = true;

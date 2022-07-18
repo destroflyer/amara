@@ -161,7 +161,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                     try {
                         expressionSpace.parse(addNewBuffComponent.getTemplateExpression());
                         int buffEntity = entityWorld.createEntity();
-                        EntityTemplate.loadTemplates(entityWorld, buffEntity, expressionSpace.getResult_String());
+                        EntityTemplate.createReader().loadTemplates(entityWorld, buffEntity, expressionSpace.getResult_String());
                         effectImpact.setComponent(new AddBuffComponent(new int[]{buffEntity}, addNewBuffComponent.getDuration()));
                     } catch (ExpressionException ex) {
                     }

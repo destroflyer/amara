@@ -120,7 +120,7 @@ public class ApplySpawnsSystems implements EntitySystem {
                 if(spawnRedirectReceivedBountiesComponent != null){
                     spawnedObject.setComponent(new RedirectReceivedBountiesComponent(casterEntity));
                 }
-                EntityTemplate.loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
+                EntityTemplate.createReader().loadTemplates(entityWorld, spawnedObject.getId(), spawnInformation.getComponent(SpawnTemplateComponent.class).getTemplateNames());
                 // Buffs
                 SpawnBuffsComponent spawnBuffsComponent = spawnInformation.getComponent(SpawnBuffsComponent.class);
                 if (spawnBuffsComponent != null) {

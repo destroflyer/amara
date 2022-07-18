@@ -146,13 +146,13 @@ public class Map_Arama extends Map {
             Vector2f tower1Position = new Vector2f(((i == 0)? 354 : 171), laneCenterY + towerOffsetY);
             Vector2f tower2Position = new Vector2f(((i == 0)? 321 : 204), laneCenterY - towerOffsetY);
             Vector2f towerDirection = new Vector2f(((i == 0)? -1 : 1), 0);
-            EntityWrapper tower1 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
+            EntityWrapper tower1 = EntityTemplate.createReader().createFromTemplate(entityWorld, "structures/tower");
             tower1.setComponent(new PositionComponent(tower1Position));
             tower1.setComponent(new DirectionComponent(towerDirection));
             tower1.setComponent(new TeamComponent(i + 1));
             tower1.removeComponent(IsTargetableComponent.class);
             tower1.removeComponent(IsVulnerableComponent.class);
-            EntityWrapper tower2 = EntityTemplate.createFromTemplate(entityWorld, "structures/tower");
+            EntityWrapper tower2 = EntityTemplate.createReader().createFromTemplate(entityWorld, "structures/tower");
             tower2.setComponent(new PositionComponent(tower2Position));
             tower2.setComponent(new DirectionComponent(towerDirection));
             tower2.setComponent(new TeamComponent(i + 1));
@@ -228,7 +228,7 @@ public class Map_Arama extends Map {
         for(int i=0;i<2;i++){
             float factorX = ((i == 0)?1:-1);
             //Bush Jungle Outer
-            EntityWrapper bush1 = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+            EntityWrapper bush1 = EntityTemplate.createReader().createFromTemplate(entityWorld, "other/bush");
             bush1.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
             bush1.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
                 new Vector2D(factorX * (358 - mapHalfWidth), 333),
@@ -237,7 +237,7 @@ public class Map_Arama extends Map {
                 new Vector2D(factorX * (344 - mapHalfWidth), 337)
             })));
             //Bush Jungle Inner
-            EntityWrapper bush2 = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+            EntityWrapper bush2 = EntityTemplate.createReader().createFromTemplate(entityWorld, "other/bush");
             bush2.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
             bush2.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
                 new Vector2D(factorX * (321 - mapHalfWidth), 337),
@@ -246,7 +246,7 @@ public class Map_Arama extends Map {
                 new Vector2D(factorX * (318 - mapHalfWidth), 331)
             })));
             //Bush Lane Outer
-            EntityWrapper bush3 = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+            EntityWrapper bush3 = EntityTemplate.createReader().createFromTemplate(entityWorld, "other/bush");
             bush3.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
             bush3.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
                 new Vector2D(factorX * (296 - mapHalfWidth), 244.4),
@@ -256,7 +256,7 @@ public class Map_Arama extends Map {
             })));
         }
         //Bush Boss
-        EntityWrapper bushBoss = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+        EntityWrapper bushBoss = EntityTemplate.createReader().createFromTemplate(entityWorld, "other/bush");
         bushBoss.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
         bushBoss.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
             new Vector2D(1 * (271.5 - mapHalfWidth), 304.5),
@@ -265,7 +265,7 @@ public class Map_Arama extends Map {
             new Vector2D(1 * (267.25 - mapHalfWidth), 308)
         })));
         //Bush Lane Inner
-        EntityWrapper bushLaneInner = EntityTemplate.createFromTemplate(entityWorld, "other/bush");
+        EntityWrapper bushLaneInner = EntityTemplate.createReader().createFromTemplate(entityWorld, "other/bush");
         bushLaneInner.setComponent(new PositionComponent(new Vector2f(mapHalfWidth, 0)));
         bushLaneInner.setComponent(new HitboxComponent(new SimpleConvexPolygon(new Vector2D[]{
             new Vector2D(1 * (275 - mapHalfWidth), 275.5),

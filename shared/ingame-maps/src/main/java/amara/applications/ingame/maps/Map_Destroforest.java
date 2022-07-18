@@ -84,7 +84,7 @@ public class Map_Destroforest extends Map {
             unit.setComponent(new IsKnockupableComponent());
             unit.setComponent(new IsSilencableComponent());
             unit.setComponent(new IsStunnableComponent());
-            EntityWrapper autoAttack = EntityTemplate.createFromTemplate(entityWorld, "spells/ranged_autoattack");
+            EntityWrapper autoAttack = EntityTemplate.createReader().createFromTemplate(entityWorld, "spells/ranged_autoattack");
             unit.setComponent(new AutoAttackComponent(autoAttack.getId()));
             unit.setComponent(new AutoAggroComponent(24));
             Vector2f position = null;
@@ -117,8 +117,8 @@ public class Map_Destroforest extends Map {
         EntityWrapper campEnemies1 = entityWorld.getWrapped(entityWorld.createEntity());
         campEnemies1.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies1.setComponent(new CampHealthResetComponent());
-        EntityWrapper enemy1 = EntityTemplate.createFromTemplate(entityWorld, "units/jaime");
-        EntityWrapper enemy1Spell = EntityTemplate.createFromTemplate(entityWorld, "spells/sonic_wave,0");
+        EntityWrapper enemy1 = EntityTemplate.createReader().createFromTemplate(entityWorld, "units/jaime");
+        EntityWrapper enemy1Spell = EntityTemplate.createReader().createFromTemplate(entityWorld, "spells/sonic_wave,0");
         enemy1.setComponent(new SpellsComponent(enemy1Spell.getId()));
         enemy1.setComponent(new IsMonsterComponent());
         Vector2f positionEnemy1 = new Vector2f(98, 91);
@@ -134,7 +134,7 @@ public class Map_Destroforest extends Map {
         campEnemies2.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies2.setComponent(new CampHealthResetComponent());
         for(int i=0;i<3;i++){
-            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "units/beetle_golem");
+            EntityWrapper enemy = EntityTemplate.createReader().createFromTemplate(entityWorld, "units/beetle_golem");
             Vector2f position = null;
             Vector2f direction = null;
             switch(i){
@@ -166,7 +166,7 @@ public class Map_Destroforest extends Map {
         campEnemies3.setComponent(new CampMaximumAggroDistanceComponent(15));
         campEnemies3.setComponent(new CampHealthResetComponent());
         for(int i=0;i<2;i++){
-            EntityWrapper enemy = EntityTemplate.createFromTemplate(entityWorld, "units/earth_elemental");
+            EntityWrapper enemy = EntityTemplate.createReader().createFromTemplate(entityWorld, "units/earth_elemental");
             Vector2f position = null;
             Vector2f direction = null;
             switch(i){

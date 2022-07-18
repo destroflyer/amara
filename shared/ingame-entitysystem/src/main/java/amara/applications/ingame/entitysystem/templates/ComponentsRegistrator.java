@@ -28,11 +28,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent>("abilityPower"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.AbilityPowerComponent(value);
             }
@@ -46,11 +46,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ArmorComponent>("armor"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.ArmorComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.ArmorComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.ArmorComponent(value);
             }
@@ -64,11 +64,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent>("attackDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.AttackDamageComponent(value);
             }
@@ -82,11 +82,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent>("attackSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.AttackSpeedComponent(value);
             }
@@ -100,11 +100,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent>("bonusFlatAbilityPower"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatAbilityPowerComponent(value);
             }
@@ -118,11 +118,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent>("bonusFlatArmor"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatArmorComponent(value);
             }
@@ -136,11 +136,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent>("bonusFlatAttackDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackDamageComponent(value);
             }
@@ -154,11 +154,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent>("bonusFlatAttackSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatAttackSpeedComponent(value);
             }
@@ -172,11 +172,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent>("bonusFlatGoldPerSecond"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatGoldPerSecondComponent(value);
             }
@@ -190,11 +190,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent>("bonusFlatHealthRegeneration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatHealthRegenerationComponent(value);
             }
@@ -208,11 +208,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent>("bonusFlatMagicResistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatMagicResistanceComponent(value);
             }
@@ -226,11 +226,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent>("bonusFlatManaRegeneration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatManaRegenerationComponent(value);
             }
@@ -244,11 +244,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent>("bonusFlatMaximumHealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumHealthComponent(value);
             }
@@ -262,11 +262,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent>("bonusFlatMaximumMana"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatMaximumManaComponent(value);
             }
@@ -280,11 +280,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent>("bonusFlatWalkSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusFlatWalkSpeedComponent(value);
             }
@@ -298,11 +298,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent>("bonusPercentageAttackSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageAttackSpeedComponent(value);
             }
@@ -316,11 +316,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent>("bonusPercentageCooldownSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCooldownSpeedComponent(value);
             }
@@ -334,11 +334,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent>("bonusPercentageCriticalChance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageCriticalChanceComponent(value);
             }
@@ -352,11 +352,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent>("bonusPercentageIncomingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageIncomingDamageAmplificationComponent(value);
             }
@@ -370,11 +370,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent>("bonusPercentageLifesteal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageLifestealComponent(value);
             }
@@ -388,11 +388,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent>("bonusPercentageOutgoingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageOutgoingDamageAmplificationComponent(value);
             }
@@ -406,11 +406,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent>("bonusPercentageSpellvamp"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageSpellvampComponent(value);
             }
@@ -424,11 +424,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent>("bonusPercentageWalkSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.BonusPercentageWalkSpeedComponent(value);
             }
@@ -442,11 +442,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent>("cooldownSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.CooldownSpeedComponent(value);
             }
@@ -460,11 +460,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent>("criticalChance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.CriticalChanceComponent(value);
             }
@@ -473,7 +473,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent>("disableGoldPerSecond"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.attributes.DisableGoldPerSecondComponent();
             }
         });
@@ -486,11 +486,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent>("goldPerSecond"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.GoldPerSecondComponent(value);
             }
@@ -504,11 +504,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.HealthComponent>("health"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.HealthComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.HealthComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.HealthComponent(value);
             }
@@ -522,11 +522,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent>("healthRegeneration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.HealthRegenerationComponent(value);
             }
@@ -540,11 +540,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent>("incomingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.IncomingDamageAmplificationComponent(value);
             }
@@ -558,11 +558,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.LifestealComponent>("lifesteal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.LifestealComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.LifestealComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.LifestealComponent(value);
             }
@@ -576,11 +576,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent>("magicResistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.MagicResistanceComponent(value);
             }
@@ -594,11 +594,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ManaComponent>("mana"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.ManaComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.ManaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.ManaComponent(value);
             }
@@ -612,11 +612,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent>("manaRegeneration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.ManaRegenerationComponent(value);
             }
@@ -630,11 +630,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent>("maximumHealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.MaximumHealthComponent(value);
             }
@@ -648,11 +648,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent>("maximumMana"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.MaximumManaComponent(value);
             }
@@ -666,11 +666,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent>("outgoingDamageAmplification"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.OutgoingDamageAmplificationComponent(value);
             }
@@ -679,7 +679,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent>("requestUpdateAttributes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.attributes.RequestUpdateAttributesComponent();
             }
         });
@@ -692,11 +692,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent>("spellvamp"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.SpellvampComponent(value);
             }
@@ -710,11 +710,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent>("walkSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.attributes.WalkSpeedComponent(value);
             }
@@ -724,8 +724,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioComponent>("audio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioComponent construct(EntityWorld entityWorld, Element element){
-                String audioPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.audio.AudioComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String audioPath = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.audio.AudioComponent(audioPath);
             }
         });
@@ -733,7 +733,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent>("audioGlobal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.AudioGlobalComponent();
             }
         });
@@ -741,7 +741,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent>("audioLoop"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.AudioLoopComponent();
             }
         });
@@ -749,7 +749,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent>("audioRemoveAfterPlaying"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.AudioRemoveAfterPlayingComponent();
             }
         });
@@ -762,8 +762,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent>("audioSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent construct(EntityWorld entityWorld, Element element){
-                int entity = createChildEntity(entityWorld, element, 0, "entity");
+            public amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int entity = createChildEntity(templateReader, entityWorld, element, 0, "entity");
                 return new amara.applications.ingame.entitysystem.components.audio.AudioSourceComponent(entity);
             }
         });
@@ -781,12 +781,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent>("audioSuccessor"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent construct(EntityWorld entityWorld, Element element){
-                int audioEntity = createChildEntity(entityWorld, element, 0, "audioEntity");
+            public amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int audioEntity = createChildEntity(templateReader, entityWorld, element, 0, "audioEntity");
                 float delay = 0;
                 String delayText = element.getAttributeValue("delay");
                 if((delayText != null) && (delayText.length() > 0)){
-                    delay = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, delayText));
+                    delay = Float.parseFloat(templateReader.parseValue(entityWorld, delayText));
                 }
                 return new amara.applications.ingame.entitysystem.components.audio.AudioSuccessorComponent(audioEntity, delay);
             }
@@ -795,11 +795,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent>("audioVolume"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float volume = 0;
                 String volumeText = element.getText();
                 if((volumeText != null) && (volumeText.length() > 0)){
-                    volume = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, volumeText));
+                    volume = Float.parseFloat(templateReader.parseValue(entityWorld, volumeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.audio.AudioVolumeComponent(volume);
             }
@@ -808,7 +808,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent>("startPlayingAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.StartPlayingAudioComponent();
             }
         });
@@ -816,7 +816,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent>("stopPlayingAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.audio.StopPlayingAudioComponent();
             }
         });
@@ -831,8 +831,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent>("areaBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffComponent(buffEntity);
             }
         });
@@ -845,8 +845,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent>("areaBuffTargetRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaBuffTargetRulesComponent(targetRulesEntity);
             }
         });
@@ -859,8 +859,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent>("areaSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent construct(EntityWorld entityWorld, Element element){
-                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(templateReader, entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.areas.AreaSourceComponent(sourceEntity);
             }
         });
@@ -868,8 +868,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent>("buffIcon"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent construct(EntityWorld entityWorld, Element element){
-                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String name = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.buffs.BuffIconComponent(name);
             }
         });
@@ -877,8 +877,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.BuffVisualisationComponent>("buffVisualisation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.BuffVisualisationComponent construct(EntityWorld entityWorld, Element element){
-                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.buffs.BuffVisualisationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String name = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.buffs.BuffVisualisationComponent(name);
             }
         });
@@ -891,8 +891,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent>("continuousAttributes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent construct(EntityWorld entityWorld, Element element){
-                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(templateReader, entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesComponent(bonusAttributesEntity);
             }
         });
@@ -905,8 +905,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent>("continuousAttributesPerStack"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent construct(EntityWorld entityWorld, Element element){
-                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(templateReader, entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.ContinuousAttributesPerStackComponent(bonusAttributesEntity);
             }
         });
@@ -914,7 +914,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent>("keepOnDeath"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.buffs.KeepOnDeathComponent();
             }
         });
@@ -927,11 +927,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.MaximumStacksComponent>("maximumStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.MaximumStacksComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.buffs.MaximumStacksComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
+                    stacks = Integer.parseInt(templateReader.parseValue(entityWorld, stacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.buffs.MaximumStacksComponent(stacks);
             }
@@ -945,8 +945,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.OnBuffAddEffectTriggersComponent>("onBuffAddEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.OnBuffAddEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.buffs.OnBuffAddEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.buffs.OnBuffAddEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -959,8 +959,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent>("onBuffRemoveEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.buffs.OnBuffRemoveEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -978,12 +978,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent>("repeatingEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent construct(EntityWorld entityWorld, Element element){
-                int effectEntity = createChildEntity(entityWorld, element, 0, "effectEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int effectEntity = createChildEntity(templateReader, entityWorld, element, 0, "effectEntity");
                 float interval = 0;
                 String intervalText = element.getAttributeValue("interval");
                 if((intervalText != null) && (intervalText.length() > 0)){
-                    interval = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, intervalText));
+                    interval = Float.parseFloat(templateReader.parseValue(entityWorld, intervalText));
                 }
                 return new amara.applications.ingame.entitysystem.components.buffs.RepeatingEffectComponent(effectEntity, interval);
             }
@@ -1003,9 +1003,9 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent>("activeBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.buffs.status.ActiveBuffComponent(targetEntity, buffEntity);
             }
         });
@@ -1018,11 +1018,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent>("remainingBuffDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.buffs.status.RemainingBuffDurationComponent(remainingDuration);
             }
@@ -1036,11 +1036,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent>("stacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
+                    stacks = Integer.parseInt(templateReader.parseValue(entityWorld, stacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.buffs.status.StacksComponent(stacks);
             }
@@ -1054,11 +1054,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent>("timeSinceLastRepeatingEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.buffs.status.TimeSinceLastRepeatingEffectComponent(duration);
             }
@@ -1068,7 +1068,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent>("campHealthReset"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampHealthResetComponent();
             }
         });
@@ -1076,7 +1076,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent>("campInCombat"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampInCombatComponent();
             }
         });
@@ -1089,11 +1089,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent>("campMaximumAggroDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.camps.CampMaximumAggroDistanceComponent(distance);
             }
@@ -1107,11 +1107,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent>("campRemainingRespawnDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.camps.CampRemainingRespawnDurationComponent(duration);
             }
@@ -1125,11 +1125,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent>("campRespawnDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.camps.CampRespawnDurationComponent(duration);
             }
@@ -1138,7 +1138,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent>("campSpawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampSpawnComponent();
             }
         });
@@ -1151,8 +1151,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent>("campSpawnInformation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent construct(EntityWorld entityWorld, Element element){
-                int[] spawnInformationEntities = createChildEntities(entityWorld, element, 0, "spawnInformationEntities");
+            public amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spawnInformationEntities = createChildEntities(templateReader, entityWorld, element, 0, "spawnInformationEntities");
                 return new amara.applications.ingame.entitysystem.components.camps.CampSpawnInformationComponent(spawnInformationEntities);
             }
         });
@@ -1160,7 +1160,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent>("campUnionAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.camps.CampUnionAggroComponent();
             }
         });
@@ -1179,12 +1179,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent>("hasBuffCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 int requiredStacks = 0;
                 String requiredStacksText = element.getAttributeValue("requiredStacks");
                 if((requiredStacksText != null) && (requiredStacksText.length() > 0)){
-                    requiredStacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, requiredStacksText));
+                    requiredStacks = Integer.parseInt(templateReader.parseValue(entityWorld, requiredStacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.conditions.HasBuffConditionComponent(buffEntity, requiredStacks);
             }
@@ -1193,21 +1193,21 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent>("hasHealthPortionCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float portion = 0;
                 String portionText = element.getAttributeValue("portion");
                 if((portionText != null) && (portionText.length() > 0)){
-                    portion = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, portionText));
+                    portion = Float.parseFloat(templateReader.parseValue(entityWorld, portionText));
                 }
                 boolean lessOrMore = false;
                 String lessOrMoreText = element.getAttributeValue("lessOrMore");
                 if((lessOrMoreText != null) && (lessOrMoreText.length() > 0)){
-                    lessOrMore = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, lessOrMoreText));
+                    lessOrMore = Boolean.parseBoolean(templateReader.parseValue(entityWorld, lessOrMoreText));
                 }
                 boolean allowEqual = false;
                 String allowEqualText = element.getAttributeValue("allowEqual");
                 if((allowEqualText != null) && (allowEqualText.length() > 0)){
-                    allowEqual = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, allowEqualText));
+                    allowEqual = Boolean.parseBoolean(templateReader.parseValue(entityWorld, allowEqualText));
                 }
                 return new amara.applications.ingame.entitysystem.components.conditions.HasHealthPortionConditionComponent(portion, lessOrMore, allowEqual);
             }
@@ -1221,8 +1221,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent>("hasRuleTargetCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.conditions.HasRuleTargetConditionComponent(targetRulesEntity);
             }
         });
@@ -1230,7 +1230,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent>("isCharacterCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.conditions.IsCharacterConditionComponent();
             }
         });
@@ -1238,11 +1238,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent>("nameAmountCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int maximum = 0;
                 String maximumText = element.getText();
                 if((maximumText != null) && (maximumText.length() > 0)){
-                    maximum = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, maximumText));
+                    maximum = Integer.parseInt(templateReader.parseValue(entityWorld, maximumText));
                 }
                 return new amara.applications.ingame.entitysystem.components.conditions.NameAmountConditionComponent(maximum);
             }
@@ -1251,7 +1251,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent>("notCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.conditions.NotConditionComponent();
             }
         });
@@ -1259,7 +1259,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.NotExistingConditionComponent>("notExistingCondition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.NotExistingConditionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.conditions.NotExistingConditionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.conditions.NotExistingConditionComponent();
             }
         });
@@ -1272,8 +1272,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent>("orConditions"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent construct(EntityWorld entityWorld, Element element){
-                int[] conditionEntities = createChildEntities(entityWorld, element, 0, "conditionEntities");
+            public amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] conditionEntities = createChildEntities(templateReader, entityWorld, element, 0, "conditionEntities");
                 return new amara.applications.ingame.entitysystem.components.conditions.OrConditionsComponent(conditionEntities);
             }
         });
@@ -1292,12 +1292,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent>("buffStacksCost"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 int stacks = 0;
                 String stacksText = element.getAttributeValue("stacks");
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
+                    stacks = Integer.parseInt(templateReader.parseValue(entityWorld, stacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.costs.BuffStacksCostComponent(buffEntity, stacks);
             }
@@ -1306,11 +1306,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.costs.GoldCostComponent>("goldCost"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.costs.GoldCostComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.costs.GoldCostComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(templateReader.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.costs.GoldCostComponent(gold);
             }
@@ -1324,11 +1324,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.costs.ManaCostComponent>("manaCost"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.costs.ManaCostComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.costs.ManaCostComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float mana = 0;
                 String manaText = element.getText();
                 if((manaText != null) && (manaText.length() > 0)){
-                    mana = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, manaText));
+                    mana = Float.parseFloat(templateReader.parseValue(entityWorld, manaText));
                 }
                 return new amara.applications.ingame.entitysystem.components.costs.ManaCostComponent(mana);
             }
@@ -1343,8 +1343,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent>("affectedTargets"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent construct(EntityWorld entityWorld, Element element){
-                int[] targetEntities = createChildEntities(entityWorld, element, 0, "targetEntities");
+            public amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] targetEntities = createChildEntities(templateReader, entityWorld, element, 0, "targetEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.AffectedTargetsComponent(targetEntities);
             }
         });
@@ -1358,11 +1358,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent>("drawTeamAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
+                    range = Float.parseFloat(templateReader.parseValue(entityWorld, rangeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.aggro.DrawTeamAggroComponent(range);
             }
@@ -1371,7 +1371,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent>("setAggroTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.aggro.SetAggroTargetComponent();
             }
         });
@@ -1384,8 +1384,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent>("applyEffectImpact"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.ApplyEffectImpactComponent(targetEntity);
             }
         });
@@ -1399,13 +1399,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent>("playAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 boolean clone = false;
                 String cloneText = element.getAttributeValue("clone");
                 if((cloneText != null) && (cloneText.length() > 0)){
-                    clone = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, cloneText));
+                    clone = Boolean.parseBoolean(templateReader.parseValue(entityWorld, cloneText));
                 }
-                int[] audioEntities = createChildEntities(entityWorld, element, 0, "audioEntities");
+                int[] audioEntities = createChildEntities(templateReader, entityWorld, element, 0, "audioEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.audio.PlayAudioComponent(clone, audioEntities);
             }
         });
@@ -1418,8 +1418,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent>("stopAudio"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent construct(EntityWorld entityWorld, Element element){
-                int[] audioEntities = createChildEntities(entityWorld, element, 0, "audioEntities");
+            public amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] audioEntities = createChildEntities(templateReader, entityWorld, element, 0, "audioEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.audio.StopAudioComponent(audioEntities);
             }
         });
@@ -1438,12 +1438,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent>("addBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.AddBuffComponent(buffEntities, duration);
             }
@@ -1457,12 +1457,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent>("addNewBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent construct(EntityWorld entityWorld, Element element){
-                String templateExpression = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("templateExpression"));
+            public amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String templateExpression = templateReader.parseValue(entityWorld, element.getAttributeValue("templateExpression"));
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.AddNewBuffComponent(templateExpression, duration);
             }
@@ -1477,8 +1477,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent>("addBuffArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent construct(EntityWorld entityWorld, Element element){
-                int buffAreaEntity = createChildEntity(entityWorld, element, 0, "buffAreaEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffAreaEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.areas.AddBuffAreaComponent(buffAreaEntity);
             }
         });
@@ -1491,8 +1491,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent>("removeBuffArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent construct(EntityWorld entityWorld, Element element){
-                int buffAreaEntity = createChildEntity(entityWorld, element, 0, "buffAreaEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffAreaEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.areas.RemoveBuffAreaComponent(buffAreaEntity);
             }
         });
@@ -1505,8 +1505,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent>("removeBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.RemoveBuffComponent(buffEntities);
             }
         });
@@ -1525,12 +1525,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent>("addStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 int stacks = 0;
                 String stacksText = element.getAttributeValue("stacks");
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
+                    stacks = Integer.parseInt(templateReader.parseValue(entityWorld, stacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.stacks.AddStacksComponent(buffEntity, stacks);
             }
@@ -1544,8 +1544,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent>("clearStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.stacks.ClearStacksComponent(buffEntity);
             }
         });
@@ -1563,9 +1563,9 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent>("copyStacks"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent construct(EntityWorld entityWorld, Element element){
-                int sourceBuffEntity = createChildEntity(entityWorld, element, 0, "sourceBuffEntity");
-                int targetBuffEntity = createChildEntity(entityWorld, element, 0, "targetBuffEntity");
+            public amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int sourceBuffEntity = createChildEntity(templateReader, entityWorld, element, 0, "sourceBuffEntity");
+                int targetBuffEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetBuffEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.buffs.stacks.CopyStacksComponent(sourceBuffEntity, targetBuffEntity);
             }
         });
@@ -1579,8 +1579,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent>("effectCastTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.casts.EffectCastTargetComponent(targetEntity);
             }
         });
@@ -1589,7 +1589,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent>("addBindable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindableComponent();
             }
         });
@@ -1602,11 +1602,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent>("addBinding"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddBindingComponent(duration);
             }
@@ -1615,7 +1615,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent>("addKnockupable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupableComponent();
             }
         });
@@ -1628,8 +1628,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent>("addKnockup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent construct(EntityWorld entityWorld, Element element){
-                int knockupEntity = createChildEntity(entityWorld, element, 0, "knockupEntity");
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int knockupEntity = createChildEntity(templateReader, entityWorld, element, 0, "knockupEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddKnockupComponent(knockupEntity);
             }
         });
@@ -1637,7 +1637,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent>("addSilencable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilencableComponent();
             }
         });
@@ -1650,11 +1650,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent>("addSilence"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddSilenceComponent(duration);
             }
@@ -1668,11 +1668,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent>("addStun"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunComponent(duration);
             }
@@ -1681,7 +1681,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent>("addStunnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.AddStunnableComponent();
             }
         });
@@ -1695,11 +1695,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent>("knockupDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupDurationComponent(duration);
             }
@@ -1713,11 +1713,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent>("knockupHeight"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float height = 0;
                 String heightText = element.getText();
                 if((heightText != null) && (heightText.length() > 0)){
-                    height = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, heightText));
+                    height = Float.parseFloat(templateReader.parseValue(entityWorld, heightText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.knockup.KnockupHeightComponent(height);
             }
@@ -1726,7 +1726,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent>("removeBindable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindableComponent();
             }
         });
@@ -1734,7 +1734,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent>("removeBinding"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveBindingComponent();
             }
         });
@@ -1742,7 +1742,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent>("removeKnockupable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupableComponent();
             }
         });
@@ -1750,7 +1750,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent>("removeKnockup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveKnockupComponent();
             }
         });
@@ -1758,7 +1758,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent>("removeSilencable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilencableComponent();
             }
         });
@@ -1766,7 +1766,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent>("removeSilence"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveSilenceComponent();
             }
         });
@@ -1774,7 +1774,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent>("removeStun"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunComponent();
             }
         });
@@ -1782,7 +1782,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent>("removeStunnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.crowdcontrol.RemoveStunnableComponent();
             }
         });
@@ -1792,7 +1792,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent>("addTargetability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.AddTargetabilityComponent();
             }
         });
@@ -1800,7 +1800,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent>("addVulnerability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.AddVulnerabilityComponent();
             }
         });
@@ -1808,7 +1808,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent>("canCrit"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.CanCritComponent();
             }
         });
@@ -1816,8 +1816,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent>("magicDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent construct(EntityWorld entityWorld, Element element){
-                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String expression = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.damage.MagicDamageComponent(expression);
             }
         });
@@ -1825,8 +1825,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent>("physicalDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent construct(EntityWorld entityWorld, Element element){
-                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String expression = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.damage.PhysicalDamageComponent(expression);
             }
         });
@@ -1834,7 +1834,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent>("removeTargetability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.RemoveTargetabilityComponent();
             }
         });
@@ -1842,7 +1842,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent>("removeVulnerability"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.damage.RemoveVulnerabilityComponent();
             }
         });
@@ -1855,11 +1855,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent>("resultingMagicDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.damage.ResultingMagicDamageComponent(value);
             }
@@ -1873,11 +1873,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent>("resultingPhysicalDamage"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.damage.ResultingPhysicalDamageComponent(value);
             }
@@ -1886,11 +1886,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.EffectSourceActionIndexComponent>("effectSourceActionIndex"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.EffectSourceActionIndexComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.EffectSourceActionIndexComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int index = 0;
                 String indexText = element.getText();
                 if((indexText != null) && (indexText.length() > 0)){
-                    index = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, indexText));
+                    index = Integer.parseInt(templateReader.parseValue(entityWorld, indexText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.EffectSourceActionIndexComponent(index);
             }
@@ -1904,8 +1904,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent>("effectSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent construct(EntityWorld entityWorld, Element element){
-                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(templateReader, entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.EffectSourceComponent(sourceEntity);
             }
         });
@@ -1918,8 +1918,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent>("effectSourceSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.EffectSourceSpellComponent(spellEntity);
             }
         });
@@ -1927,7 +1927,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent>("finishObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.FinishObjectiveComponent();
             }
         });
@@ -1936,8 +1936,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent>("playCinematic"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent construct(EntityWorld entityWorld, Element element){
-                String cinematicClassName = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String cinematicClassName = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.game.PlayCinematicComponent(cinematicClassName);
             }
         });
@@ -1947,7 +1947,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent>("addCustomCleanup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.general.AddCustomCleanupComponent();
             }
         });
@@ -1960,8 +1960,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent>("addEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.general.AddEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -1969,13 +1969,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent>("addNewEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] effectTriggerTemplates = new String[0];
                 String effectTriggerTemplatesText = element.getText();
                 if(effectTriggerTemplatesText != null){
                     effectTriggerTemplates = effectTriggerTemplatesText.split("\\|");
                     for(int i=0;i<effectTriggerTemplates.length;i++){
-                        effectTriggerTemplates[i] = xmlTemplateManager.parseTemplateText(entityWorld, effectTriggerTemplates[i]);
+                        effectTriggerTemplates[i] = templateReader.parseTemplateText(entityWorld, effectTriggerTemplates[i]);
                     }
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.general.AddNewEffectTriggersComponent(effectTriggerTemplates);
@@ -1991,12 +1991,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent>("removeEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 boolean removeEntities = false;
                 String removeEntitiesText = element.getAttributeValue("removeEntities");
                 if((removeEntitiesText != null) && (removeEntitiesText.length() > 0)){
-                    removeEntities = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, removeEntitiesText));
+                    removeEntities = Boolean.parseBoolean(templateReader.parseValue(entityWorld, removeEntitiesText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.general.RemoveEffectTriggersComponent(effectTriggerEntities, removeEntities);
             }
@@ -2005,7 +2005,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent>("removeEntity"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.general.RemoveEntityComponent();
             }
         });
@@ -2014,8 +2014,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.heals.HealComponent>("heal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.heals.HealComponent construct(EntityWorld entityWorld, Element element){
-                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.heals.HealComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String expression = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.heals.HealComponent(expression);
             }
         });
@@ -2028,11 +2028,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent>("resultingHeal"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.heals.ResultingHealComponent(value);
             }
@@ -2042,8 +2042,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent>("addMana"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent construct(EntityWorld entityWorld, Element element){
-                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String expression = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.mana.AddManaComponent(expression);
             }
         });
@@ -2056,11 +2056,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent>("resultingAddMana"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.mana.ResultingAddManaComponent(value);
             }
@@ -2075,8 +2075,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent>("move"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent construct(EntityWorld entityWorld, Element element){
-                int movementEntity = createChildEntity(entityWorld, element, 0, "movementEntity");
+            public amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int movementEntity = createChildEntity(templateReader, entityWorld, element, 0, "movementEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.movement.MoveComponent(movementEntity);
             }
         });
@@ -2084,14 +2084,14 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.RelativeTeleportComponent>("relativeTeleport"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.RelativeTeleportComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.movement.RelativeTeleportComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] sourceParentPositionCoordinates = element.getAttributeValue("sourceParentPosition").split(",");
-                float sourceParentPositionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, sourceParentPositionCoordinates[0]));
-                float sourceParentPositionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, sourceParentPositionCoordinates[1]));
+                float sourceParentPositionX = Float.parseFloat(templateReader.parseValue(entityWorld, sourceParentPositionCoordinates[0]));
+                float sourceParentPositionY = Float.parseFloat(templateReader.parseValue(entityWorld, sourceParentPositionCoordinates[1]));
                 Vector2f sourceParentPosition = new Vector2f(sourceParentPositionX, sourceParentPositionY);
                 String[] targetParentPositionCoordinates = element.getAttributeValue("targetParentPosition").split(",");
-                float targetParentPositionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, targetParentPositionCoordinates[0]));
-                float targetParentPositionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, targetParentPositionCoordinates[1]));
+                float targetParentPositionX = Float.parseFloat(templateReader.parseValue(entityWorld, targetParentPositionCoordinates[0]));
+                float targetParentPositionY = Float.parseFloat(templateReader.parseValue(entityWorld, targetParentPositionCoordinates[1]));
                 Vector2f targetParentPosition = new Vector2f(targetParentPositionX, targetParentPositionY);
                 return new amara.applications.ingame.entitysystem.components.effects.movement.RelativeTeleportComponent(sourceParentPosition, targetParentPosition);
             }
@@ -2100,7 +2100,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.StopComponent>("stop"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.StopComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.movement.StopComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.movement.StopComponent();
             }
         });
@@ -2113,8 +2113,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent>("teleport"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.movement.TeleportComponent(targetEntity);
             }
         });
@@ -2123,7 +2123,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent>("activateHitbox"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.ActivateHitboxComponent();
             }
         });
@@ -2132,7 +2132,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent>("addIntersectionPushed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushedComponent();
             }
         });
@@ -2140,7 +2140,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent>("addIntersectionPushes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.AddIntersectionPushesComponent();
             }
         });
@@ -2148,7 +2148,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent>("deactivateHitbox"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.DeactivateHitboxComponent();
             }
         });
@@ -2157,7 +2157,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent>("removeIntersectionPushed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushedComponent();
             }
         });
@@ -2165,7 +2165,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent>("removeIntersectionPushes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.physics.RemoveIntersectionPushesComponent();
             }
         });
@@ -2173,11 +2173,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.SetScaleComponent>("setScale"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.SetScaleComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.physics.SetScaleComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float scale = 0;
                 String scaleText = element.getText();
                 if((scaleText != null) && (scaleText.length() > 0)){
-                    scale = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, scaleText));
+                    scale = Float.parseFloat(templateReader.parseValue(entityWorld, scaleText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.physics.SetScaleComponent(scale);
             }
@@ -2191,8 +2191,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent>("swapPositions"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.physics.SwapPositionsComponent(targetEntity);
             }
         });
@@ -2206,12 +2206,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent>("displayPlayerAnnouncement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent construct(EntityWorld entityWorld, Element element){
-                String expression = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("expression"));
+            public amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String expression = templateReader.parseValue(entityWorld, element.getAttributeValue("expression"));
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.players.DisplayPlayerAnnouncementComponent(expression, remainingDuration);
             }
@@ -2225,12 +2225,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent>("resultingPlayerAnnouncement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent construct(EntityWorld entityWorld, Element element){
-                String text = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("text"));
+            public amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String text = templateReader.parseValue(entityWorld, element.getAttributeValue("text"));
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.players.ResultingPlayerAnnouncementComponent(text, remainingDuration);
             }
@@ -2240,8 +2240,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent>("addPopup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent construct(EntityWorld entityWorld, Element element){
-                String expression = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String expression = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.popups.AddPopupComponent(expression);
             }
         });
@@ -2249,7 +2249,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent>("removePopup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.popups.RemovePopupComponent();
             }
         });
@@ -2257,8 +2257,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent>("resultingPopup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent construct(EntityWorld entityWorld, Element element){
-                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String text = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.effects.popups.ResultingPopupComponent(text);
             }
         });
@@ -2271,8 +2271,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent>("prepareEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent construct(EntityWorld entityWorld, Element element){
-                int effectEntity = createChildEntity(entityWorld, element, 0, "effectEntity");
+            public amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int effectEntity = createChildEntity(templateReader, entityWorld, element, 0, "effectEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.PrepareEffectComponent(effectEntity);
             }
         });
@@ -2285,11 +2285,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent>("remainingEffectDelay"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.RemainingEffectDelayComponent(duration);
             }
@@ -2304,8 +2304,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent>("spawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent construct(EntityWorld entityWorld, Element element){
-                int[] spawnInformationEntities = createChildEntities(entityWorld, element, 0, "spawnInformationEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spawnInformationEntities = createChildEntities(templateReader, entityWorld, element, 0, "spawnInformationEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.spawns.SpawnComponent(spawnInformationEntities);
             }
         });
@@ -2319,8 +2319,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent>("addAutoAttackSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellEffectEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellEffectEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.AddAutoAttackSpellEffectsComponent(spellEffectEntities);
             }
         });
@@ -2333,12 +2333,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent>("addSpellSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellEffectEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellEffectEntities");
                 boolean setSourcesToSpells = false;
                 String setSourcesToSpellsText = element.getAttributeValue("setSourcesToSpells");
                 if((setSourcesToSpellsText != null) && (setSourcesToSpellsText.length() > 0)){
-                    setSourcesToSpells = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, setSourcesToSpellsText));
+                    setSourcesToSpells = Boolean.parseBoolean(templateReader.parseValue(entityWorld, setSourcesToSpellsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.spells.AddSpellSpellEffectsComponent(spellEffectEntities, setSourcesToSpells);
             }
@@ -2357,9 +2357,9 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent>("enqueueSpellCast"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.EnqueueSpellCastComponent(spellEntity, targetEntity);
             }
         });
@@ -2372,11 +2372,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent>("reduceRemainingCooldownAbsolute"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ReduceRemainingCooldownAbsoluteComponent(duration);
             }
@@ -2390,8 +2390,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent>("removeSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellEffectEntities = createChildEntities(entityWorld, element, 0, "spellEffectEntities");
+            public amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellEffectEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellEffectEntities");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.RemoveSpellEffectsComponent(spellEffectEntities);
             }
         });
@@ -2404,13 +2404,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent>("replaceSpellWithExistingSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int spellIndex = 0;
                 String spellIndexText = element.getAttributeValue("spellIndex");
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
-                    spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, spellIndexText));
+                    spellIndex = Integer.parseInt(templateReader.parseValue(entityWorld, spellIndexText));
                 }
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithExistingSpellComponent(spellIndex, spellEntity);
             }
         });
@@ -2418,13 +2418,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent>("replaceSpellWithNewSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int spellIndex = 0;
                 String spellIndexText = element.getAttributeValue("spellIndex");
                 if((spellIndexText != null) && (spellIndexText.length() > 0)){
-                    spellIndex = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, spellIndexText));
+                    spellIndex = Integer.parseInt(templateReader.parseValue(entityWorld, spellIndexText));
                 }
-                String newSpellTemplate = xmlTemplateManager.parseTemplateText(entityWorld, element.getAttributeValue("newSpellTemplate"));
+                String newSpellTemplate = templateReader.parseTemplateText(entityWorld, element.getAttributeValue("newSpellTemplate"));
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ReplaceSpellWithNewSpellComponent(spellIndex, newSpellTemplate);
             }
         });
@@ -2432,7 +2432,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent>("resetCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.spells.ResetCooldownComponent();
             }
         });
@@ -2445,8 +2445,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent>("triggerSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.spells.TriggerSpellEffectsComponent(spellEntity);
             }
         });
@@ -2455,11 +2455,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent>("addGold"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(templateReader.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.units.AddGoldComponent(gold);
             }
@@ -2478,12 +2478,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent>("addShield"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent construct(EntityWorld entityWorld, Element element){
-                int shieldEntity = createChildEntity(entityWorld, element, 0, "shieldEntity");
+            public amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int shieldEntity = createChildEntity(templateReader, entityWorld, element, 0, "shieldEntity");
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.units.AddShieldComponent(shieldEntity, duration);
             }
@@ -2492,7 +2492,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent>("cancelAction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.CancelActionComponent();
             }
         });
@@ -2500,7 +2500,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent>("disableAutoAttack"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.DisableAutoAttackComponent();
             }
         });
@@ -2508,7 +2508,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent>("disableSpells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.DisableSpellsComponent();
             }
         });
@@ -2516,7 +2516,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent>("enableAutoAttack"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.EnableAutoAttackComponent();
             }
         });
@@ -2524,7 +2524,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent>("enableSpells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.EnableSpellsComponent();
             }
         });
@@ -2532,7 +2532,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.LevelUpComponent>("levelUp"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.LevelUpComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.LevelUpComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.LevelUpComponent();
             }
         });
@@ -2540,7 +2540,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.RemoveAutoAggroComponent>("removeAutoAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.RemoveAutoAggroComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.RemoveAutoAggroComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.RemoveAutoAggroComponent();
             }
         });
@@ -2548,7 +2548,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent>("respawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.RespawnComponent();
             }
         });
@@ -2556,7 +2556,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.SetAsRespawnTransformComponent>("setAsRespawnTransform"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.SetAsRespawnTransformComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.SetAsRespawnTransformComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.units.SetAsRespawnTransformComponent();
             }
         });
@@ -2569,11 +2569,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.units.SetAutoAggroComponent>("setAutoAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.units.SetAutoAggroComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.units.SetAutoAggroComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
+                    range = Float.parseFloat(templateReader.parseValue(entityWorld, rangeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.effects.units.SetAutoAggroComponent(range);
             }
@@ -2583,7 +2583,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent>("addStealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.vision.AddStealthComponent();
             }
         });
@@ -2591,7 +2591,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent>("removeStealth"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.vision.RemoveStealthComponent();
             }
         });
@@ -2605,8 +2605,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent>("playAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.effects.visuals.PlayAnimationComponent(animationEntity);
             }
         });
@@ -2614,7 +2614,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent>("stopAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.effects.visuals.StopAnimationComponent();
             }
         });
@@ -2623,8 +2623,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.CinematicComponent>("cinematic"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.CinematicComponent construct(EntityWorld entityWorld, Element element){
-                String cinematicClassName = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.game.CinematicComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String cinematicClassName = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.game.CinematicComponent(cinematicClassName);
             }
         });
@@ -2632,11 +2632,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.GameSpeedComponent>("gameSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.GameSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.game.GameSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
-                    speed = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, speedText));
+                    speed = Float.parseFloat(templateReader.parseValue(entityWorld, speedText));
                 }
                 return new amara.applications.ingame.entitysystem.components.game.GameSpeedComponent(speed);
             }
@@ -2650,11 +2650,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.GameTimeComponent>("gameTime"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.GameTimeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.game.GameTimeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float time = 0;
                 String timeText = element.getText();
                 if((timeText != null) && (timeText.length() > 0)){
-                    time = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, timeText));
+                    time = Float.parseFloat(templateReader.parseValue(entityWorld, timeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.game.GameTimeComponent(time);
             }
@@ -2663,11 +2663,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent>("nextEffectActionIndex"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int index = 0;
                 String indexText = element.getText();
                 if((indexText != null) && (indexText.length() > 0)){
-                    index = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, indexText));
+                    index = Integer.parseInt(templateReader.parseValue(entityWorld, indexText));
                 }
                 return new amara.applications.ingame.entitysystem.components.game.NextEffectActionIndexComponent(index);
             }
@@ -2677,7 +2677,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent>("customCleanup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.general.CustomCleanupComponent();
             }
         });
@@ -2685,8 +2685,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent>("deltaDescription"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent construct(EntityWorld entityWorld, Element element){
-                String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String description = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.DeltaDescriptionComponent(description);
             }
         });
@@ -2694,8 +2694,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.DescriptionComponent>("description"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.DescriptionComponent construct(EntityWorld entityWorld, Element element){
-                String description = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.general.DescriptionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String description = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.DescriptionComponent(description);
             }
         });
@@ -2703,8 +2703,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.NameComponent>("name"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.NameComponent construct(EntityWorld entityWorld, Element element){
-                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.general.NameComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String name = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.NameComponent(name);
             }
         });
@@ -2712,7 +2712,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.TemporaryComponent>("temporary"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.TemporaryComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.general.TemporaryComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.general.TemporaryComponent();
             }
         });
@@ -2720,8 +2720,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.general.UniqueComponent>("unique"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.general.UniqueComponent construct(EntityWorld entityWorld, Element element){
-                String id = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.general.UniqueComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String id = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.general.UniqueComponent(id);
             }
         });
@@ -2740,9 +2740,9 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.input.CastSpellComponent>("castSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.input.CastSpellComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.input.CastSpellComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.input.CastSpellComponent(spellEntity, targetEntity);
             }
         });
@@ -2756,8 +2756,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.BagComponent>("bag"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.BagComponent construct(EntityWorld entityWorld, Element element){
-                int[] itemEntities = createChildEntities(entityWorld, element, 0, "itemEntities");
+            public amara.applications.ingame.entitysystem.components.items.BagComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] itemEntities = createChildEntities(templateReader, entityWorld, element, 0, "itemEntities");
                 return new amara.applications.ingame.entitysystem.components.items.BagComponent(itemEntities);
             }
         });
@@ -2770,8 +2770,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.InventoryComponent>("inventory"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.InventoryComponent construct(EntityWorld entityWorld, Element element){
-                int[] itemEntities = createChildEntities(entityWorld, element, 0, "itemEntities");
+            public amara.applications.ingame.entitysystem.components.items.InventoryComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] itemEntities = createChildEntities(templateReader, entityWorld, element, 0, "itemEntities");
                 return new amara.applications.ingame.entitysystem.components.items.InventoryComponent(itemEntities);
             }
         });
@@ -2779,11 +2779,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.IsSellableComponent>("isSellable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.IsSellableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.items.IsSellableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(templateReader.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.items.IsSellableComponent(gold);
             }
@@ -2797,12 +2797,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemActiveComponent>("itemActive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemActiveComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.items.ItemActiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
                 boolean consumable = false;
                 String consumableText = element.getAttributeValue("consumable");
                 if((consumableText != null) && (consumableText.length() > 0)){
-                    consumable = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, consumableText));
+                    consumable = Boolean.parseBoolean(templateReader.parseValue(entityWorld, consumableText));
                 }
                 return new amara.applications.ingame.entitysystem.components.items.ItemActiveComponent(spellEntity, consumable);
             }
@@ -2811,13 +2811,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent>("itemCategories"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] categories = new String[0];
                 String categoriesText = element.getText();
                 if(categoriesText != null){
                     categories = categoriesText.split(",");
                     for(int i=0;i<categories.length;i++){
-                        categories[i] = xmlTemplateManager.parseValue(entityWorld, categories[i]);
+                        categories[i] = templateReader.parseValue(entityWorld, categories[i]);
                     }
                 }
                 return new amara.applications.ingame.entitysystem.components.items.ItemCategoriesComponent(categories);
@@ -2827,8 +2827,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemIDComponent>("itemID"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemIDComponent construct(EntityWorld entityWorld, Element element){
-                String id = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.items.ItemIDComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String id = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.items.ItemIDComponent(id);
             }
         });
@@ -2841,8 +2841,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent>("itemPassives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent construct(EntityWorld entityWorld, Element element){
-                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(templateReader, entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.items.ItemPassivesComponent(passiveEntities);
             }
         });
@@ -2850,14 +2850,14 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent>("itemRecipe"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent construct(EntityWorld entityWorld, Element element){
-                int combineCostEntity = createChildEntity(entityWorld, element, 0, "combineCostEntity");
+            public amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int combineCostEntity = createChildEntity(templateReader, entityWorld, element, 0, "combineCostEntity");
                 String[] itemIDs = new String[0];
                 String itemIDsText = element.getAttributeValue("itemIDs");
                 if(itemIDsText != null){
                     itemIDs = itemIDsText.split(",");
                     for(int i=0;i<itemIDs.length;i++){
-                        itemIDs[i] = xmlTemplateManager.parseValue(entityWorld, itemIDs[i]);
+                        itemIDs[i] = templateReader.parseValue(entityWorld, itemIDs[i]);
                     }
                 }
                 return new amara.applications.ingame.entitysystem.components.items.ItemRecipeComponent(combineCostEntity, itemIDs);
@@ -2867,8 +2867,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent>("itemVisualisation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent construct(EntityWorld entityWorld, Element element){
-                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String name = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.items.ItemVisualisationComponent(name);
             }
         });
@@ -2882,8 +2882,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent>("mapObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent construct(EntityWorld entityWorld, Element element){
-                int objectiveEntity = createChildEntity(entityWorld, element, 0, "objectiveEntity");
+            public amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int objectiveEntity = createChildEntity(templateReader, entityWorld, element, 0, "objectiveEntity");
                 return new amara.applications.ingame.entitysystem.components.maps.MapObjectiveComponent(objectiveEntity);
             }
         });
@@ -2892,7 +2892,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent>("respawnPlayers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnPlayersComponent();
             }
         });
@@ -2910,16 +2910,16 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent>("respawnTimer"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float initialDuration = 0;
                 String initialDurationText = element.getAttributeValue("initialDuration");
                 if((initialDurationText != null) && (initialDurationText.length() > 0)){
-                    initialDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, initialDurationText));
+                    initialDuration = Float.parseFloat(templateReader.parseValue(entityWorld, initialDurationText));
                 }
                 float deltaDurationPerTime = 0;
                 String deltaDurationPerTimeText = element.getAttributeValue("deltaDurationPerTime");
                 if((deltaDurationPerTimeText != null) && (deltaDurationPerTimeText.length() > 0)){
-                    deltaDurationPerTime = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, deltaDurationPerTimeText));
+                    deltaDurationPerTime = Float.parseFloat(templateReader.parseValue(entityWorld, deltaDurationPerTimeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.maps.playerdeathrules.RespawnTimerComponent(initialDuration, deltaDurationPerTime);
             }
@@ -2933,8 +2933,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent>("playerDeathRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent construct(EntityWorld entityWorld, Element element){
-                int rulesEntity = createChildEntity(entityWorld, element, 0, "rulesEntity");
+            public amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int rulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "rulesEntity");
                 return new amara.applications.ingame.entitysystem.components.maps.PlayerDeathRulesComponent(rulesEntity);
             }
         });
@@ -2943,7 +2943,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.DisplacementComponent>("displacement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.DisplacementComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.DisplacementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.DisplacementComponent();
             }
         });
@@ -2956,11 +2956,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent>("distanceLimit"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.movements.DistanceLimitComponent(distance);
             }
@@ -2974,11 +2974,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent>("movedDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.movements.MovedDistanceComponent(distance);
             }
@@ -2992,8 +2992,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent>("movementAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.movements.MovementAnimationComponent(animationEntity);
             }
         });
@@ -3001,10 +3001,10 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent>("movementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] directionCoordinates = element.getText().split(",");
-                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
-                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
+                float directionX = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.applications.ingame.entitysystem.components.movements.MovementDirectionComponent(direction);
             }
@@ -3013,7 +3013,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent>("movementIsCancelable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementIsCancelableComponent();
             }
         });
@@ -3021,7 +3021,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent>("movementLocalAvoidance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementLocalAvoidanceComponent();
             }
         });
@@ -3029,7 +3029,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent>("movementPathfinding"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementPathfindingComponent();
             }
         });
@@ -3042,11 +3042,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent>("movementSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
-                    speed = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, speedText));
+                    speed = Float.parseFloat(templateReader.parseValue(entityWorld, speedText));
                 }
                 return new amara.applications.ingame.entitysystem.components.movements.MovementSpeedComponent(speed);
             }
@@ -3060,8 +3060,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent>("movementTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTargetComponent(targetEntity);
             }
         });
@@ -3069,7 +3069,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent>("movementTargetReached"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTargetReachedComponent();
             }
         });
@@ -3082,11 +3082,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent>("movementTargetSufficientDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTargetSufficientDistanceComponent(distance);
             }
@@ -3095,7 +3095,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent>("movementTurnInDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.MovementTurnInDirectionComponent();
             }
         });
@@ -3103,7 +3103,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent>("walkMovement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.movements.WalkMovementComponent();
             }
         });
@@ -3112,7 +3112,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent>("finishedObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.objectives.FinishedObjectiveComponent();
             }
         });
@@ -3125,8 +3125,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent>("missingEntities"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent construct(EntityWorld entityWorld, Element element){
-                int[] entities = createChildEntities(entityWorld, element, 0, "entities");
+            public amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] entities = createChildEntities(templateReader, entityWorld, element, 0, "entities");
                 return new amara.applications.ingame.entitysystem.components.objectives.MissingEntitiesComponent(entities);
             }
         });
@@ -3134,7 +3134,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent>("openObjective"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.objectives.OpenObjectiveComponent();
             }
         });
@@ -3147,8 +3147,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent>("orObjectives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent construct(EntityWorld entityWorld, Element element){
-                int[] objectiveEntities = createChildEntities(entityWorld, element, 0, "objectiveEntities");
+            public amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] objectiveEntities = createChildEntities(templateReader, entityWorld, element, 0, "objectiveEntities");
                 return new amara.applications.ingame.entitysystem.components.objectives.OrObjectivesComponent(objectiveEntities);
             }
         });
@@ -3158,11 +3158,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.DirectionComponent>("direction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.DirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.DirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float radian = 0;
                 String radianText = element.getText();
                 if((radianText != null) && (radianText.length() > 0)){
-                    radian = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, radianText));
+                    radian = Float.parseFloat(templateReader.parseValue(entityWorld, radianText));
                 }
                 return new amara.applications.ingame.entitysystem.components.physics.DirectionComponent(radian);
             }
@@ -3171,7 +3171,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent>("hitboxActive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.HitboxActiveComponent();
             }
         });
@@ -3180,7 +3180,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent>("intersectionPushed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.IntersectionPushedComponent();
             }
         });
@@ -3188,7 +3188,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent>("intersectionPushes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.IntersectionPushesComponent();
             }
         });
@@ -3196,10 +3196,10 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.PositionComponent>("position"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.PositionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.PositionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
+                float positionX = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.applications.ingame.entitysystem.components.physics.PositionComponent(position);
             }
@@ -3208,7 +3208,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent>("removeOnMapLeave"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.physics.RemoveOnMapLeaveComponent();
             }
         });
@@ -3216,11 +3216,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.ScaleComponent>("scale"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.ScaleComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.physics.ScaleComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float scale = 0;
                 String scaleText = element.getText();
                 if((scaleText != null) && (scaleText.length() > 0)){
-                    scale = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, scaleText));
+                    scale = Float.parseFloat(templateReader.parseValue(entityWorld, scaleText));
                 }
                 return new amara.applications.ingame.entitysystem.components.physics.ScaleComponent(scale);
             }
@@ -3234,8 +3234,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent>("transformOrigin"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent construct(EntityWorld entityWorld, Element element){
-                int originEntity = createChildEntity(entityWorld, element, 0, "originEntity");
+            public amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int originEntity = createChildEntity(templateReader, entityWorld, element, 0, "originEntity");
                 return new amara.applications.ingame.entitysystem.components.physics.TransformOriginComponent(originEntity);
             }
         });
@@ -3244,11 +3244,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.ClientComponent>("client"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.ClientComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.players.ClientComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int clientId = 0;
                 String clientIdText = element.getText();
                 if((clientIdText != null) && (clientIdText.length() > 0)){
-                    clientId = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, clientIdText));
+                    clientId = Integer.parseInt(templateReader.parseValue(entityWorld, clientIdText));
                 }
                 return new amara.applications.ingame.entitysystem.components.players.ClientComponent(clientId);
             }
@@ -3257,7 +3257,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.IsBotComponent>("isBot"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.IsBotComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.players.IsBotComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.players.IsBotComponent();
             }
         });
@@ -3265,8 +3265,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent>("playerAnnouncement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent construct(EntityWorld entityWorld, Element element){
-                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String text = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementComponent(text);
             }
         });
@@ -3279,11 +3279,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent>("playerAnnouncementRemainingDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.players.PlayerAnnouncementRemainingDurationComponent(remainingDuration);
             }
@@ -3297,8 +3297,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent>("playerCharacter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent construct(EntityWorld entityWorld, Element element){
-                int entity = createChildEntity(entityWorld, element, 0, "entity");
+            public amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int entity = createChildEntity(templateReader, entityWorld, element, 0, "entity");
                 return new amara.applications.ingame.entitysystem.components.players.PlayerCharacterComponent(entity);
             }
         });
@@ -3306,11 +3306,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent>("playerIndex"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int index = 0;
                 String indexText = element.getText();
                 if((indexText != null) && (indexText.length() > 0)){
-                    index = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, indexText));
+                    index = Integer.parseInt(templateReader.parseValue(entityWorld, indexText));
                 }
                 return new amara.applications.ingame.entitysystem.components.players.PlayerIndexComponent(index);
             }
@@ -3320,13 +3320,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent>("shopItems"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] itemTemplateNames = new String[0];
                 String itemTemplateNamesText = element.getText();
                 if(itemTemplateNamesText != null){
                     itemTemplateNames = itemTemplateNamesText.split(",");
                     for(int i=0;i<itemTemplateNames.length;i++){
-                        itemTemplateNames[i] = xmlTemplateManager.parseValue(entityWorld, itemTemplateNames[i]);
+                        itemTemplateNames[i] = templateReader.parseValue(entityWorld, itemTemplateNames[i]);
                     }
                 }
                 return new amara.applications.ingame.entitysystem.components.shop.ShopItemsComponent(itemTemplateNames);
@@ -3341,11 +3341,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent>("shopRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
+                    range = Float.parseFloat(templateReader.parseValue(entityWorld, rangeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.shop.ShopRangeComponent(range);
             }
@@ -3355,7 +3355,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent>("spawnAttackMove"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnAttackMoveComponent();
             }
         });
@@ -3368,8 +3368,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent>("spawnBuffs"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnBuffsComponent(buffEntities);
             }
         });
@@ -3382,8 +3382,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent>("spawnMovementAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementAnimationComponent(animationEntity);
             }
         });
@@ -3396,11 +3396,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent>("spawnMovementDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementDistanceComponent(distance);
             }
@@ -3409,11 +3409,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent>("spawnMovementRelativeDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(templateReader.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementRelativeDirectionComponent(angle_Degrees);
             }
@@ -3427,11 +3427,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent>("spawnMovementSpeed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float speed = 0;
                 String speedText = element.getText();
                 if((speedText != null) && (speedText.length() > 0)){
-                    speed = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, speedText));
+                    speed = Float.parseFloat(templateReader.parseValue(entityWorld, speedText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMovementSpeedComponent(speed);
             }
@@ -3440,7 +3440,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent>("spawnMoveToTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnMoveToTargetComponent();
             }
         });
@@ -3448,7 +3448,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent>("spawnRedirectReceivedBounties"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnRedirectReceivedBountiesComponent();
             }
         });
@@ -3456,11 +3456,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent>("spawnRelativeDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(templateReader.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnRelativeDirectionComponent(angle_Degrees);
             }
@@ -3469,10 +3469,10 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent>("spawnRelativePosition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
+                float positionX = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnRelativePositionComponent(position);
             }
@@ -3481,7 +3481,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spawns.SpawnSetAsRespawnTransformComponent>("spawnSetAsRespawnTransform"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spawns.SpawnSetAsRespawnTransformComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spawns.SpawnSetAsRespawnTransformComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spawns.SpawnSetAsRespawnTransformComponent();
             }
         });
@@ -3497,8 +3497,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent>("erikaPassiveEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.specials.erika.ErikaPassiveEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -3506,7 +3506,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent>("triggerErikaPassive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.specials.erika.TriggerErikaPassiveComponent();
             }
         });
@@ -3520,11 +3520,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent>("baseCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.BaseCooldownComponent(duration);
             }
@@ -3538,12 +3538,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent>("castAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 int additionalLoops = 0;
                 String additionalLoopsText = element.getAttributeValue("additionalLoops");
                 if((additionalLoopsText != null) && (additionalLoopsText.length() > 0)){
-                    additionalLoops = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, additionalLoopsText));
+                    additionalLoops = Integer.parseInt(templateReader.parseValue(entityWorld, additionalLoopsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.CastAnimationComponent(animationEntity, additionalLoops);
             }
@@ -3552,7 +3552,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent>("castAtMaxRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastAtMaxRangeComponent();
             }
         });
@@ -3560,7 +3560,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent>("castCancelable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelableComponent();
             }
         });
@@ -3568,7 +3568,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent>("castCancelCast"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelCastComponent();
             }
         });
@@ -3576,7 +3576,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent>("castCancelMovement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastCancelMovementComponent();
             }
         });
@@ -3584,8 +3584,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastCostComponent>("castCost"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastCostComponent construct(EntityWorld entityWorld, Element element){
-                int costEntity = createChildEntity(entityWorld, element, 0, "costEntity");
+            public amara.applications.ingame.entitysystem.components.spells.CastCostComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int costEntity = createChildEntity(templateReader, entityWorld, element, 0, "costEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.CastCostComponent(costEntity);
             }
         });
@@ -3598,11 +3598,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastDurationComponent>("castDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CastDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.CastDurationComponent(duration);
             }
@@ -3611,7 +3611,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent>("castTurnToTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.CastTurnToTargetComponent();
             }
         });
@@ -3625,11 +3625,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.CooldownComponent>("cooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.CooldownComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.CooldownComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.CooldownComponent(duration);
             }
@@ -3654,21 +3654,21 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent>("circularIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float x = 0;
                 String xText = element.getAttributeValue("x");
                 if((xText != null) && (xText.length() > 0)){
-                    x = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, xText));
+                    x = Float.parseFloat(templateReader.parseValue(entityWorld, xText));
                 }
                 float y = 0;
                 String yText = element.getAttributeValue("y");
                 if((yText != null) && (yText.length() > 0)){
-                    y = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, yText));
+                    y = Float.parseFloat(templateReader.parseValue(entityWorld, yText));
                 }
                 float radius = 0;
                 String radiusText = element.getAttributeValue("radius");
                 if((radiusText != null) && (radiusText.length() > 0)){
-                    radius = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, radiusText));
+                    radius = Float.parseFloat(templateReader.parseValue(entityWorld, radiusText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.indicators.CircularIndicatorComponent(x, y, radius);
             }
@@ -3697,26 +3697,26 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent>("linearIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float x = 0;
                 String xText = element.getAttributeValue("x");
                 if((xText != null) && (xText.length() > 0)){
-                    x = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, xText));
+                    x = Float.parseFloat(templateReader.parseValue(entityWorld, xText));
                 }
                 float y = 0;
                 String yText = element.getAttributeValue("y");
                 if((yText != null) && (yText.length() > 0)){
-                    y = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, yText));
+                    y = Float.parseFloat(templateReader.parseValue(entityWorld, yText));
                 }
                 float width = 0;
                 String widthText = element.getAttributeValue("width");
                 if((widthText != null) && (widthText.length() > 0)){
-                    width = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, widthText));
+                    width = Float.parseFloat(templateReader.parseValue(entityWorld, widthText));
                 }
                 float height = 0;
                 String heightText = element.getAttributeValue("height");
                 if((heightText != null) && (heightText.length() > 0)){
-                    height = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, heightText));
+                    height = Float.parseFloat(templateReader.parseValue(entityWorld, heightText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.indicators.LinearIndicatorComponent(x, y, width, height);
             }
@@ -3730,8 +3730,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent>("instantEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -3744,8 +3744,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent>("learnEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.LearnEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -3758,8 +3758,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent>("linkedCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent construct(EntityWorld entityWorld, Element element){
-                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(templateReader, entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.LinkedCooldownComponent(sourceEntity);
             }
         });
@@ -3773,8 +3773,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent>("ruleMovementTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.RuleMovementTargetComponent(targetRulesEntity);
             }
         });
@@ -3782,11 +3782,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent>("sourceMovementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(templateReader.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementDirectionComponent(angle_Degrees);
             }
@@ -3795,7 +3795,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent>("sourceMovementTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.SourceMovementTargetComponent();
             }
         });
@@ -3803,11 +3803,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent>("targetedMovementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(templateReader.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementDirectionComponent(angle_Degrees);
             }
@@ -3816,7 +3816,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent>("targetedMovementTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TargetedMovementTargetComponent();
             }
         });
@@ -3824,7 +3824,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent>("teleportToTargetPosition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TeleportToTargetPositionComponent();
             }
         });
@@ -3832,11 +3832,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent>("towardsSourceMovementDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float angle_Degrees = 0;
                 String angle_DegreesText = element.getText();
                 if((angle_DegreesText != null) && (angle_DegreesText.length() > 0)){
-                    angle_Degrees = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, angle_DegreesText));
+                    angle_Degrees = Float.parseFloat(templateReader.parseValue(entityWorld, angle_DegreesText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TowardsSourceMovementDirectionComponent(angle_Degrees);
             }
@@ -3845,7 +3845,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent>("triggerCastedSpellEffects"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.spells.placeholders.TriggerCastedSpellEffectsComponent();
             }
         });
@@ -3864,11 +3864,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent>("remainingCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.RemainingCooldownComponent(duration);
             }
@@ -3882,8 +3882,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent>("spellIndicator"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent construct(EntityWorld entityWorld, Element element){
-                int indicatorEntity = createChildEntity(entityWorld, element, 0, "indicatorEntity");
+            public amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int indicatorEntity = createChildEntity(templateReader, entityWorld, element, 0, "indicatorEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellIndicatorComponent(indicatorEntity);
             }
         });
@@ -3896,8 +3896,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent>("spellPassives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent construct(EntityWorld entityWorld, Element element){
-                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(templateReader, entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellPassivesComponent(passiveEntities);
             }
         });
@@ -3905,11 +3905,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent>("spellRequiredLevel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int level = 0;
                 String levelText = element.getText();
                 if((levelText != null) && (levelText.length() > 0)){
-                    level = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, levelText));
+                    level = Integer.parseInt(templateReader.parseValue(entityWorld, levelText));
                 }
                 return new amara.applications.ingame.entitysystem.components.spells.SpellRequiredLevelComponent(level);
             }
@@ -3923,8 +3923,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent>("spellTargetRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellTargetRulesComponent(targetRulesEntity);
             }
         });
@@ -3937,8 +3937,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent>("spellUpgrades"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.SpellUpgradesComponent(spellsEntities);
             }
         });
@@ -3946,8 +3946,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent>("spellVisualisation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent construct(EntityWorld entityWorld, Element element){
-                String name = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String name = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.spells.SpellVisualisationComponent(name);
             }
         });
@@ -3961,8 +3961,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent>("castedEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -3975,8 +3975,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent>("castedSpell"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent construct(EntityWorld entityWorld, Element element){
-                int spellEntity = createChildEntity(entityWorld, element, 0, "spellEntity");
+            public amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent(spellEntity);
             }
         });
@@ -3989,8 +3989,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent>("spellEffectParent"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent construct(EntityWorld entityWorld, Element element){
-                int spellEffectEntity = createChildEntity(entityWorld, element, 0, "spellEffectEntity");
+            public amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int spellEffectEntity = createChildEntity(templateReader, entityWorld, element, 0, "spellEffectEntity");
                 return new amara.applications.ingame.entitysystem.components.spells.triggers.SpellEffectParentComponent(spellEffectEntity);
             }
         });
@@ -3999,7 +3999,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent>("acceptAllies"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent();
             }
         });
@@ -4007,7 +4007,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent>("acceptEnemies"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent();
             }
         });
@@ -4015,7 +4015,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent>("acceptUntargetable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent();
             }
         });
@@ -4028,8 +4028,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireAllBuffsComponent>("requireAllBuffs"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireAllBuffsComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.targets.RequireAllBuffsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.targets.RequireAllBuffsComponent(buffEntities);
             }
         });
@@ -4042,8 +4042,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireAnyBuffsComponent>("requireAnyBuffs"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireAnyBuffsComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.targets.RequireAnyBuffsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.targets.RequireAnyBuffsComponent(buffEntities);
             }
         });
@@ -4051,7 +4051,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent>("requireCharacter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireCharacterComponent();
             }
         });
@@ -4064,8 +4064,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent>("requireEntity"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent construct(EntityWorld entityWorld, Element element){
-                int entity = createChildEntity(entityWorld, element, 0, "entity");
+            public amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int entity = createChildEntity(templateReader, entityWorld, element, 0, "entity");
                 return new amara.applications.ingame.entitysystem.components.targets.RequireEntityComponent(entity);
             }
         });
@@ -4078,11 +4078,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent>("requireMaximumDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.targets.RequireMaximumDistanceComponent(distance);
             }
@@ -4091,7 +4091,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent>("requireMinion"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireMinionComponent();
             }
         });
@@ -4104,8 +4104,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent>("requireNoBuffs"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent(buffEntities);
             }
         });
@@ -4113,7 +4113,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent>("requireProjectile"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent();
             }
         });
@@ -4122,11 +4122,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent>("aggroPriority"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int priority = 0;
                 String priorityText = element.getText();
                 if((priorityText != null) && (priorityText.length() > 0)){
-                    priority = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, priorityText));
+                    priority = Integer.parseInt(templateReader.parseValue(entityWorld, priorityText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.AggroPriorityComponent(priority);
             }
@@ -4140,11 +4140,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent>("aggroResetTimer"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.AggroResetTimerComponent(duration);
             }
@@ -4158,8 +4158,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AggroTargetComponent>("aggroTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AggroTargetComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.units.AggroTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AggroTargetComponent(targetEntity);
             }
         });
@@ -4173,8 +4173,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent>("autoAttackAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.AutoAttackAnimationComponent(animationEntity);
             }
         });
@@ -4187,8 +4187,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent>("danceAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.DanceAnimationComponent(animationEntity);
             }
         });
@@ -4201,8 +4201,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent>("deathAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.DeathAnimationComponent(animationEntity);
             }
         });
@@ -4215,8 +4215,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent>("idleAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.IdleAnimationComponent(animationEntity);
             }
         });
@@ -4229,8 +4229,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent>("walkAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.units.animations.WalkAnimationComponent(animationEntity);
             }
         });
@@ -4243,8 +4243,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AttackMoveComponent>("attackMove"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AttackMoveComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
+            public amara.applications.ingame.entitysystem.components.units.AttackMoveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AttackMoveComponent(targetEntity);
             }
         });
@@ -4257,12 +4257,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent>("attributesPerLevel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent construct(EntityWorld entityWorld, Element element){
-                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(templateReader, entityWorld, element, 0, "bonusAttributesEntity");
                 float exponentialBase = 0;
                 String exponentialBaseText = element.getAttributeValue("exponentialBase");
                 if((exponentialBaseText != null) && (exponentialBaseText.length() > 0)){
-                    exponentialBase = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, exponentialBaseText));
+                    exponentialBase = Float.parseFloat(templateReader.parseValue(entityWorld, exponentialBaseText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.AttributesPerLevelComponent(bonusAttributesEntity, exponentialBase);
             }
@@ -4276,11 +4276,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AutoAggroComponent>("autoAggro"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AutoAggroComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.AutoAggroComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
+                    range = Float.parseFloat(templateReader.parseValue(entityWorld, rangeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.AutoAggroComponent(range);
             }
@@ -4294,8 +4294,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.AutoAttackComponent>("autoAttack"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.AutoAttackComponent construct(EntityWorld entityWorld, Element element){
-                int autoAttackEntity = createChildEntity(entityWorld, element, 0, "autoAttackEntity");
+            public amara.applications.ingame.entitysystem.components.units.AutoAttackComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int autoAttackEntity = createChildEntity(templateReader, entityWorld, element, 0, "autoAttackEntity");
                 return new amara.applications.ingame.entitysystem.components.units.AutoAttackComponent(autoAttackEntity);
             }
         });
@@ -4308,8 +4308,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent>("baseAttributes"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent construct(EntityWorld entityWorld, Element element){
-                int bonusAttributesEntity = createChildEntity(entityWorld, element, 0, "bonusAttributesEntity");
+            public amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int bonusAttributesEntity = createChildEntity(templateReader, entityWorld, element, 0, "bonusAttributesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.BaseAttributesComponent(bonusAttributesEntity);
             }
         });
@@ -4328,12 +4328,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent>("bountyBuff"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 float duration = 0;
                 String durationText = element.getAttributeValue("duration");
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyBuffComponent(buffEntity, duration);
             }
@@ -4342,7 +4342,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent>("bountyCharacterKill"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyCharacterKillComponent();
             }
         });
@@ -4350,7 +4350,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent>("bountyCreepScore"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyCreepScoreComponent();
             }
         });
@@ -4358,11 +4358,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent>("bountyExperience"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int experience = 0;
                 String experienceText = element.getText();
                 if((experienceText != null) && (experienceText.length() > 0)){
-                    experience = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, experienceText));
+                    experience = Integer.parseInt(templateReader.parseValue(entityWorld, experienceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyExperienceComponent(experience);
             }
@@ -4371,11 +4371,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent>("bountyGold"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(templateReader.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyGoldComponent(gold);
             }
@@ -4389,8 +4389,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent>("bountyItems"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent construct(EntityWorld entityWorld, Element element){
-                int[] itemEntities = createChildEntities(entityWorld, element, 0, "itemEntities");
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] itemEntities = createChildEntities(templateReader, entityWorld, element, 0, "itemEntities");
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyItemsComponent(itemEntities);
             }
         });
@@ -4403,8 +4403,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent>("bountyRules"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.bounties.BountyRulesComponent(targetRulesEntity);
             }
         });
@@ -4417,8 +4417,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent>("redirectReceivedBounties"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent construct(EntityWorld entityWorld, Element element){
-                int receiverEntity = createChildEntity(entityWorld, element, 0, "receiverEntity");
+            public amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int receiverEntity = createChildEntity(templateReader, entityWorld, element, 0, "receiverEntity");
                 return new amara.applications.ingame.entitysystem.components.units.bounties.RedirectReceivedBountiesComponent(receiverEntity);
             }
         });
@@ -4431,8 +4431,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BountyComponent>("bounty"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.BountyComponent construct(EntityWorld entityWorld, Element element){
-                int bountyEntity = createChildEntity(entityWorld, element, 0, "bountyEntity");
+            public amara.applications.ingame.entitysystem.components.units.BountyComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int bountyEntity = createChildEntity(templateReader, entityWorld, element, 0, "bountyEntity");
                 return new amara.applications.ingame.entitysystem.components.units.BountyComponent(bountyEntity);
             }
         });
@@ -4445,8 +4445,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.BuffsComponent>("buffs"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.BuffsComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffStatusEntities = createChildEntities(entityWorld, element, 0, "buffStatusEntities");
+            public amara.applications.ingame.entitysystem.components.units.BuffsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffStatusEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffStatusEntities");
                 return new amara.applications.ingame.entitysystem.components.units.BuffsComponent(buffStatusEntities);
             }
         });
@@ -4459,15 +4459,15 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CampComponent>("camp"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CampComponent construct(EntityWorld entityWorld, Element element){
-                int campEntity = createChildEntity(entityWorld, element, 0, "campEntity");
+            public amara.applications.ingame.entitysystem.components.units.CampComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int campEntity = createChildEntity(templateReader, entityWorld, element, 0, "campEntity");
                 String[] positionCoordinates = element.getAttributeValue("position").split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
+                float positionX = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 String[] directionCoordinates = element.getAttributeValue("direction").split(",");
-                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
-                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
+                float directionX = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.applications.ingame.entitysystem.components.units.CampComponent(campEntity, position, direction);
             }
@@ -4476,7 +4476,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CampResetComponent>("campReset"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CampResetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.CampResetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.CampResetComponent();
             }
         });
@@ -4484,11 +4484,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent>("castSpellOnCooldownWhileAttacking"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] spellIndicesParts = element.getText().split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
-                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, element.getText()));
+                    spellIndices[i] = Integer.parseInt(templateReader.parseValue(entityWorld, element.getText()));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.CastSpellOnCooldownWhileAttackingComponent(spellIndices);
             }
@@ -4498,7 +4498,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent>("isBindable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindableComponent();
             }
         });
@@ -4511,11 +4511,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent>("isBinded"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsBindedComponent(remainingDuration);
             }
@@ -4524,7 +4524,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent>("isKnockupable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupableComponent();
             }
         });
@@ -4542,12 +4542,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent>("isKnockuped"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent construct(EntityWorld entityWorld, Element element){
-                int knockupEntity = createChildEntity(entityWorld, element, 0, "knockupEntity");
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int knockupEntity = createChildEntity(templateReader, entityWorld, element, 0, "knockupEntity");
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsKnockupedComponent(knockupEntity, remainingDuration);
             }
@@ -4556,7 +4556,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent>("isSilencable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencableComponent();
             }
         });
@@ -4569,11 +4569,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent>("isSilenced"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsSilencedComponent(remainingDuration);
             }
@@ -4582,7 +4582,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent>("isStunnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnableComponent();
             }
         });
@@ -4595,11 +4595,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent>("isStunned"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.crowdcontrol.IsStunnedComponent(remainingDuration);
             }
@@ -4613,8 +4613,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent>("currentCastEffectCasts"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectCastEntities = createChildEntities(entityWorld, element, 0, "effectCastEntities");
+            public amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectCastEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectCastEntities");
                 return new amara.applications.ingame.entitysystem.components.units.CurrentCastEffectCastsComponent(effectCastEntities);
             }
         });
@@ -4627,8 +4627,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent>("currentPassives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent construct(EntityWorld entityWorld, Element element){
-                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(templateReader, entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.units.CurrentPassivesComponent(passiveEntities);
             }
         });
@@ -4654,8 +4654,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent>("buffTargetsTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.BuffTargetsTargetComponent(buffEntity);
             }
         });
@@ -4668,8 +4668,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent>("customTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent construct(EntityWorld entityWorld, Element element){
-                int[] targetEntities = createChildEntities(entityWorld, element, 0, "targetEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] targetEntities = createChildEntities(templateReader, entityWorld, element, 0, "targetEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.CustomTargetComponent(targetEntities);
             }
         });
@@ -4677,7 +4677,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.ExcludeTargetTargetComponent>("excludeTargetTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.ExcludeTargetTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.ExcludeTargetTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.ExcludeTargetTargetComponent();
             }
         });
@@ -4685,11 +4685,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.MaximumTargetsComponent>("maximumTargets"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.MaximumTargetsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.MaximumTargetsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int maximum = 0;
                 String maximumText = element.getText();
                 if((maximumText != null) && (maximumText.length() > 0)){
-                    maximum = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, maximumText));
+                    maximum = Integer.parseInt(templateReader.parseValue(entityWorld, maximumText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.MaximumTargetsComponent(maximum);
             }
@@ -4703,8 +4703,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent>("ruleTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.RuleTargetComponent(targetRulesEntity);
             }
         });
@@ -4712,7 +4712,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent>("sourceCasterTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceCasterTargetComponent();
             }
         });
@@ -4720,7 +4720,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent>("sourceTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.SourceTargetComponent();
             }
         });
@@ -4728,7 +4728,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent>("targetCasterTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetCasterTargetComponent();
             }
         });
@@ -4736,7 +4736,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent>("targetTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TargetTargetComponent();
             }
         });
@@ -4749,8 +4749,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent>("teamTarget"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent construct(EntityWorld entityWorld, Element element){
-                int teamEntity = createChildEntity(entityWorld, element, 0, "teamEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int teamEntity = createChildEntity(templateReader, entityWorld, element, 0, "teamEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.targets.TeamTargetComponent(teamEntity);
             }
         });
@@ -4763,8 +4763,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent>("triggerConditions"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent construct(EntityWorld entityWorld, Element element){
-                int[] conditionEntities = createChildEntities(entityWorld, element, 0, "conditionEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] conditionEntities = createChildEntities(templateReader, entityWorld, element, 0, "conditionEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerConditionsComponent(conditionEntities);
             }
         });
@@ -4777,11 +4777,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent>("triggerDelay"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerDelayComponent(duration);
             }
@@ -4795,8 +4795,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent>("triggeredEffect"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent construct(EntityWorld entityWorld, Element element){
-                int effectEntity = createChildEntity(entityWorld, element, 0, "effectEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int effectEntity = createChildEntity(templateReader, entityWorld, element, 0, "effectEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggeredEffectComponent(effectEntity);
             }
         });
@@ -4804,7 +4804,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent>("triggerOnCancel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnCancelComponent();
             }
         });
@@ -4812,11 +4812,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent>("triggerOnce"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 boolean removeEntity = false;
                 String removeEntityText = element.getText();
                 if((removeEntityText != null) && (removeEntityText.length() > 0)){
-                    removeEntity = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, removeEntityText));
+                    removeEntity = Boolean.parseBoolean(templateReader.parseValue(entityWorld, removeEntityText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerOnceComponent(removeEntity);
             }
@@ -4831,12 +4831,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent>("buffTargetsAmountTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent construct(EntityWorld entityWorld, Element element){
-                int buffEntity = createChildEntity(entityWorld, element, 0, "buffEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int buffEntity = createChildEntity(templateReader, entityWorld, element, 0, "buffEntity");
                 int amount = 0;
                 String amountText = element.getAttributeValue("amount");
                 if((amountText != null) && (amountText.length() > 0)){
-                    amount = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, amountText));
+                    amount = Integer.parseInt(templateReader.parseValue(entityWorld, amountText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.BuffTargetsAmountTriggerComponent(buffEntity, amount);
             }
@@ -4845,7 +4845,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent>("castCancelledTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastCancelledTriggerComponent();
             }
         });
@@ -4853,7 +4853,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent>("castingFinishedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingFinishedTriggerComponent();
             }
         });
@@ -4861,7 +4861,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingStartedTriggerComponent>("castingStartedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingStartedTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingStartedTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CastingStartedTriggerComponent();
             }
         });
@@ -4874,8 +4874,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent>("collisionTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent construct(EntityWorld entityWorld, Element element){
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.CollisionTriggerComponent(targetRulesEntity);
             }
         });
@@ -4883,21 +4883,21 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent>("damageTakenTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 boolean physicalDamage = false;
                 String physicalDamageText = element.getAttributeValue("physicalDamage");
                 if((physicalDamageText != null) && (physicalDamageText.length() > 0)){
-                    physicalDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, physicalDamageText));
+                    physicalDamage = Boolean.parseBoolean(templateReader.parseValue(entityWorld, physicalDamageText));
                 }
                 boolean magicDamage = false;
                 String magicDamageText = element.getAttributeValue("magicDamage");
                 if((magicDamageText != null) && (magicDamageText.length() > 0)){
-                    magicDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, magicDamageText));
+                    magicDamage = Boolean.parseBoolean(templateReader.parseValue(entityWorld, magicDamageText));
                 }
                 boolean trueDamage = false;
                 String trueDamageText = element.getAttributeValue("trueDamage");
                 if((trueDamageText != null) && (trueDamageText.length() > 0)){
-                    trueDamage = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, trueDamageText));
+                    trueDamage = Boolean.parseBoolean(templateReader.parseValue(entityWorld, trueDamageText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DamageTakenTriggerComponent(physicalDamage, magicDamage, trueDamage);
             }
@@ -4906,7 +4906,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent>("deathTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.DeathTriggerComponent();
             }
         });
@@ -4914,7 +4914,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent>("hasAggroTargetTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasAggroTargetTriggerComponent();
             }
         });
@@ -4927,8 +4927,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent>("hasBuffsTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasBuffsTriggerComponent(buffEntities);
             }
         });
@@ -4936,7 +4936,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent>("hasNoAggroTargetTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.HasNoAggroTargetTriggerComponent();
             }
         });
@@ -4944,7 +4944,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent>("instantTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.InstantTriggerComponent();
             }
         });
@@ -4952,7 +4952,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent>("killTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.KillTriggerComponent();
             }
         });
@@ -4960,7 +4960,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent>("mapCollisionTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MapCollisionTriggerComponent();
             }
         });
@@ -4973,11 +4973,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent>("movementTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerComponent(distance);
             }
@@ -4991,11 +4991,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent>("movementTriggerMovedDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.MovementTriggerMovedDistanceComponent(distance);
             }
@@ -5009,8 +5009,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent>("noBuffTargetsTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent construct(EntityWorld entityWorld, Element element){
-                int[] buffEntities = createChildEntities(entityWorld, element, 0, "buffEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] buffEntities = createChildEntities(templateReader, entityWorld, element, 0, "buffEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.NoBuffTargetsTriggerComponent(buffEntities);
             }
         });
@@ -5018,7 +5018,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent>("objectiveFinishedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ObjectiveFinishedTriggerComponent();
             }
         });
@@ -5026,7 +5026,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent>("removeTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RemoveTriggerComponent();
             }
         });
@@ -5039,11 +5039,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent>("repeatingTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float intervalDuration = 0;
                 String intervalDurationText = element.getText();
                 if((intervalDurationText != null) && (intervalDurationText.length() > 0)){
-                    intervalDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, intervalDurationText));
+                    intervalDuration = Float.parseFloat(templateReader.parseValue(entityWorld, intervalDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerComponent(intervalDuration);
             }
@@ -5052,11 +5052,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent>("repeatingTriggerCounter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int counter = 0;
                 String counterText = element.getText();
                 if((counterText != null) && (counterText.length() > 0)){
-                    counter = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, counterText));
+                    counter = Integer.parseInt(templateReader.parseValue(entityWorld, counterText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.RepeatingTriggerCounterComponent(counter);
             }
@@ -5065,7 +5065,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent>("shopUsageTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.ShopUsageTriggerComponent();
             }
         });
@@ -5078,11 +5078,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent>("stacksReachedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int stacks = 0;
                 String stacksText = element.getText();
                 if((stacksText != null) && (stacksText.length() > 0)){
-                    stacks = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, stacksText));
+                    stacks = Integer.parseInt(templateReader.parseValue(entityWorld, stacksText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.StacksReachedTriggerComponent(stacks);
             }
@@ -5101,13 +5101,13 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent>("surroundingDeathTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float maximumDistance = 0;
                 String maximumDistanceText = element.getAttributeValue("maximumDistance");
                 if((maximumDistanceText != null) && (maximumDistanceText.length() > 0)){
-                    maximumDistance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, maximumDistanceText));
+                    maximumDistance = Float.parseFloat(templateReader.parseValue(entityWorld, maximumDistanceText));
                 }
-                int targetRulesEntity = createChildEntity(entityWorld, element, 0, "targetRulesEntity");
+                int targetRulesEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetRulesEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.SurroundingDeathTriggerComponent(maximumDistance, targetRulesEntity);
             }
         });
@@ -5115,7 +5115,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent>("targetReachedTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TargetReachedTriggerComponent();
             }
         });
@@ -5128,8 +5128,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent>("teamDeathTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent construct(EntityWorld entityWorld, Element element){
-                int[] excludedEntities = createChildEntities(entityWorld, element, 0, "excludedEntities");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] excludedEntities = createChildEntities(templateReader, entityWorld, element, 0, "excludedEntities");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TeamDeathTriggerComponent(excludedEntities);
             }
         });
@@ -5142,11 +5142,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent>("timeSinceLastRepeatTrigger"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.triggers.TimeSinceLastRepeatTriggerComponent(duration);
             }
@@ -5160,8 +5160,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent>("triggerSource"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent construct(EntityWorld entityWorld, Element element){
-                int sourceEntity = createChildEntity(entityWorld, element, 0, "sourceEntity");
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int sourceEntity = createChildEntity(templateReader, entityWorld, element, 0, "sourceEntity");
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerSourceComponent(sourceEntity);
             }
         });
@@ -5169,7 +5169,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent>("triggerTemporary"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.effecttriggers.TriggerTemporaryComponent();
             }
         });
@@ -5177,11 +5177,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ExperienceComponent>("experience"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ExperienceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.ExperienceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int experience = 0;
                 String experienceText = element.getText();
                 if((experienceText != null) && (experienceText.length() > 0)){
-                    experience = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, experienceText));
+                    experience = Integer.parseInt(templateReader.parseValue(entityWorld, experienceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.ExperienceComponent(experience);
             }
@@ -5190,11 +5190,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.GoldComponent>("gold"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.GoldComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.GoldComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float gold = 0;
                 String goldText = element.getText();
                 if((goldText != null) && (goldText.length() > 0)){
-                    gold = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, goldText));
+                    gold = Float.parseFloat(templateReader.parseValue(entityWorld, goldText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.GoldComponent(gold);
             }
@@ -5209,11 +5209,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.InCombatComponent>("inCombat"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.InCombatComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.InCombatComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.InCombatComponent(remainingDuration);
             }
@@ -5222,10 +5222,10 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent>("innateWalkDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] directionCoordinates = element.getText().split(",");
-                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
-                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
+                float directionX = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.applications.ingame.entitysystem.components.units.InnateWalkDirectionComponent(direction);
             }
@@ -5234,7 +5234,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAliveComponent>("isAlive"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsAliveComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsAliveComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsAliveComponent();
             }
         });
@@ -5242,7 +5242,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent>("isAlwaysVisible"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsAlwaysVisibleComponent();
             }
         });
@@ -5250,7 +5250,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent>("isAutoAttackEnabled"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsAutoAttackEnabledComponent();
             }
         });
@@ -5263,16 +5263,16 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsCastingComponent>("isCasting"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsCastingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsCastingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 boolean isCancelable = false;
                 String isCancelableText = element.getAttributeValue("isCancelable");
                 if((isCancelableText != null) && (isCancelableText.length() > 0)){
-                    isCancelable = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, isCancelableText));
+                    isCancelable = Boolean.parseBoolean(templateReader.parseValue(entityWorld, isCancelableText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.IsCastingComponent(remainingDuration, isCancelable);
             }
@@ -5281,7 +5281,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent>("isHiddenArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsHiddenAreaComponent();
             }
         });
@@ -5294,8 +5294,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent>("isInHiddenArea"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent construct(EntityWorld entityWorld, Element element){
-                int hiddenAreaEntity = createChildEntity(entityWorld, element, 0, "hiddenAreaEntity");
+            public amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int hiddenAreaEntity = createChildEntity(templateReader, entityWorld, element, 0, "hiddenAreaEntity");
                 return new amara.applications.ingame.entitysystem.components.units.IsInHiddenAreaComponent(hiddenAreaEntity);
             }
         });
@@ -5303,7 +5303,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent>("isRespawnable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsRespawnableComponent();
             }
         });
@@ -5311,7 +5311,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent>("isSpellsEnabled"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsSpellsEnabledComponent();
             }
         });
@@ -5319,7 +5319,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsStealthedComponent>("isStealthed"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsStealthedComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsStealthedComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsStealthedComponent();
             }
         });
@@ -5327,7 +5327,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsTargetableComponent>("isTargetable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsTargetableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsTargetableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsTargetableComponent();
             }
         });
@@ -5335,11 +5335,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent>("isVisibleForTeams"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] teamVisionsParts = element.getText().split(",");
                 boolean[] teamVisions = new boolean[teamVisionsParts.length];
                 for(int i=0;i<teamVisions.length;i++){
-                    teamVisions[i] = Boolean.parseBoolean(xmlTemplateManager.parseValue(entityWorld, element.getText()));
+                    teamVisions[i] = Boolean.parseBoolean(templateReader.parseValue(entityWorld, element.getText()));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.IsVisibleForTeamsComponent(teamVisions);
             }
@@ -5348,7 +5348,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent>("isVulnerable"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.IsVulnerableComponent();
             }
         });
@@ -5361,8 +5361,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent>("learnableSpells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.units.LearnableSpellsComponent(spellsEntities);
             }
         });
@@ -5370,11 +5370,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LevelComponent>("level"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LevelComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.LevelComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int level = 0;
                 String levelText = element.getText();
                 if((levelText != null) && (levelText.length() > 0)){
-                    level = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, levelText));
+                    level = Integer.parseInt(templateReader.parseValue(entityWorld, levelText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.LevelComponent(level);
             }
@@ -5388,11 +5388,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LifetimeComponent>("lifetime"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LifetimeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.LifetimeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.LifetimeComponent(remainingDuration);
             }
@@ -5401,7 +5401,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent>("localAvoidanceWalk"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.LocalAvoidanceWalkComponent();
             }
         });
@@ -5414,8 +5414,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MapSpellsComponent>("mapSpells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.MapSpellsComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.units.MapSpellsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.units.MapSpellsComponent(spellsEntities);
             }
         });
@@ -5428,11 +5428,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent>("maximumAggroRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
+                    range = Float.parseFloat(templateReader.parseValue(entityWorld, rangeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.MaximumAggroRangeComponent(range);
             }
@@ -5446,8 +5446,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.MovementComponent>("movement"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.MovementComponent construct(EntityWorld entityWorld, Element element){
-                int movementEntity = createChildEntity(entityWorld, element, 0, "movementEntity");
+            public amara.applications.ingame.entitysystem.components.units.MovementComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int movementEntity = createChildEntity(templateReader, entityWorld, element, 0, "movementEntity");
                 return new amara.applications.ingame.entitysystem.components.units.MovementComponent(movementEntity);
             }
         });
@@ -5461,8 +5461,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent>("passiveAddedEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.units.passives.PassiveAddedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -5475,8 +5475,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent>("passiveRemovedEffectTriggers"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent construct(EntityWorld entityWorld, Element element){
-                int[] effectTriggerEntities = createChildEntities(entityWorld, element, 0, "effectTriggerEntities");
+            public amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] effectTriggerEntities = createChildEntities(templateReader, entityWorld, element, 0, "effectTriggerEntities");
                 return new amara.applications.ingame.entitysystem.components.units.passives.PassiveRemovedEffectTriggersComponent(effectTriggerEntities);
             }
         });
@@ -5489,8 +5489,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PassivesComponent>("passives"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.PassivesComponent construct(EntityWorld entityWorld, Element element){
-                int[] passiveEntities = createChildEntities(entityWorld, element, 0, "passiveEntities");
+            public amara.applications.ingame.entitysystem.components.units.PassivesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] passiveEntities = createChildEntities(templateReader, entityWorld, element, 0, "passiveEntities");
                 return new amara.applications.ingame.entitysystem.components.units.PassivesComponent(passiveEntities);
             }
         });
@@ -5498,8 +5498,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.PopupComponent>("popup"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.PopupComponent construct(EntityWorld entityWorld, Element element){
-                String text = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.units.PopupComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String text = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.units.PopupComponent(text);
             }
         });
@@ -5512,12 +5512,12 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ReactionComponent>("reaction"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ReactionComponent construct(EntityWorld entityWorld, Element element){
-                String reaction = xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("reaction"));
+            public amara.applications.ingame.entitysystem.components.units.ReactionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String reaction = templateReader.parseValue(entityWorld, element.getAttributeValue("reaction"));
                 float remainingDuration = 0;
                 String remainingDurationText = element.getAttributeValue("remainingDuration");
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.ReactionComponent(reaction, remainingDuration);
             }
@@ -5531,11 +5531,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent>("remainingAggroResetDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.RemainingAggroResetDurationComponent(remainingDuration);
             }
@@ -5544,10 +5544,10 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent>("respawnDirection"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] directionCoordinates = element.getText().split(",");
-                float directionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[0]));
-                float directionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, directionCoordinates[1]));
+                float directionX = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[0]));
+                float directionY = Float.parseFloat(templateReader.parseValue(entityWorld, directionCoordinates[1]));
                 Vector2f direction = new Vector2f(directionX, directionY);
                 return new amara.applications.ingame.entitysystem.components.units.RespawnDirectionComponent(direction);
             }
@@ -5556,10 +5556,10 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent>("respawnPosition"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] positionCoordinates = element.getText().split(",");
-                float positionX = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[0]));
-                float positionY = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, positionCoordinates[1]));
+                float positionX = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[0]));
+                float positionY = Float.parseFloat(templateReader.parseValue(entityWorld, positionCoordinates[1]));
                 Vector2f position = new Vector2f(positionX, positionY);
                 return new amara.applications.ingame.entitysystem.components.units.RespawnPositionComponent(position);
             }
@@ -5573,8 +5573,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ScoreComponent>("score"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ScoreComponent construct(EntityWorld entityWorld, Element element){
-                int scoreEntity = createChildEntity(entityWorld, element, 0, "scoreEntity");
+            public amara.applications.ingame.entitysystem.components.units.ScoreComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int scoreEntity = createChildEntity(templateReader, entityWorld, element, 0, "scoreEntity");
                 return new amara.applications.ingame.entitysystem.components.units.ScoreComponent(scoreEntity);
             }
         });
@@ -5583,11 +5583,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent>("characterAssists"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int assists = 0;
                 String assistsText = element.getText();
                 if((assistsText != null) && (assistsText.length() > 0)){
-                    assists = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, assistsText));
+                    assists = Integer.parseInt(templateReader.parseValue(entityWorld, assistsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.scores.CharacterAssistsComponent(assists);
             }
@@ -5596,11 +5596,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent>("characterKills"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int kills = 0;
                 String killsText = element.getText();
                 if((killsText != null) && (killsText.length() > 0)){
-                    kills = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, killsText));
+                    kills = Integer.parseInt(templateReader.parseValue(entityWorld, killsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.scores.CharacterKillsComponent(kills);
             }
@@ -5609,11 +5609,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent>("creepScore"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int kills = 0;
                 String killsText = element.getText();
                 if((killsText != null) && (killsText.length() > 0)){
-                    kills = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, killsText));
+                    kills = Integer.parseInt(templateReader.parseValue(entityWorld, killsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.scores.CreepScoreComponent(kills);
             }
@@ -5622,11 +5622,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent>("deaths"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int deaths = 0;
                 String deathsText = element.getText();
                 if((deathsText != null) && (deathsText.length() > 0)){
-                    deaths = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, deathsText));
+                    deaths = Integer.parseInt(templateReader.parseValue(entityWorld, deathsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.scores.DeathsComponent(deaths);
             }
@@ -5640,16 +5640,16 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent>("setNewCampCombatSpellsOnCooldown"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 String[] spellIndicesParts = element.getAttributeValue("spellIndices").split(",");
                 int[] spellIndices = new int[spellIndicesParts.length];
                 for(int i=0;i<spellIndices.length;i++){
-                    spellIndices[i] = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("spellIndices")));
+                    spellIndices[i] = Integer.parseInt(templateReader.parseValue(entityWorld, element.getAttributeValue("spellIndices")));
                 }
                 String[] cooldownsParts = element.getAttributeValue("cooldowns").split(",");
                 float[] cooldowns = new float[cooldownsParts.length];
                 for(int i=0;i<cooldowns.length;i++){
-                    cooldowns[i] = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
+                    cooldowns[i] = Float.parseFloat(templateReader.parseValue(entityWorld, element.getAttributeValue("cooldowns")));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.SetNewCampCombatSpellsOnCooldownComponent(spellIndices, cooldowns);
             }
@@ -5669,9 +5669,9 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent>("activeShield"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent construct(EntityWorld entityWorld, Element element){
-                int targetEntity = createChildEntity(entityWorld, element, 0, "targetEntity");
-                int shieldEntity = createChildEntity(entityWorld, element, 0, "shieldEntity");
+            public amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int targetEntity = createChildEntity(templateReader, entityWorld, element, 0, "targetEntity");
+                int shieldEntity = createChildEntity(templateReader, entityWorld, element, 0, "shieldEntity");
                 return new amara.applications.ingame.entitysystem.components.units.shields.ActiveShieldComponent(targetEntity, shieldEntity);
             }
         });
@@ -5684,11 +5684,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent>("remainingShieldDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.shields.RemainingShieldDurationComponent(duration);
             }
@@ -5702,11 +5702,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent>("shieldAmount"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float value = 0;
                 String valueText = element.getText();
                 if((valueText != null) && (valueText.length() > 0)){
-                    value = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, valueText));
+                    value = Float.parseFloat(templateReader.parseValue(entityWorld, valueText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.shields.ShieldAmountComponent(value);
             }
@@ -5720,8 +5720,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.ShieldsComponent>("shields"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.ShieldsComponent construct(EntityWorld entityWorld, Element element){
-                int[] shieldStatusEntities = createChildEntities(entityWorld, element, 0, "shieldStatusEntities");
+            public amara.applications.ingame.entitysystem.components.units.ShieldsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] shieldStatusEntities = createChildEntities(templateReader, entityWorld, element, 0, "shieldStatusEntities");
                 return new amara.applications.ingame.entitysystem.components.units.ShieldsComponent(shieldStatusEntities);
             }
         });
@@ -5735,11 +5735,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SightRangeComponent>("sightRange"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SightRangeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.SightRangeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float range = 0;
                 String rangeText = element.getText();
                 if((rangeText != null) && (rangeText.length() > 0)){
-                    range = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, rangeText));
+                    range = Float.parseFloat(templateReader.parseValue(entityWorld, rangeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.SightRangeComponent(range);
             }
@@ -5754,8 +5754,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SpellsComponent>("spells"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SpellsComponent construct(EntityWorld entityWorld, Element element){
-                int[] spellsEntities = createChildEntities(entityWorld, element, 0, "spellsEntities");
+            public amara.applications.ingame.entitysystem.components.units.SpellsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int[] spellsEntities = createChildEntities(templateReader, entityWorld, element, 0, "spellsEntities");
                 return new amara.applications.ingame.entitysystem.components.units.SpellsComponent(spellsEntities);
             }
         });
@@ -5763,11 +5763,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent>("spellsUpgradePoints"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int upgradePoints = 0;
                 String upgradePointsText = element.getText();
                 if((upgradePointsText != null) && (upgradePointsText.length() > 0)){
-                    upgradePoints = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, upgradePointsText));
+                    upgradePoints = Integer.parseInt(templateReader.parseValue(entityWorld, upgradePointsText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.SpellsUpgradePointsComponent(upgradePoints);
             }
@@ -5781,8 +5781,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.TeamComponent>("team"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.TeamComponent construct(EntityWorld entityWorld, Element element){
-                int teamEntity = createChildEntity(entityWorld, element, 0, "teamEntity");
+            public amara.applications.ingame.entitysystem.components.units.TeamComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int teamEntity = createChildEntity(templateReader, entityWorld, element, 0, "teamEntity");
                 return new amara.applications.ingame.entitysystem.components.units.TeamComponent(teamEntity);
             }
         });
@@ -5791,7 +5791,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent>("isCharacter"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsCharacterComponent();
             }
         });
@@ -5799,7 +5799,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent>("isMinion"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsMinionComponent();
             }
         });
@@ -5807,7 +5807,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent>("isMonster"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsMonsterComponent();
             }
         });
@@ -5815,7 +5815,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent>("isProjectile"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsProjectileComponent();
             }
         });
@@ -5823,7 +5823,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent>("isStructure"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsStructureComponent();
             }
         });
@@ -5831,7 +5831,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent>("isSummon"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.units.types.IsSummonComponent();
             }
         });
@@ -5844,11 +5844,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent>("waitingToRespawn"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float remainingDuration = 0;
                 String remainingDurationText = element.getText();
                 if((remainingDurationText != null) && (remainingDurationText.length() > 0)){
-                    remainingDuration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, remainingDurationText));
+                    remainingDuration = Float.parseFloat(templateReader.parseValue(entityWorld, remainingDurationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.WaitingToRespawnComponent(remainingDuration);
             }
@@ -5862,11 +5862,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent>("walkStepDistance"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float distance = 0;
                 String distanceText = element.getText();
                 if((distanceText != null) && (distanceText.length() > 0)){
-                    distance = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, distanceText));
+                    distance = Float.parseFloat(templateReader.parseValue(entityWorld, distanceText));
                 }
                 return new amara.applications.ingame.entitysystem.components.units.WalkStepDistanceComponent(distance);
             }
@@ -5881,8 +5881,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.AnimationComponent>("animation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.AnimationComponent construct(EntityWorld entityWorld, Element element){
-                int animationEntity = createChildEntity(entityWorld, element, 0, "animationEntity");
+            public amara.applications.ingame.entitysystem.components.visuals.AnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                int animationEntity = createChildEntity(templateReader, entityWorld, element, 0, "animationEntity");
                 return new amara.applications.ingame.entitysystem.components.visuals.AnimationComponent(animationEntity);
             }
         });
@@ -5891,7 +5891,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent>("freezeAfterPlaying"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.FreezeAfterPlayingComponent();
             }
         });
@@ -5904,11 +5904,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent>("loopDuration"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float duration = 0;
                 String durationText = element.getText();
                 if((durationText != null) && (durationText.length() > 0)){
-                    duration = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, durationText));
+                    duration = Float.parseFloat(templateReader.parseValue(entityWorld, durationText));
                 }
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.LoopDurationComponent(duration);
             }
@@ -5922,11 +5922,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent>("passedLoopTime"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 float passedTime = 0;
                 String passedTimeText = element.getText();
                 if((passedTimeText != null) && (passedTimeText.length() > 0)){
-                    passedTime = Float.parseFloat(xmlTemplateManager.parseValue(entityWorld, passedTimeText));
+                    passedTime = Float.parseFloat(templateReader.parseValue(entityWorld, passedTimeText));
                 }
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.PassedLoopTimeComponent(passedTime);
             }
@@ -5935,11 +5935,11 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent>("remainingLoops"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 int loopsCount = 0;
                 String loopsCountText = element.getText();
                 if((loopsCountText != null) && (loopsCountText.length() > 0)){
-                    loopsCount = Integer.parseInt(xmlTemplateManager.parseValue(entityWorld, loopsCountText));
+                    loopsCount = Integer.parseInt(templateReader.parseValue(entityWorld, loopsCountText));
                 }
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.RemainingLoopsComponent(loopsCount);
             }
@@ -5948,7 +5948,7 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent>("restartClientAnimation"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent construct(EntityWorld entityWorld, Element element){
+            public amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.visuals.animations.RestartClientAnimationComponent();
             }
         });
@@ -5956,8 +5956,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.ModelComponent>("model"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.ModelComponent construct(EntityWorld entityWorld, Element element){
-                String modelSkinPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.visuals.ModelComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String modelSkinPath = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.visuals.ModelComponent(modelSkinPath);
             }
         });
@@ -5965,8 +5965,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent>("teamModel"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent construct(EntityWorld entityWorld, Element element){
-                String modelSkinPath = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String modelSkinPath = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.visuals.TeamModelComponent(modelSkinPath);
             }
         });
@@ -5974,8 +5974,8 @@ public class ComponentsRegistrator{
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.visuals.TitleComponent>("title"){
 
             @Override
-            public amara.applications.ingame.entitysystem.components.visuals.TitleComponent construct(EntityWorld entityWorld, Element element){
-                String title = xmlTemplateManager.parseValue(entityWorld, element.getText());
+            public amara.applications.ingame.entitysystem.components.visuals.TitleComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                String title = templateReader.parseValue(entityWorld, element.getText());
                 return new amara.applications.ingame.entitysystem.components.visuals.TitleComponent(title);
             }
         });

@@ -27,7 +27,7 @@ public class ApplyAddNewEffectTriggersSystem implements EntitySystem {
                     template += ",newEffectTrigger" + r + "=" + effectTriggerEntities[r];
                 }
                 template += ")";
-                EntityTemplate.loadTemplate(entityWorld, effectTriggerEntities[i], template);
+                EntityTemplate.createReader().loadTemplate(entityWorld, effectTriggerEntities[i], template);
                 entityWorld.setComponent(effectTriggerEntities[i], new TriggerSourceComponent(targetEntity));
             }
         }
