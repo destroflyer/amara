@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package amara.applications.ingame.entitysystem.systems.cleanup;
 
 import amara.applications.ingame.entitysystem.components.effects.audio.*;
@@ -15,10 +11,6 @@ import amara.applications.ingame.entitysystem.components.effects.spells.*;
 import amara.applications.ingame.entitysystem.components.effects.visuals.*;
 import amara.libraries.entitysystem.*;
 
-/**
- *
- * @author Carl
- */
 public class CleanupEffectsSystem implements EntitySystem {
 
     @Override
@@ -36,19 +28,15 @@ public class CleanupEffectsSystem implements EntitySystem {
             AddSpellSpellEffectsComponent.class,
             PlayAnimationComponent.class
         );
-        //audio
+        // audio
         for (int entity : observer.getRemoved().getEntitiesWithAny(PlayAudioComponent.class)) {
             int[] audioEntities = observer.getRemoved().getComponent(entity, PlayAudioComponent.class).getAudioEntities();
-            for (int audioEntity : audioEntities) {
-                CleanupUtil.tryCleanupEntity(entityWorld, audioEntity);
-            }
+            CleanupUtil.tryCleanupEntities(entityWorld, audioEntities);
         }
-        //buffs
+        // buffs
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddBuffComponent.class)) {
             int[] buffEntities = observer.getRemoved().getComponent(entity, AddBuffComponent.class).getBuffEntities();
-            for (int buffEntity : buffEntities) {
-                CleanupUtil.tryCleanupEntity(entityWorld, buffEntity);
-            }
+            CleanupUtil.tryCleanupEntities(entityWorld, buffEntities);
         }
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddBuffAreaComponent.class)) {
             int buffAreaEntity = observer.getRemoved().getComponent(entity, AddBuffAreaComponent.class).getBuffAreaEntity();
@@ -72,22 +60,16 @@ public class CleanupEffectsSystem implements EntitySystem {
         // spawns
         for (int entity : observer.getRemoved().getEntitiesWithAny(SpawnComponent.class)) {
             int[] spawnInformationEntities = observer.getRemoved().getComponent(entity, SpawnComponent.class).getSpawnInformationEntites();
-            for (int spawnInformationEntity : spawnInformationEntities) {
-                CleanupUtil.tryCleanupEntity(entityWorld, spawnInformationEntity);
-            }
+            CleanupUtil.tryCleanupEntities(entityWorld, spawnInformationEntities);
         }
         // spells
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddAutoAttackSpellEffectsComponent.class)){
             int[] spellEffectEntities = observer.getRemoved().getComponent(entity, AddAutoAttackSpellEffectsComponent.class).getSpellEffectEntities();
-            for (int spellEffectEntity : spellEffectEntities) {
-                CleanupUtil.tryCleanupEntity(entityWorld, spellEffectEntity);
-            }
+            CleanupUtil.tryCleanupEntities(entityWorld, spellEffectEntities);
         }
         for (int entity : observer.getRemoved().getEntitiesWithAny(AddSpellSpellEffectsComponent.class)) {
             int[] spellEffectEntities = observer.getRemoved().getComponent(entity, AddSpellSpellEffectsComponent.class).getSpellEffectEntities();
-            for (int spellEffectEntity : spellEffectEntities) {
-                CleanupUtil.tryCleanupEntity(entityWorld, spellEffectEntity);
-            }
+            CleanupUtil.tryCleanupEntities(entityWorld, spellEffectEntities);
         }
         // visuals
         for (int entity : observer.getRemoved().getEntitiesWithAny(PlayAnimationComponent.class)) {
