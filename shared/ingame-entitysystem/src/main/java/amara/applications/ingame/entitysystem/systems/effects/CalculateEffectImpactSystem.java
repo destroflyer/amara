@@ -80,6 +80,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         expressionSpace.parse(physicalDamageComponent.getExpression());
                         physicalDamage += expressionSpace.getResult_Float();
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 MagicDamageComponent magicDamageComponent = effect.getComponent(MagicDamageComponent.class);
@@ -88,6 +89,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         expressionSpace.parse(magicDamageComponent.getExpression());
                         magicDamage += expressionSpace.getResult_Float();
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 HealComponent healComponent = effect.getComponent(HealComponent.class);
@@ -96,6 +98,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         expressionSpace.parse(healComponent.getExpression());
                         heal += expressionSpace.getResult_Float();
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 AddManaComponent addManaComponent = effect.getComponent(AddManaComponent.class);
@@ -104,6 +107,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         expressionSpace.parse(addManaComponent.getExpression());
                         manaGain += expressionSpace.getResult_Float();
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 if (effectSourceEntity != -1) {
@@ -164,6 +168,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         EntityTemplate.createReader().loadTemplates(entityWorld, buffEntity, expressionSpace.getResult_String());
                         effectImpact.setComponent(new AddBuffComponent(new int[]{buffEntity}, addNewBuffComponent.getDuration()));
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 MoveComponent moveComponent = effect.getComponent(MoveComponent.class);
@@ -227,6 +232,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         expressionSpace.parse(displayPlayerAnnouncementComponent.getExpression());
                         effectImpact.setComponent(new ResultingPlayerAnnouncementComponent(expressionSpace.getResult_String(), displayPlayerAnnouncementComponent.getRemainingDuration()));
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 AddPopupComponent addPopupComponent = effect.getComponent(AddPopupComponent.class);
@@ -235,6 +241,7 @@ public class CalculateEffectImpactSystem implements EntitySystem {
                         expressionSpace.parse(addPopupComponent.getExpression());
                         effectImpact.setComponent(new ResultingPopupComponent(expressionSpace.getResult_String()));
                     } catch (ExpressionException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 EntityUtil.transferComponents(entityWorld, effect.getId(), effectImpact.getId(), new Class[]{
