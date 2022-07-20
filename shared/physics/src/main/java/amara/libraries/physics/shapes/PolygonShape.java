@@ -64,7 +64,7 @@ public class PolygonShape extends Shape
         
         for (ArrayList<Vector2D> poly : polygon.outlines())
         {
-            graphics.drawPolygon(poly.toArray(new Vector2D[0]));
+            graphics.drawPolygon(poly.toArray(Vector2D[]::new));
         }
     }
 
@@ -81,7 +81,7 @@ public class PolygonShape extends Shape
         
         for (ArrayList<Vector2D> poly : polygon.cutPolys())
         {
-            graphics.fillPolygon(poly.toArray(new Vector2D[0]));
+            graphics.fillPolygon(poly.toArray(Vector2D[]::new));
         }
     }
 

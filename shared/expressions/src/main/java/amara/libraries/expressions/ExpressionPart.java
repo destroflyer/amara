@@ -68,7 +68,7 @@ public class ExpressionPart{
                         if(function == null){
                             throw new UnknownFunctionException(currentValueText);
                         }
-                        function.setArguments(arguments.toArray(new Value[arguments.size()]));
+                        function.setArguments(arguments.toArray(Value[]::new));
                         addLastOperation(function);
                         currentValueText = "";
                         isOperatorAllowed = true;

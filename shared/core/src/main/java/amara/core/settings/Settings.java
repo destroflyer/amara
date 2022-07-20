@@ -137,7 +137,7 @@ public class Settings {
 
     public static void saveFile() {
         String fileContent = "#Settings";
-        String[] keySet = values.keySet().toArray(new String[values.size()]);
+        String[] keySet = values.keySet().toArray(String[]::new);
         Arrays.sort(keySet, String.CASE_INSENSITIVE_ORDER);
         for (String key : keySet) {
             String value = get(key);

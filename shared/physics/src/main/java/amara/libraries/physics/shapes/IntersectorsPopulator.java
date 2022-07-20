@@ -143,7 +143,7 @@ public class IntersectorsPopulator {
 
             for (ArrayList<Vector2D> points : poly.outlines())
             {
-                if(outlineCircleIntersect(center, radiusSquared, points.toArray(new Vector2D[0]))) return true;
+                if(outlineCircleIntersect(center, radiusSquared, points.toArray(Vector2D[]::new))) return true;
             }
             return false;
         }
@@ -213,11 +213,11 @@ public class IntersectorsPopulator {
         public Vector2D resolveVector(SimpleConvexPolygon a, PolygonShape b) {
             throw new RuntimeException("resolveVector is not implemented for convex<->poly");
         }
-        
+
         @Override
         public boolean intersect(SimpleConvexPolygon a, PolygonShape b) {
-            if(seperated(a.getGlobalPoints(), b.getGlobalPolygon().points().toArray(new Vector2D[0]))) return false;
-        
+            if(seperated(a.getGlobalPoints(), b.getGlobalPolygon().points().toArray(Vector2D[]::new))) return false;
+
             Vector2D[] points = a.getGlobalPoints();
             PolygonBuilder builder = new PolygonBuilder();
             builder.nextOutline(false);

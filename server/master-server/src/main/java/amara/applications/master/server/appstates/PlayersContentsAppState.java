@@ -39,11 +39,11 @@ public class PlayersContentsAppState extends ServerBaseAppState {
             Integer activeSkinIdResult = databaseAppState.getQueryResult("SELECT skin_id FROM users_characters_active_skins WHERE (user_id = " + playerId + ") AND (character_id = " + characterId + ") LIMIT 1").nextInteger_Close();
             int activeSkinId = ((activeSkinIdResult != null) ? activeSkinIdResult : 0);
 
-            GameCharacter character = new GameCharacter(characterId, characterName, characterTitle, characterLore, characterIsPublic, tmpOwnedSkins.toArray(new GameCharacterSkin[0]));
+            GameCharacter character = new GameCharacter(characterId, characterName, characterTitle, characterLore, characterIsPublic, tmpOwnedSkins.toArray(GameCharacterSkin[]::new));
             ownedCharacters.add(new OwnedGameCharacter(character, activeSkinId));
         }
         result_Characters.close();
-        return ownedCharacters.toArray(new OwnedGameCharacter[0]);
+        return ownedCharacters.toArray(OwnedGameCharacter[]::new);
     }
 
     public String[] getAvailableMapNames(int playerId) {
@@ -56,7 +56,7 @@ public class PlayersContentsAppState extends ServerBaseAppState {
             mapNames.add("destroforest");
             mapNames.add("techtest");
         }
-        return mapNames.toArray(new String[0]);
+        return mapNames.toArray(String[]::new);
     }
 
     private boolean canSeeNonPublicContent(int playerId) {

@@ -75,7 +75,7 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
             modelObjects[i] = new ModelObject(mainApplication.getAssetManager(), modelSkinPaths[i]);
             AnimControl animationControl = modelObjects[i].getModelNode().getControl(AnimControl.class);
             if(animationControl != null){
-                animationNames[i] = animationControl.getAnimationNames().toArray(new String[0]);
+                animationNames[i] = animationControl.getAnimationNames().toArray(String[]::new);
             }
             else{
                 animationNames[i] = new String[0];

@@ -189,11 +189,11 @@ public class Vector2DUtil
     }
     public static double area(List<Vector2D> points)
     {
-        return area(points.toArray(new Vector2D[0]));
+        return area(points.toArray(Vector2D[]::new));
     }
     public static double kahanSumArea(List<Vector2D> points)
     {
-        return kahanSumArea(points.toArray(new Vector2D[0]));
+        return kahanSumArea(points.toArray(Vector2D[]::new));
     }
 
     public static Vector2D sum(Vector2D... points)

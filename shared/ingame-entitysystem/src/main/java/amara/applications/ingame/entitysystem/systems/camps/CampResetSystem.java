@@ -39,13 +39,13 @@ public class CampResetSystem implements EntitySystem{
                 entityWorld.setComponent(effectTriggerEntity, new TargetReachedTriggerComponent());
                 entityWorld.setComponent(effectTriggerEntity, new SourceTargetComponent());
                 int effectEntity = entityWorld.createEntity();
-                LinkedList<Object> componentsToAdd = new LinkedList<Object>();
+                LinkedList<Object> componentsToAdd = new LinkedList<>();
                 componentsToAdd.add(new DirectionComponent(campComponent.getDirection()));
                 if(entityWorld.hasComponent(campComponent.getCampEntity(), CampHealthResetComponent.class)){
                     float maximumHealth = entityWorld.getComponent(entity, MaximumHealthComponent.class).getValue();
                     componentsToAdd.add(new HealthComponent(maximumHealth));
                 }
-                entityWorld.setComponent(effectEntity, new AddComponentsComponent(componentsToAdd.toArray(new Object[componentsToAdd.size()])));
+                entityWorld.setComponent(effectEntity, new AddComponentsComponent(componentsToAdd.toArray(Object[]::new)));
                 entityWorld.setComponent(effectEntity, new RemoveComponentsComponent(CampResetComponent.class));
                 entityWorld.setComponent(effectTriggerEntity, new TriggeredEffectComponent(effectEntity));
                 entityWorld.setComponent(effectTriggerEntity, new TriggerSourceComponent(entity));

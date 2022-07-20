@@ -55,9 +55,9 @@ public class SendGameContentsBackend implements MessageBackend {
                 tmpSkins.add(new GameCharacterSkin(skinID, skinTitle));
             }
             result_Skins.close();
-            tmpCharacters.add(new GameCharacter(characterId, characterName, characterTitle, characterLore, characterIsPublic, tmpSkins.toArray(new GameCharacterSkin[tmpSkins.size()])));
+            tmpCharacters.add(new GameCharacter(characterId, characterName, characterTitle, characterLore, characterIsPublic, tmpSkins.toArray(GameCharacterSkin[]::new)));
         }
         result_Characters.close();
-        return tmpCharacters.toArray(new GameCharacter[tmpCharacters.size()]);
+        return tmpCharacters.toArray(GameCharacter[]::new);
     }
 }
