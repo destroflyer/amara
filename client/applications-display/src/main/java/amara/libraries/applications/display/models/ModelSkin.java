@@ -219,8 +219,7 @@ public class ModelSkin {
     private void loadModifiers() {
         modelModifiers.clear();
         if (modifiersElement != null){
-            for (Object childObject : modifiersElement.getChildren("modifier")) {
-                Element modifierElement = (Element) childObject;
+            for (Element modifierElement : modifiersElement.getChildren("modifier")) {
                 ModelModifier modelModifier = Util.createObjectByClassName(modifierElement.getText());
                 if (modelModifier != null) {
                     modelModifiers.add(modelModifier);
