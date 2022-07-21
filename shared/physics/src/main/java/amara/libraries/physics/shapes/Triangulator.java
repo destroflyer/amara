@@ -14,7 +14,7 @@ public class Triangulator
 {
     public boolean isConvex(List<Vector2D> poly)
     {
-        Vector2D[] points = amara.core.Util.toArray(poly, Vector2D.class);
+        Vector2D[] points = poly.toArray(Vector2D[]::new);
         double side = 0;
         int i, j ,k;
         for(i = 0; side == 0 && i < points.length; i++) {

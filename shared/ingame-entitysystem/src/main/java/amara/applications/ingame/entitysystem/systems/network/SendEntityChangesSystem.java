@@ -85,7 +85,7 @@ public class SendEntityChangesSystem implements EntitySystem {
     }
     
     public static Message_EntityChanges[] getEntityChangesMessages(LinkedList<EntityChange> changes) {
-        LinkedList<EntityChange[]> splitChanges = Util.split(changes, 500, EntityChange.class);
+        LinkedList<EntityChange[]> splitChanges = Util.split(changes, 500, EntityChange[]::new);
         Message_EntityChanges[] messages = new Message_EntityChanges[splitChanges.size()];
         Iterator<EntityChange[]> changesIterator = splitChanges.iterator();
         for (int i = 0; changesIterator.hasNext(); i++) {

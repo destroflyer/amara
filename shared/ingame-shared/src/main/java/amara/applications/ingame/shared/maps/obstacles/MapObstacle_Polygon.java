@@ -27,7 +27,7 @@ public class MapObstacle_Polygon extends MapObstacle {
     private List<ConvexShape> generateConvexShapes(List<Vector2D> outline) {
         List<ConvexShape> convexShapes = new LinkedList<>();
         if (triangulator.isConvex(outline)) {
-            Vector2D[] points = Util.toArray(outline, Vector2D.class);
+            Vector2D[] points = outline.toArray(Vector2D[]::new);
             convexShapes.add(new SimpleConvexPolygon(points));
         } else if (triangulator.canTriangulate(outline)) {
             convexShapes.addAll(triangulator.createDelaunayTrisFromPoly(outline));

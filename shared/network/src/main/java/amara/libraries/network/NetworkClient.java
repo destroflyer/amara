@@ -59,7 +59,7 @@ public class NetworkClient extends NetworkListener{
             client.start();
             long connectionStart = System.currentTimeMillis();
             while(!isConnected){
-                if(Util.isTimeElapsed(connectionStart, MAXIMUM_CONNECTION_TIME)){
+                if ((System.currentTimeMillis() - connectionStart) >= MAXIMUM_CONNECTION_TIME) {
                     throw new ServerConnectionTimeoutException(host, port);
                 }
                 try{

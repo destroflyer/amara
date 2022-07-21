@@ -37,7 +37,7 @@ public class CharactersAppState extends ClientBaseAppState{
                 publicCharactersList.add(character);
             }
         }
-        publicCharacters = Util.toArray(publicCharactersList, GameCharacter.class);
+        publicCharacters = publicCharactersList.toArray(GameCharacter[]::new);
     }
     
     public GameCharacter getCharacter(int characterID){

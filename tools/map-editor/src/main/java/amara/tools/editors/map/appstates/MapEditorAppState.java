@@ -397,7 +397,7 @@ public class MapEditorAppState extends BaseDisplayAppState<MapEditorApplication>
             
             case PLACE_HITBOX_CUSTOM:
                 obstacleToPlace = null;
-                Vector2D[] basePoints = Util.toArray(customShapePoints, Vector2D.class);
+                Vector2D[] basePoints = customShapePoints.toArray(Vector2D[]::new);
                 ConnectedPointsMesh connectedPointsMesh = new ConnectedPointsMesh(basePoints);
                 toolCursor = MapObstaclesAppState.generateGeometry(mainApplication.getAssetManager(), connectedPointsMesh, ColorRGBA.Blue);
                 parentNode = getAppState(MapObstaclesAppState.class).getObstaclesNode();
