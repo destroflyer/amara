@@ -1,7 +1,7 @@
 <skin>
     <model>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Bubble_Glitter</modifier>
+            <modifier>Bubble_Glitter</modifier>
         </modifiers>
     </model>
 </skin>

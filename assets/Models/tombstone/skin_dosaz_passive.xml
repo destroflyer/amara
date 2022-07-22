@@ -4,7 +4,7 @@
             <texture>diffuse_grey.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Dosaz_Tombstone</modifier>
+            <modifier>Dosaz_Tombstone</modifier>
         </modifiers>
     </model>
 </skin>

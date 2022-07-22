@@ -32,6 +32,7 @@ public class ModelSkin {
     }
     private static ConcurrentHashMap<String, ModelSkin> cachedSkins = new ConcurrentHashMap<>();
     private static final String[] FILE_EXTENSIONS = new String[]{"j3o", "mesh.xml", "blend"};
+    private static final String MODEL_MODIFIER_CLASS_PREFIX = "amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_";
     private Element modelElement;
     private Element positionElement;
     private Element materialElement;
@@ -220,7 +221,7 @@ public class ModelSkin {
         modelModifiers.clear();
         if (modifiersElement != null){
             for (Element modifierElement : modifiersElement.getChildren("modifier")) {
-                ModelModifier modelModifier = Util.createObjectByClassName(modifierElement.getText());
+                ModelModifier modelModifier = Util.createObjectByClassName(MODEL_MODIFIER_CLASS_PREFIX + modifierElement.getText());
                 if (modelModifier != null) {
                     modelModifiers.add(modelModifier);
                 }

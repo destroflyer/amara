@@ -1,7 +1,7 @@
 <skin>
     <model>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_DwarfWarrior_UltImpact</modifier>
+            <modifier>DwarfWarrior_UltImpact</modifier>
         </modifiers>
     </model>
 </skin>

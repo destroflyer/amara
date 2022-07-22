@@ -4,7 +4,7 @@
             <texture>diffuse_red.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_3DSA_Nexus</modifier>
+            <modifier>3DSA_Nexus</modifier>
         </modifiers>
     </model>
 </skin>

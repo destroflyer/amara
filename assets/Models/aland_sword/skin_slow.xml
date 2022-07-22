@@ -7,7 +7,7 @@
             <texture source="aland">diffuse_purple.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_AlandSword_Slow</modifier>
+            <modifier>AlandSword_Slow</modifier>
         </modifiers>
     </model>
 </skin>

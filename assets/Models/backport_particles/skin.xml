@@ -1,7 +1,7 @@
 <skin name="backport_particles">
     <model scale="1">
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Backport_Particles</modifier>
+            <modifier>Backport_Particles</modifier>
         </modifiers>
     </model>
 </skin>

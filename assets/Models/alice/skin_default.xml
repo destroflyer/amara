@@ -4,7 +4,7 @@
             <texture>diffuse_red.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Alice_Weapons</modifier>
+            <modifier>Alice_Weapons</modifier>
         </modifiers>
     </model>
 </skin>

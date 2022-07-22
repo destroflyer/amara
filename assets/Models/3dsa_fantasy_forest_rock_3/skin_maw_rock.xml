@@ -4,7 +4,7 @@
             <texture source="3dsa_fantasy_forest_rock_1">diffuse.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Maw_Rock</modifier>
+            <modifier>Maw_Rock</modifier>
         </modifiers>
     </model>
 </skin>

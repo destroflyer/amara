@@ -7,7 +7,7 @@
             <texture source="aland">diffuse_green.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_AlandSword_AutoAttack</modifier>
+            <modifier>AlandSword_AutoAttack</modifier>
         </modifiers>
     </model>
 </skin>

@@ -1,7 +1,7 @@
 <skin>
     <model>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Aland_Explosion</modifier>
+            <modifier>Aland_Explosion</modifier>
         </modifiers>
     </model>
 </skin>

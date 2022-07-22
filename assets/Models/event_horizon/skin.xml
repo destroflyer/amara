@@ -5,7 +5,7 @@
             <color>0.5,0.5,1,1</color>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_EventHorizon</modifier>
+            <modifier>EventHorizon</modifier>
         </modifiers>
     </model>
 </skin>

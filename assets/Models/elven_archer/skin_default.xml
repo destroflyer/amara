@@ -4,7 +4,7 @@
             <texture>diffuse_green.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_ElvenArcher_Weapons</modifier>
+            <modifier>ElvenArcher_Weapons</modifier>
         </modifiers>
     </model>
 </skin>

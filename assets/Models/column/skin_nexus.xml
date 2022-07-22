@@ -4,7 +4,7 @@
             <texture>diffuse.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Column_Nexus</modifier>
+            <modifier>Column_Nexus</modifier>
         </modifiers>
     </model>
 </skin>

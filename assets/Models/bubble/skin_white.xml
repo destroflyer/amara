@@ -1,7 +1,7 @@
 <skin>
     <model scale="0.5">
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Bubble_White</modifier>
+            <modifier>Bubble_White</modifier>
         </modifiers>
     </model>
 </skin>

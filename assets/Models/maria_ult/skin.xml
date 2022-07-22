@@ -4,7 +4,7 @@
             <location>0,2,0</location>
         </position>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Maria_Ult</modifier>
+            <modifier>Maria_Ult</modifier>
         </modifiers>
     </model>
 </skin>

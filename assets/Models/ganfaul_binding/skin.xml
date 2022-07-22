@@ -4,7 +4,7 @@
             <location>0,3.7,0</location>
         </position>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Ganfaul_Binding</modifier>
+            <modifier>Ganfaul_Binding</modifier>
         </modifiers>
     </model>
 </skin>

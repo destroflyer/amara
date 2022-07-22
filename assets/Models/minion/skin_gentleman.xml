@@ -13,7 +13,7 @@
             <color>0.4,0.4,0.4,1</color>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Minion_Gentleman</modifier>
+            <modifier>Minion_Gentleman</modifier>
         </modifiers>
     </model>
 </skin>

@@ -4,7 +4,7 @@
             <location>0,3.5,0</location>
         </position>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_EnergyProjectile</modifier>
+            <modifier>EnergyProjectile</modifier>
         </modifiers>
     </model>
 </skin>

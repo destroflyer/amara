@@ -1,7 +1,7 @@
 <skin>
     <model>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Scarlet_Barrier_Kunais</modifier>
+            <modifier>Scarlet_Barrier_Kunais</modifier>
         </modifiers>
     </model>
 </skin>

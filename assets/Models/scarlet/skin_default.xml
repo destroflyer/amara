@@ -4,7 +4,7 @@
             <texture>diffuse_blue.png</texture>
         </material>
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Scarlet_Weapons</modifier>
+            <modifier>Scarlet_Weapons</modifier>
         </modifiers>
     </model>
 </skin>

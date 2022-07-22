@@ -1,7 +1,7 @@
 <skin name="firecomet">
     <model scale="2">
         <modifiers>
-            <modifier>amara.libraries.applications.display.ingame.models.modifiers.ModelModifier_Firecomet</modifier>
+            <modifier>Firecomet</modifier>
         </modifiers>
     </model>
 </skin>
