@@ -88,11 +88,10 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         if (mapCamera instanceof MapCamera_TopDown mapCamera_TopDown) {
             camera.setLocation(mapCamera_TopDown.getInitialPosition());
             camera.lookAtDirection(mapCamera_TopDown.getInitialDirection(), Vector3f.UNIT_Y);
-            if (ingameCameraAppState.shouldBeLimited()) {
-                MapCamera_Limit limit = mapCamera_TopDown.getLimit();
-                if (limit != null) {
-                    ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum());
-                }
+            // Limit
+            MapCamera_Limit limit = mapCamera_TopDown.getLimit();
+            if (limit != null) {
+                ingameCameraAppState.setLimit(limit.getMinimum(), limit.getMaximum());
             }
             // Zoom
             ingameCameraAppState.initializeZoom(zoom.getInitialDistance(), getGroundLocation_ScreenCenter());
@@ -213,6 +212,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
         if (chaseCamera != null) {
             chaseCamera.cleanupWithInput(mainApplication.getInputManager());
         }
+        getAppState(IngameCameraAppState.class).clearLimit();
         removeFilters();
     }
 

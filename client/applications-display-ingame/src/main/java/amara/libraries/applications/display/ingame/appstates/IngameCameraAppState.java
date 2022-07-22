@@ -93,7 +93,7 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         }
         updateWorldSurfaceCorners();
         // Limit
-        if (limitMinimum != null) {
+        if (shouldBeLimited && (limitMinimum != null)) {
             boolean wasCorrected = false;
             if ((rightBottomCornerWorldSurfaceLocation.getX() < limitMinimum.getX())
              || (leftTopCornerWorldSurfaceLocation.getX() > limitMaximum.getX())) {
@@ -183,6 +183,10 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         }
     }
 
+    public void clearLimit() {
+        setLimit(null, null);
+    }
+
     public void setLimit(Vector2f minimum, Vector2f maximum) {
         limitMinimum = minimum;
         limitMaximum = maximum;
@@ -249,10 +253,6 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
 
     public void setMovementEnabled(boolean isMovementEnabled) {
         this.isMovementEnabled = isMovementEnabled;
-    }
-
-    public boolean shouldBeLimited() {
-        return shouldBeLimited;
     }
 
     public void setZoomEnabled(boolean isZoomEnabled) {
