@@ -3,6 +3,7 @@ package amara.libraries.applications.display.ingame.appstates;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import amara.core.settings.Settings;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
 import com.jme3.audio.Listener;
@@ -232,7 +233,7 @@ public class MapAppState extends BaseDisplayAppState<DisplayApplication> {
                 modelsNode.attachChild(modelObject);
                 modelObjectsVisuals.put(modelObject, modelVisual);
             } else if (visual instanceof WaterVisual waterVisual) {
-                if (true) {
+                if (Settings.getBoolean("water_filter")) {
                     WaterFilter waterFilter = getAppState(WaterAppState.class).createWaterFilter(waterVisual.getPosition(), waterVisual.getSize());
                     addFilter(waterFilter);
                 } else {
