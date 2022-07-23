@@ -10,7 +10,6 @@ import amara.applications.ingame.server.entitysystem.GameLogic;
 import amara.applications.ingame.shared.maps.MapFileHandler;
 import amara.applications.master.server.games.Game;
 import amara.applications.ingame.shared.maps.Map;
-import amara.core.Queue;
 import amara.core.files.FileAssets;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
@@ -20,9 +19,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.mockito.Mock;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
@@ -37,7 +36,7 @@ public class GameLogicTest {
     protected EntityWorld entityWorld = new EntityWorld();
     @Mock
     private Game gameMock;
-    private Queue<PlayerCommand> playerCommandsQueue = new Queue<>();
+    private LinkedList<PlayerCommand> playerCommandsQueue = new LinkedList<>();
     @Mock
     private ExecuteAIActionsSystem.EntityBotsMap entityBotsMapMock;
 
@@ -77,7 +76,7 @@ public class GameLogicTest {
         Set<Integer> resultingEntities = entityWorld.getEntitiesWithAll();
         boolean shouldFail = false;
         if (!expectRemovedEntities) {
-            List<Integer> removedEntities = initialEntities.stream().filter(entity -> !resultingEntities.contains(entity)).collect(Collectors.toList());
+            List<Integer> removedEntities = initialEntities.stream().filter(entity -> !resultingEntities.contains(entity)).toList();
             if (removedEntities.size() > 0) {
                 for (Integer removedEntity : removedEntities) {
                     System.err.println("Unexpected removed entity: #" + removedEntity);
@@ -86,7 +85,7 @@ public class GameLogicTest {
             }
         }
         if (!expectNewEntities) {
-            List<Integer> newEntities = resultingEntities.stream().filter(entity -> !initialEntities.contains(entity)).collect(Collectors.toList());
+            List<Integer> newEntities = resultingEntities.stream().filter(entity -> !initialEntities.contains(entity)).toList();
             if (newEntities.size() > 0) {
                 for (Integer newEntity : newEntities) {
                     System.err.println("Unexpected new entity: " + getEntityDebugString(newEntity));

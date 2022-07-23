@@ -1,6 +1,6 @@
 package amara.applications.ingame.entitysystem.systems.commands;
 
-import java.util.Iterator;
+import java.util.LinkedList;
 
 import amara.applications.ingame.entitysystem.components.general.*;
 import amara.applications.ingame.entitysystem.components.items.*;
@@ -21,52 +21,43 @@ import amara.applications.ingame.entitysystem.systems.units.UnitUtil;
 import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.applications.ingame.network.messages.objects.commands.casting.*;
 import amara.applications.ingame.shared.maps.Map;
-import amara.core.Queue;
 import amara.libraries.entitysystem.*;
 import com.jme3.math.Vector2f;
 
 public class ExecutePlayerCommandsSystem implements EntitySystem {
 
-    public ExecutePlayerCommandsSystem(Queue<PlayerCommand> playerCommandsQueue, CastSpellQueueSystem castSpellQueueSystem, Map map) {
+    public ExecutePlayerCommandsSystem(LinkedList<PlayerCommand> playerCommandsQueue, CastSpellQueueSystem castSpellQueueSystem, Map map) {
         this.playerCommandsQueue = playerCommandsQueue;
         this.castSpellQueueSystem = castSpellQueueSystem;
         this.map = map;
     }
-    private Queue<PlayerCommand> playerCommandsQueue;
+    private LinkedList<PlayerCommand> playerCommandsQueue;
     private CastSpellQueueSystem castSpellQueueSystem;
     private Map map;
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
-        Iterator<PlayerCommand> playerCommandsIterator = playerCommandsQueue.getIterator();
-        while (playerCommandsIterator.hasNext()) {
-            PlayerCommand playerCommand = playerCommandsIterator.next();
+        for (PlayerCommand playerCommand : playerCommandsQueue) {
             Command command = playerCommand.getCommand();
             int playerEntity = getPlayerEntity(entityWorld, playerCommand.getClientID());
             int characterEntity = entityWorld.getComponent(playerEntity, PlayerCharacterComponent.class).getEntity();
             boolean isUnitAlive = entityWorld.hasComponent(characterEntity, IsAliveComponent.class);
-            if (command instanceof BuyItemCommand) {
-                BuyItemCommand buyItemCommand = (BuyItemCommand) command;
+            if (command instanceof BuyItemCommand buyItemCommand) {
                 if ((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, characterEntity)) {
                     ShopUtil.buy(entityWorld, characterEntity, buyItemCommand.getItemID(), map);
                 }
-            } else if (command instanceof SellItemCommand) {
-                SellItemCommand sellItemCommand = (SellItemCommand) command;
+            } else if (command instanceof SellItemCommand sellItemCommand) {
                 if ((!isUnitAlive) || ShopUtil.isInShopRange(entityWorld, characterEntity)){
                     ShopUtil.sell(entityWorld, characterEntity, sellItemCommand.getItemIndex());
                 }
-            } else if (command instanceof LearnSpellCommand) {
-                LearnSpellCommand learnSpellCommand = (LearnSpellCommand) command;
+            } else if (command instanceof LearnSpellCommand learnSpellCommand) {
                 SpellUtil.learnSpell(entityWorld, characterEntity, learnSpellCommand.getSpellIndex());
-            } else if (command instanceof UpgradeSpellCommand) {
-                UpgradeSpellCommand upgradeSpellCommand = (UpgradeSpellCommand) command;
+            } else if (command instanceof UpgradeSpellCommand upgradeSpellCommand) {
                 SpellUtil.upgradeSpell(entityWorld, characterEntity, upgradeSpellCommand.getSpellIndex(), upgradeSpellCommand.getUpgradeIndex());
-            } else if (command instanceof SwapItemsCommand) {
-                SwapItemsCommand swapItemsCommand = (SwapItemsCommand) command;
+            } else if (command instanceof SwapItemsCommand swapItemsCommand) {
                 ItemUtil.swapItems(entityWorld, characterEntity, swapItemsCommand.getItemIndex1(), swapItemsCommand.getItemIndex2());
             } else if (isUnitAlive) {
-                if (command instanceof WalkToTargetCommand) {
-                    WalkToTargetCommand walkToTargetCommand = (WalkToTargetCommand) command;
+                if (command instanceof WalkToTargetCommand walkToTargetCommand) {
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new PositionComponent(walkToTargetCommand.getPosition()));
@@ -74,8 +65,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                     if (!wasSuccessful) {
                         entityWorld.removeEntity(targetEntity);
                     }
-                } else if (command instanceof WalkInDirectionCommand) {
-                    WalkInDirectionCommand walkInDirectionCommand = (WalkInDirectionCommand) command;
+                } else if (command instanceof WalkInDirectionCommand walkInDirectionCommand) {
                     Vector2f direction = walkInDirectionCommand.getDirection();
                     // If a client thinks it can cheat
                     if (direction.length() > 1) {
@@ -94,26 +84,21 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                     UnitUtil.tryCancelMovement(entityWorld, characterEntity);
                 } else if (command instanceof StopCommand) {
                     UnitUtil.tryCancelAction(entityWorld, characterEntity);
-                } else if (command instanceof AutoAttackCommand) {
-                    AutoAttackCommand autoAttackCommand = (AutoAttackCommand) command;
+                } else if (command instanceof AutoAttackCommand autoAttackCommand) {
                     tryAutoAttack(entityWorld, characterEntity, autoAttackCommand.getTargetEntity());
-                } else if (command instanceof CastSelfcastSpellCommand) {
-                    CastSelfcastSpellCommand castSelfcastSpellCommand = (CastSelfcastSpellCommand) command;
+                } else if (command instanceof CastSelfcastSpellCommand castSelfcastSpellCommand) {
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castSelfcastSpellCommand.getSpellIndex());
                     castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, -1);
-                } else if (command instanceof CastSingleTargetSpellCommand) {
-                    CastSingleTargetSpellCommand castSingleTargetSpellCommand = (CastSingleTargetSpellCommand) command;
+                } else if (command instanceof CastSingleTargetSpellCommand castSingleTargetSpellCommand) {
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castSingleTargetSpellCommand.getSpellIndex());
                     castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, castSingleTargetSpellCommand.getTargetEntity());
-                } else if (command instanceof CastLinearSkillshotSpellCommand) {
-                    CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand = (CastLinearSkillshotSpellCommand) command;
+                } else if (command instanceof CastLinearSkillshotSpellCommand castLinearSkillshotSpellCommand) {
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castLinearSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
                     entityWorld.setComponent(targetEntity, new DirectionComponent(castLinearSkillshotSpellCommand.getDirection().clone()));
                     castSpellQueueSystem.enqueueSpellCast(entityWorld, characterEntity, spellEntity, targetEntity);
-                } else if (command instanceof CastPositionalSkillshotSpellCommand) {
-                    CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand = (CastPositionalSkillshotSpellCommand) command;
+                } else if (command instanceof CastPositionalSkillshotSpellCommand castPositionalSkillshotSpellCommand) {
                     int spellEntity = getSpellEntity(entityWorld, characterEntity, castPositionalSkillshotSpellCommand.getSpellIndex());
                     int targetEntity = entityWorld.createEntity();
                     entityWorld.setComponent(targetEntity, new TemporaryComponent());
@@ -126,8 +111,7 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
                             entityWorld.setComponent(characterEntity, new AnimationComponent(danceAnimationComponent.getAnimationEntity()));
                         }
                     }
-                } else if (command instanceof ShowReactionCommand) {
-                    ShowReactionCommand showReactionCommand = (ShowReactionCommand) command;
+                } else if (command instanceof ShowReactionCommand showReactionCommand) {
                     entityWorld.setComponent(characterEntity, new ReactionComponent(showReactionCommand.getReaction(), 2));
                 }
             }
@@ -144,40 +128,38 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
         return -1;
     }
 
-    public static int getSpellEntity(EntityWorld entityWorld, int casterEntity, SpellIndex spellIndex){
-        switch(spellIndex.getSpellSet()){
-            case SPELLS:
+    public static int getSpellEntity(EntityWorld entityWorld, int casterEntity, SpellIndex spellIndex) {
+        switch (spellIndex.getSpellSet()) {
+            case SPELLS -> {
                 SpellsComponent spellsComponent = entityWorld.getComponent(casterEntity, SpellsComponent.class);
-                if(spellsComponent != null){
+                if (spellsComponent != null) {
                     int[] spells = spellsComponent.getSpellsEntities();
-                    if(spellIndex.getIndex() < spells.length){
+                    if (spellIndex.getIndex() < spells.length) {
                         return spells[spellIndex.getIndex()];
                     }
                 }
-                break;
-            
-            case ITEMS:
+            }
+            case ITEMS -> {
                 InventoryComponent inventoryComponent = entityWorld.getComponent(casterEntity, InventoryComponent.class);
-                if(inventoryComponent != null){
+                if (inventoryComponent != null) {
                     int[] items = inventoryComponent.getItemEntities();
-                    if(spellIndex.getIndex() < items.length){
+                    if (spellIndex.getIndex() < items.length) {
                         ItemActiveComponent itemActiveComponent = entityWorld.getComponent(items[spellIndex.getIndex()], ItemActiveComponent.class);
-                        if(itemActiveComponent != null){
+                        if (itemActiveComponent != null) {
                             return itemActiveComponent.getSpellEntity();
                         }
                     }
                 }
-                break;
-            
-            case MAP:
+            }
+            case MAP -> {
                 MapSpellsComponent mapSpellsComponent = entityWorld.getComponent(casterEntity, MapSpellsComponent.class);
-                if(mapSpellsComponent != null){
+                if (mapSpellsComponent != null) {
                     int[] mapSpells = mapSpellsComponent.getSpellsEntities();
-                    if(spellIndex.getIndex() < mapSpells.length){
+                    if (spellIndex.getIndex() < mapSpells.length) {
                         return mapSpells[spellIndex.getIndex()];
                     }
                 }
-                break;
+            }
         }
         return -1;
     }
@@ -189,9 +171,9 @@ public class ExecutePlayerCommandsSystem implements EntitySystem {
         }
         return false;
     }
-    
-    public static boolean tryWalk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance){
-        if(MovementSystem.canMove(entityWorld, unitEntity)){
+
+    public static boolean tryWalk(EntityWorld entityWorld, int unitEntity, int targetEntity, float sufficientDistance) {
+        if (MovementSystem.canMove(entityWorld, unitEntity)) {
             return walk(entityWorld, unitEntity, targetEntity, sufficientDistance);
         }
         return false;

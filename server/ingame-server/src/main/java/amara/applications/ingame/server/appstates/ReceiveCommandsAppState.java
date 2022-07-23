@@ -3,17 +3,20 @@ package amara.applications.ingame.server.appstates;
 import amara.applications.ingame.network.messages.objects.commands.PlayerCommand;
 import amara.applications.ingame.server.network.backends.ReceiveCommandsBackend;
 import amara.applications.master.server.games.TeamGame;
-import amara.core.Queue;
 import amara.libraries.applications.headless.applications.HeadlessAppStateManager;
 import amara.libraries.applications.headless.applications.HeadlessApplication;
 import amara.libraries.applications.headless.appstates.SubNetworkServerAppState;
 import amara.libraries.network.SubNetworkServer;
+import lombok.Getter;
+
+import java.util.LinkedList;
 
 public class ReceiveCommandsAppState extends ServerBaseAppState {
 
     private static final float MAXIMUM_TIME_SINCE_LAST_COMMAND = (60 * 30);
 
-    private Queue<PlayerCommand> playerCommandsQueue = new Queue<>();
+    @Getter
+    private LinkedList<PlayerCommand> playerCommandsQueue = new LinkedList<>();
     private float timeSinceLastCommand;
 
     @Override
@@ -38,9 +41,5 @@ public class ReceiveCommandsAppState extends ServerBaseAppState {
             timeSinceLastCommand = 0;
             playerCommandsQueue.add(playerCommand);
         });
-    }
-
-    public Queue<PlayerCommand> getPlayerCommandsQueue(){
-        return playerCommandsQueue;
     }
 }

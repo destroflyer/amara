@@ -1,7 +1,6 @@
 package amara.applications.ingame.client.appstates;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import com.jme3.app.Application;
 import com.jme3.app.state.AppStateManager;
@@ -12,7 +11,6 @@ import amara.applications.ingame.client.gui.ScreenController_Chat;
 import amara.applications.ingame.client.network.debug.frame.NetworkLoadDisplay;
 import amara.applications.ingame.network.messages.*;
 import amara.applications.master.network.messages.objects.PlayerProfileData;
-import amara.core.input.Event;
 import amara.core.input.events.KeyEvent;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.headless.appstates.NetworkClientHeadlessAppState;
@@ -31,8 +29,7 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
         super.initialize(stateManager, application);
         IngameNetworkAppState ingameNetworkAppState = getAppState(IngameNetworkAppState.class);
         ingameNetworkAppState.addMessageBackend((Message receivedMessage, MessageResponse messageResponse) -> {
-            if (receivedMessage instanceof Message_ChatMessage) {
-                final Message_ChatMessage message = (Message_ChatMessage) receivedMessage;
+            if (receivedMessage instanceof Message_ChatMessage message) {
                 mainApplication.enqueue(() -> {
                     queuedMessages.add(message);
                 });
@@ -41,30 +38,27 @@ public class ClientChatAppState extends BaseDisplayAppState<IngameClientApplicat
     }
 
     @Override
-    public void update(float lastTimePerFrame){
+    public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
         ScreenController_Chat screenController_Chat = getScreenController_Chat();
-        Iterator<Event> eventsIterator = getAppState(EventManagerAppState.class).getEventQueue().getIterator();
-        while(eventsIterator.hasNext()){
-            Event event = eventsIterator.next();
-            if(event instanceof KeyEvent){
-                KeyEvent keyEvent = (KeyEvent) event;
+        getAppState(EventManagerAppState.class).forEachEvent(event -> {
+            if (event instanceof KeyEvent keyEvent) {
                 if ((keyEvent.getKeyCode() == KeyInput.KEY_RETURN) && keyEvent.isPressed()) {
                     screenController_Chat.setChatVisible_Input(true);
                     screenController_Chat.setChatVisible_Output(true);
                 }
             }
-        }
+        });
         timeSinceLastReceivedMessage += lastTimePerFrame;
-        if(screenController_Chat.isOnlyChatOutputVisible() && (timeSinceLastReceivedMessage >= HIDE_CHAT_DELAY)){
+        if (screenController_Chat.isOnlyChatOutputVisible() && (timeSinceLastReceivedMessage >= HIDE_CHAT_DELAY)) {
             screenController_Chat.setChatVisible_Output(false);
         }
-        if((queuedMessages.size() > 0) && (!isHandlingMessage)){
+        if ((queuedMessages.size() > 0) && (!isHandlingMessage)) {
             displayMessages(queuedMessages.toArray(Message_ChatMessage[]::new));
             queuedMessages.clear();
         }
     }
-    
+
     private void displayMessages(final Message_ChatMessage[] messages){
         new Thread(() -> {
             isHandlingMessage = true;

@@ -1,7 +1,6 @@
 package amara.applications.ingame.client.appstates;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.gui.*;
@@ -12,8 +11,6 @@ import amara.applications.ingame.client.systems.gui.deathrecap.DisplayDeathRecap
 import amara.applications.ingame.client.systems.information.*;
 import amara.applications.ingame.client.systems.visualisation.*;
 import amara.applications.master.network.messages.objects.GameSelectionPlayer;
-import amara.core.Queue;
-import amara.core.input.Event;
 import amara.core.input.events.MouseClickEvent;
 import amara.libraries.applications.display.appstates.*;
 import amara.libraries.applications.display.ingame.appstates.*;
@@ -166,12 +163,8 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
         LocalEntitySystemAppState localEntitySystemAppState = getAppState(LocalEntitySystemAppState.class);
         EntityWorld entityWorld = localEntitySystemAppState.getEntityWorld();
         // Inspect hovered entity when selected
-        Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
-        Iterator<Event> eventsIterator = eventQueue.getIterator();
-        while(eventsIterator.hasNext()) {
-            Event event = eventsIterator.next();
-            if (event instanceof MouseClickEvent) {
-                MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
+        getAppState(EventManagerAppState.class).forEachEvent(event -> {
+            if (event instanceof MouseClickEvent mouseClickEvent) {
                 int mouseButtonIndex = mouseClickEvent.getButton().ordinal();
                 String mapCameraType = getAppState(MapAppState.class).getMap().getCamera().getType();
                 if (mouseButtonIndex == Settings.getInteger("controls_" + mapCameraType + "_navigation_select")) {
@@ -182,7 +175,7 @@ public class PlayerAppState extends BaseDisplayAppState<IngameClientApplication>
                     }
                 }
             }
-        }
+        });
         // Reset inspection when entity gets removed
         if ((inspectedEntity != -1) && (!entityWorld.hasEntity(inspectedEntity))) {
             inspectedEntity = -1;

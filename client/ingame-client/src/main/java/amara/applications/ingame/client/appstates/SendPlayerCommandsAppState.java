@@ -1,7 +1,5 @@
 package amara.applications.ingame.client.appstates;
 
-import java.util.Iterator;
-
 import amara.applications.ingame.client.IngameClientApplication;
 import amara.applications.ingame.client.gui.*;
 import amara.applications.ingame.client.systems.gui.DisplaySpellsImagesSystem;
@@ -19,8 +17,6 @@ import amara.applications.ingame.network.messages.objects.commands.*;
 import amara.applications.ingame.network.messages.objects.commands.casting.*;
 import amara.applications.ingame.shared.maps.MapCamera;
 import amara.applications.ingame.shared.maps.cameras.*;
-import amara.core.Queue;
-import amara.core.input.Event;
 import amara.core.input.events.*;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.appstates.*;
@@ -62,12 +58,8 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
         MapCamera mapCamera = mapAppState.getMap().getCamera();
         String controlsCameraPrefix = "controls_" + mapCamera.getType() + "_";
         // Events
-        Queue<Event> eventQueue = getAppState(EventManagerAppState.class).getEventQueue();
-        Iterator<Event> eventsIterator = eventQueue.getIterator();
-        while (eventsIterator.hasNext()) {
-            Event event = eventsIterator.next();
-            if (event instanceof MouseClickEvent) {
-                MouseClickEvent mouseClickEvent = (MouseClickEvent) event;
+        getAppState(EventManagerAppState.class).forEachEvent(event -> {
+            if (event instanceof MouseClickEvent mouseClickEvent) {
                 int mouseButtonIndex = mouseClickEvent.getButton().ordinal();
                 int hoveredEntity = getAppState(PlayerAppState.class).getCursorHoveredEntity();
                 if (mouseButtonIndex == Settings.getInteger(controlsCameraPrefix + "navigation_select")) {
@@ -100,8 +92,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                         }
                     }
                 }
-            } else if (event instanceof KeyEvent) {
-                KeyEvent keyEvent = (KeyEvent) event;
+            } else if (event instanceof KeyEvent keyEvent) {
                 if (screenController_Menu.isReadingKeyInput()) {
                     screenController_Menu.readKey(keyEvent.getKeyCode());
                 } else {
@@ -195,7 +186,7 @@ public class SendPlayerCommandsAppState extends BaseDisplayAppState<IngameClient
                     }
                 }
             }
-        }
+        });
         // Camera change
         if (mapCamera instanceof MapCamera_3rdPerson) {
             ChaseCamera chaseCamera = mapAppState.getChaseCamera();

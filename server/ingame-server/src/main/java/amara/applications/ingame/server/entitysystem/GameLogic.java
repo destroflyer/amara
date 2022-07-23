@@ -32,7 +32,6 @@ import amara.applications.ingame.server.entitysystem.systems.effects.ApplyEffect
 import amara.applications.ingame.server.maps.PolyMapLoader;
 import amara.applications.ingame.shared.maps.Map;
 import amara.applications.master.server.games.Game;
-import amara.core.Queue;
 import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.physics.intersectionHelper.PolyMapManager;
@@ -42,7 +41,7 @@ import java.util.LinkedList;
 
 public class GameLogic {
 
-    public GameLogic(EntityWorld entityWorld, Game game, Queue<PlayerCommand> playerCommandsQueue, ExecuteAIActionsSystem.EntityBotsMap entityBotsMap) {
+    public GameLogic(EntityWorld entityWorld, Game game, LinkedList<PlayerCommand> playerCommandsQueue, ExecuteAIActionsSystem.EntityBotsMap entityBotsMap) {
         this.entityWorld = entityWorld;
         this.game = game;
         this.playerCommandsQueue = playerCommandsQueue;
@@ -50,7 +49,7 @@ public class GameLogic {
     }
     private EntityWorld entityWorld;
     private Game game;
-    private Queue<PlayerCommand> playerCommandsQueue;
+    private LinkedList<PlayerCommand> playerCommandsQueue;
     private ExecuteAIActionsSystem.EntityBotsMap entityBotsMap;
     private LinkedList<EntitySystem> entitySystems;
 

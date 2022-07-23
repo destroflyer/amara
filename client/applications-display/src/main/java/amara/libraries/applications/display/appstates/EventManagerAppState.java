@@ -1,6 +1,5 @@
 package amara.libraries.applications.display.appstates;
 
-import amara.core.Queue;
 import amara.core.input.*;
 import amara.core.input.events.*;
 import amara.libraries.applications.display.DisplayApplication;
@@ -10,10 +9,13 @@ import com.jme3.input.*;
 import com.jme3.input.controls.*;
 import com.jme3.math.Vector2f;
 
+import java.util.LinkedList;
+import java.util.function.Consumer;
+
 public class EventManagerAppState extends BaseDisplayAppState<DisplayApplication> implements ActionListener {
 
     private static final String ACTION_NAME_PREFIX_KEY_PRESSED = "key_pressed_";
-    private Queue<Event> eventQueue = new Queue<>();
+    private LinkedList<Event> eventQueue = new LinkedList<>();
     private boolean isModifierControlLeft;
     private boolean isModifierControlRight;
     private boolean isModifierShiftLeft;
@@ -39,12 +41,6 @@ public class EventManagerAppState extends BaseDisplayAppState<DisplayApplication
     }
 
     @Override
-    public void cleanup() {
-        super.cleanup();
-        mainApplication.getInputManager().removeListener(this);
-    }
-
-    @Override
     public void update(float lastTimePerFrame) {
         super.update(lastTimePerFrame);
         mainApplication.enqueue(() -> eventQueue.clear());
@@ -67,18 +63,10 @@ public class EventManagerAppState extends BaseDisplayAppState<DisplayApplication
 
     private void updateModifiers(int keyCode, boolean value) {
         switch (keyCode) {
-            case KeyInput.KEY_LCONTROL:
-                isModifierControlLeft = value;
-                break;
-            case KeyInput.KEY_RCONTROL:
-                isModifierControlRight = value;
-                break;
-            case KeyInput.KEY_LSHIFT:
-                isModifierShiftLeft = value;
-                break;
-            case KeyInput.KEY_RSHIFT:
-                isModifierShiftRight = value;
-                break;
+            case KeyInput.KEY_LCONTROL -> isModifierControlLeft = value;
+            case KeyInput.KEY_RCONTROL -> isModifierControlRight = value;
+            case KeyInput.KEY_LSHIFT -> isModifierShiftLeft = value;
+            case KeyInput.KEY_RSHIFT -> isModifierShiftRight = value;
         }
     }
 
@@ -86,7 +74,13 @@ public class EventManagerAppState extends BaseDisplayAppState<DisplayApplication
         return mainApplication.getInputManager().getCursorPosition();
     }
 
-    public Queue<Event> getEventQueue() {
-        return eventQueue;
+    public void forEachEvent(Consumer<Event> consumer) {
+        eventQueue.forEach(consumer);
+    }
+
+    @Override
+    public void cleanup() {
+        super.cleanup();
+        mainApplication.getInputManager().removeListener(this);
     }
 }
