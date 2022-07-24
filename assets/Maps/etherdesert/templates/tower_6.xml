@@ -76,7 +76,7 @@
         </areaBuff>
         <areaBuffTargetRules>
             <entity>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </areaBuffTargetRules>
         <areaSource>#entity</areaSource>

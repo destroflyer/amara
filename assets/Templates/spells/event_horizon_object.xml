@@ -10,7 +10,7 @@
     <entity>
         <collisionTrigger>
             <entity>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </collisionTrigger>
         <targetTarget/>

@@ -63,7 +63,7 @@
                 <ruleTarget>
                     <entity>
                         <requireCharacter/>
-                        <acceptAllies/>
+                        <requiresAlly/>
                     </entity>
                 </ruleTarget>
                 <triggeredEffect>

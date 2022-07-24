@@ -35,7 +35,7 @@
                             <entity id="targetCollisionTrigger">
                                 <collisionTrigger>
                                     <entity>
-                                        <acceptEnemies/>
+                                        <requiresEnemy/>
                                     </entity>
                                 </collisionTrigger>
                                 <targetTarget/>
@@ -50,7 +50,7 @@
                             <entity if="[resetOnMarkedTargets]" id="resetOnMarkedTargetsTrigger">
                                 <collisionTrigger>
                                     <entity>
-                                        <acceptEnemies/>
+                                        <requiresEnemy/>
                                     </entity>
                                 </collisionTrigger>
                                 <customTarget>#spell</customTarget>

@@ -47,7 +47,7 @@
         <range type="edge_to_edge" distance="9"/>
         <spellTargetRules>
             <entity>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </spellTargetRules>
     </entity>

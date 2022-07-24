@@ -38,7 +38,6 @@ import amara.applications.ingame.entitysystem.components.spells.CastCostComponen
 import amara.applications.ingame.entitysystem.components.spells.InstantEffectTriggersComponent;
 import amara.applications.ingame.entitysystem.components.spells.triggers.CastedEffectTriggersComponent;
 import amara.applications.ingame.entitysystem.components.spells.triggers.CastedSpellComponent;
-import amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent;
 import amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent;
 import amara.applications.ingame.entitysystem.components.targets.RequireAllBuffsComponent;
 import amara.applications.ingame.entitysystem.components.targets.RequireNoBuffsComponent;
@@ -285,7 +284,6 @@ public class Map_Vegas extends Map {
                         entityWorld.setComponent(upgradeUpgradeTrigger, new BuffTargetsAmountTriggerComponent(unitTypeBuff, unitUpgradeAmount));
                         int upgradeUpgradeRules = entityWorld.createEntity();
                         entityWorld.setComponent(upgradeUpgradeRules, new AcceptUntargetableComponent());
-                        entityWorld.setComponent(upgradeUpgradeRules, new AcceptAlliesComponent());
                         entityWorld.setComponent(upgradeUpgradeRules, new RequireAllBuffsComponent(unitTypeUpgradeTargetBuff));
                         entityWorld.setComponent(upgradeUpgradeRules, new MaximumTargetsComponent(1));
                         entityWorld.setComponent(upgradeUpgradeTrigger, new RuleTargetComponent(upgradeUpgradeRules));
@@ -302,7 +300,6 @@ public class Map_Vegas extends Map {
                         entityWorld.setComponent(upgradeRemoveTrigger, new BuffTargetsAmountTriggerComponent(unitTypeBuff, unitUpgradeAmount));
                         int upgradeRemoveRules = entityWorld.createEntity();
                         entityWorld.setComponent(upgradeRemoveRules, new AcceptUntargetableComponent());
-                        entityWorld.setComponent(upgradeRemoveRules, new AcceptAlliesComponent());
                         entityWorld.setComponent(upgradeRemoveRules, new RequireAllBuffsComponent(unitTypeBuff));
                         entityWorld.setComponent(upgradeRemoveRules, new RequireNoBuffsComponent(unitTypeUpgradeTargetBuff));
                         entityWorld.setComponent(upgradeRemoveRules, new MaximumTargetsComponent(2));

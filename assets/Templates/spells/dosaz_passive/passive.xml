@@ -16,7 +16,7 @@
                                 <surroundingDeathTrigger maximumDistance="20">
                                     <entity>
                                         <requireMinion/>
-                                        <acceptAllies/>
+                                        <requiresAlly/>
                                     </entity>
                                 </surroundingDeathTrigger>
                                 <targetTarget/>

@@ -22,7 +22,7 @@
         <baseCooldown>25</baseCooldown>
         <spellTargetRules>
             <entity>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </spellTargetRules>
     </entity>

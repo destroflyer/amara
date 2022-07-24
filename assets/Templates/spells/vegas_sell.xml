@@ -18,7 +18,6 @@
         <castTurnToTarget/>
         <spellTargetRules>
             <entity>
-                <acceptAllies/>
                 <requireAnyBuffs>[unitOnBenchBuff],[unitOnBoardBuff]</requireAnyBuffs>
             </entity>
         </spellTargetRules>

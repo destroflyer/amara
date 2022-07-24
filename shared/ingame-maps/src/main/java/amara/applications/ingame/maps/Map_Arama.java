@@ -91,7 +91,7 @@ public class Map_Arama extends Map {
             fountainBuff_Allies.setComponent(new RepeatingEffectComponent(fountainBuffEffect_Allies.getId(), 0.25f));
             fountainBuffArea_Allies.setComponent(new AreaBuffComponent(fountainBuff_Allies.getId()));
             EntityWrapper fountainAreaBuffTargetRules_Allies = entityWorld.getWrapped(entityWorld.createEntity());
-            fountainAreaBuffTargetRules_Allies.setComponent(new AcceptAlliesComponent());
+            fountainAreaBuffTargetRules_Allies.setComponent(new RequiresAllyComponent());
             fountainBuffArea_Allies.setComponent(new AreaBuffTargetRulesComponent(fountainAreaBuffTargetRules_Allies.getId()));
             fountainBuffArea_Allies.setComponent(new TransformOriginComponent(GAME_ENTITY));
             fountainBuffArea_Allies.setComponent(new AreaSourceComponent(fountain.getId()));
@@ -108,7 +108,7 @@ public class Map_Arama extends Map {
             fountainBuff_Enemies.setComponent(new RepeatingEffectComponent(fountainBuffEffect__Enemies.getId(), 0.5f));
             fountainBuffArea_Enemies.setComponent(new AreaBuffComponent(fountainBuff_Enemies.getId()));
             EntityWrapper fountainAreaBuffTargetRules__Enemies = entityWorld.getWrapped(entityWorld.createEntity());
-            fountainAreaBuffTargetRules__Enemies.setComponent(new AcceptEnemiesComponent());
+            fountainAreaBuffTargetRules__Enemies.setComponent(new RequiresEnemyComponent());
             fountainBuffArea_Enemies.setComponent(new AreaBuffTargetRulesComponent(fountainAreaBuffTargetRules__Enemies.getId()));
             fountainBuffArea_Enemies.setComponent(new TransformOriginComponent(GAME_ENTITY));
             fountainBuffArea_Enemies.setComponent(new AreaSourceComponent(fountain.getId()));
@@ -332,7 +332,7 @@ public class Map_Arama extends Map {
         characterBounty.setComponent(new BountyGoldComponent(300));
         int bountyRulesEntity = entityWorld.createEntity();
         entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
-        entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+        entityWorld.setComponent(bountyRulesEntity, new RequiresEnemyComponent());
         characterBounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
         entityWorld.setComponent(characterEntity, new BountyComponent(characterBounty.getId()));
         //GoldPerTime

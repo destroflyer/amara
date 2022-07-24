@@ -17,7 +17,7 @@
                                 <areaBuff>
                                     <entity>
                                         <name>Burned</name>
-                                        <description>This unit received magic damage over time.</description>
+                                        <description>This unit receives magic damage over time.</description>
                                         <buffIcon>items/glowing_tabard</buffIcon>
                                         <buffVisualisation>burning</buffVisualisation>
                                         <repeatingEffect interval="0.5">
@@ -29,7 +29,7 @@
                                 </areaBuff>
                                 <areaBuffTargetRules>
                                     <entity>
-                                        <acceptEnemies/>
+                                        <requiresEnemy/>
                                     </entity>
                                 </areaBuffTargetRules>
                             </entity>

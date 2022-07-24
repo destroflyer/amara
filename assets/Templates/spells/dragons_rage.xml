@@ -33,7 +33,7 @@
         <spellTargetRules>
             <entity>
                 <requireCharacter/>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </spellTargetRules>
     </entity>
@@ -60,7 +60,7 @@
                             <entity id="knockupTrigger">
                                 <collisionTrigger>
                                     <entity>
-                                        <acceptAllies/>
+                                        <requiresAlly/>
                                     </entity>
                                 </collisionTrigger>
                                 <targetTarget/>

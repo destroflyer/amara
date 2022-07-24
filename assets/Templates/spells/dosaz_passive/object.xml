@@ -16,7 +16,6 @@
         <collisionTrigger>
             <entity>
                 <acceptUntargetable/>
-                <acceptAllies/>
                 <requireAllBuffs>[triggerTombstonesBuff]</requireAllBuffs>
             </entity>
         </collisionTrigger>

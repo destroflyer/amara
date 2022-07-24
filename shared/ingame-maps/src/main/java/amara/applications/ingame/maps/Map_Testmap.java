@@ -123,7 +123,7 @@ public class Map_Testmap extends Map {
         forestMonsterBounty.setComponent(new BountyExperienceComponent(200));
         int forestMonsterBountyRulesEntity = entityWorld.createEntity();
         entityWorld.setComponent(forestMonsterBountyRulesEntity, new RequireCharacterComponent());
-        entityWorld.setComponent(forestMonsterBountyRulesEntity, new AcceptEnemiesComponent());
+        entityWorld.setComponent(forestMonsterBountyRulesEntity, new RequiresEnemyComponent());
         forestMonsterBounty.setComponent(new BountyRulesComponent(forestMonsterBountyRulesEntity));
         EntityWrapper forestMonsterCamp = entityWorld.getWrapped(entityWorld.createEntity());
         forestMonsterCamp.setComponent(new CampUnionAggroComponent());
@@ -211,7 +211,7 @@ public class Map_Testmap extends Map {
         characterBounty.setComponent(new BountyGoldComponent(300));
         int bountyRulesEntity = entityWorld.createEntity();
         entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
-        entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+        entityWorld.setComponent(bountyRulesEntity, new RequiresEnemyComponent());
         characterBounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
         entityWorld.setComponent(characterEntity, new BountyComponent(characterBounty.getId()));
         entityWorld.setComponent(characterEntity, new LevelComponent(12));

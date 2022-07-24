@@ -3995,22 +3995,6 @@ public class ComponentsRegistrator{
             }
         });
         //targets
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent>("acceptAllies"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.targets.AcceptAlliesComponent();
-            }
-        });
-        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent.class);
-        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent>("acceptEnemies"){
-
-            @Override
-            public amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
-                return new amara.applications.ingame.entitysystem.components.targets.AcceptEnemiesComponent();
-            }
-        });
         bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent.class);
         xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.AcceptUntargetableComponent>("acceptUntargetable"){
 
@@ -4115,6 +4099,22 @@ public class ComponentsRegistrator{
             @Override
             public amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
                 return new amara.applications.ingame.entitysystem.components.targets.RequireProjectileComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequiresAllyComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequiresAllyComponent>("requiresAlly"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequiresAllyComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.targets.RequiresAllyComponent();
+            }
+        });
+        bitstreamClassManager.register(amara.applications.ingame.entitysystem.components.targets.RequiresEnemyComponent.class);
+        xmlTemplateManager.registerComponent(new XMLComponentConstructor<amara.applications.ingame.entitysystem.components.targets.RequiresEnemyComponent>("requiresEnemy"){
+
+            @Override
+            public amara.applications.ingame.entitysystem.components.targets.RequiresEnemyComponent construct(XMLTemplateReader templateReader, EntityWorld entityWorld, Element element){
+                return new amara.applications.ingame.entitysystem.components.targets.RequiresEnemyComponent();
             }
         });
         //units

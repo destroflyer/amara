@@ -15,7 +15,7 @@
         <collisionTrigger>
             <entity>
                 <requireProjectile/>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </collisionTrigger>
         <targetTarget/>

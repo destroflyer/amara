@@ -29,7 +29,7 @@
                         </areaBuff>
                         <areaBuffTargetRules>
                             <entity>
-                                <acceptEnemies/>
+                                <requiresEnemy/>
                             </entity>
                         </areaBuffTargetRules>
                     </entity>

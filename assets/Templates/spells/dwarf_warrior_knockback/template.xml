@@ -57,7 +57,7 @@
         <baseCooldown>15</baseCooldown>
         <spellTargetRules if="![multipleTargets]">
             <entity>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </spellTargetRules>
     </entity>

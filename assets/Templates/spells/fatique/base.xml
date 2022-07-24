@@ -32,7 +32,7 @@
         <spellTargetRules>
             <entity>
                 <requireCharacter/>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </spellTargetRules>
     </entity>

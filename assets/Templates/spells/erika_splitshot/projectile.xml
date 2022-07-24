@@ -13,7 +13,7 @@
     <entity>
         <collisionTrigger>
             <entity id="collisionRules">
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </collisionTrigger>
         <targetTarget/>

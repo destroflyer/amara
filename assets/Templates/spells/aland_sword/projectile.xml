@@ -58,7 +58,7 @@
                                 <sourceTarget/>
                                 <hasRuleTargetCondition>
                                     <entity id="bounceRules">
-                                        <acceptEnemies/>
+                                        <requiresEnemy/>
                                         <requireNoBuffs>#alreadyHitTargetBuff</requireNoBuffs>
                                         <requireMaximumDistance>[bounceRange]</requireMaximumDistance>
                                     </entity>

@@ -26,7 +26,6 @@
         <collisionTrigger>
             <entity>
                 <acceptUntargetable/>
-                <acceptAllies/>
                 <requireAllBuffs>[thunderPoppableBuff]</requireAllBuffs>
             </entity>
         </collisionTrigger>
@@ -42,7 +41,7 @@
     <entity>
         <collisionTrigger>
             <entity id="enemyCollisionRules">
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </collisionTrigger>
         <targetTarget/>

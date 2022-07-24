@@ -220,7 +220,7 @@ public class CustomGameTemplates {
                     bounty.setComponent(new BountyGoldComponent(30));
                     int bountyRulesEntity = entityWorld.createEntity();
                     entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
-                    entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+                    entityWorld.setComponent(bountyRulesEntity, new RequiresEnemyComponent());
                     bounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 } else if (template.getName().equals("arama_camp_beetle_golem")) {
@@ -240,7 +240,7 @@ public class CustomGameTemplates {
                     bounty.setComponent(new BountyGoldComponent(100));
                     int bountyRulesEntity = entityWorld.createEntity();
                     entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
-                    entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+                    entityWorld.setComponent(bountyRulesEntity, new RequiresEnemyComponent());
                     bounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 } else if (template.getName().equals("arama_boss")) {
@@ -302,7 +302,7 @@ public class CustomGameTemplates {
                     bounty.setComponent(new BountyBuffComponent(bountyBuff.getId(), 60));
                     int bountyRulesEntity = entityWorld.createEntity();
                     entityWorld.setComponent(bountyRulesEntity, new RequireCharacterComponent());
-                    entityWorld.setComponent(bountyRulesEntity, new AcceptEnemiesComponent());
+                    entityWorld.setComponent(bountyRulesEntity, new RequiresEnemyComponent());
                     bounty.setComponent(new BountyRulesComponent(bountyRulesEntity));
                     entityWrapper.setComponent(new BountyComponent(bounty.getId()));
                 } else if(template.getName().equals("arama_camp_boss")) {

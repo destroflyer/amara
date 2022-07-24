@@ -46,7 +46,7 @@
         <baseCooldown>90</baseCooldown>
         <spellTargetRules>
             <entity>
-                <acceptEnemies/>
+                <requiresEnemy/>
             </entity>
         </spellTargetRules>
         <spellRequiredLevel>6</spellRequiredLevel>

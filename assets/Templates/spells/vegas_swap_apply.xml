@@ -19,7 +19,6 @@
         <spellTargetRules>
             <entity>
                 <acceptUntargetable/>
-                <acceptAllies/>
                 <requireAllBuffs>[putTargetBuff]</requireAllBuffs>
             </entity>
         </spellTargetRules>

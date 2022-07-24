@@ -78,7 +78,6 @@
         <baseCooldown>20</baseCooldown>
         <spellTargetRules>
             <entity>
-                <acceptAllies/>
                 <requireAllBuffs>[ghostBuff]</requireAllBuffs>
             </entity>
         </spellTargetRules>

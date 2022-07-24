@@ -150,7 +150,7 @@ public class PayOutBountiesSystem implements EntitySystem {
     private int getOrCreateDefaultBountyRulesEntity(EntityWorld entityWorld) {
         if (defaultBountyRulesEntity == -1){
             defaultBountyRulesEntity = entityWorld.createEntity();
-            entityWorld.setComponent(defaultBountyRulesEntity, new AcceptEnemiesComponent());
+            entityWorld.setComponent(defaultBountyRulesEntity, new RequiresEnemyComponent());
         }
         return defaultBountyRulesEntity;
     }
