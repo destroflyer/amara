@@ -28,7 +28,7 @@
                 </spawn>
                 <playAudio clone="true">
                     <entity>
-                        <audio>Sounds/sounds/spells/ganfaul_ult_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/ganfaul_ult_hit.ogg</audio>
                         <audioVolume>0.75</audioVolume>
                         <audioRemoveAfterPlaying/>
                     </entity>

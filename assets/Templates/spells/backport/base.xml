@@ -33,7 +33,7 @@
                     <entity>
                         <playAudio>
                             <entity id="castAudio">
-                                <audio>Sounds/sounds/spells/backport_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/backport_cast.ogg</audio>
                             </entity>
                         </playAudio>
                         <addEffectTriggers>

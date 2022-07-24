@@ -80,7 +80,7 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity id="autoattack" template="spells/ranged_autoattack(model=Models/elven_archer_arrow/skin_small.xml,soundCast=Sounds/sounds/spells/elven_archer_autoattack_cast.ogg,soundHit=Sounds/sounds/spells/elven_archer_autoattack_hit.ogg)"/>
+            <entity id="autoattack" template="spells/ranged_autoattack(model=Models/elven_archer_arrow/skin_small.xml,soundCast=Audio/sounds/spells/elven_archer_autoattack_cast.ogg,soundHit=Audio/sounds/spells/elven_archer_autoattack_hit.ogg)"/>
         </autoAttack>
         <passives>
             <entity template="spells/elven_archer_passive/passive"/>

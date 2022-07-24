@@ -16,7 +16,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/aland_stealth_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/aland_stealth_cast.ogg</audio>
                                 <audioVolume>6</audioVolume>
                             </entity>
                         </playAudio>

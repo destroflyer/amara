@@ -23,7 +23,7 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/dosaz_skull_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/dosaz_skull_hit.ogg</audio>
                         <audioVolume>2</audioVolume>
                         <audioRemoveAfterPlaying/>
                     </entity>
@@ -58,7 +58,7 @@
                 </spawn>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/dosaz_passive_unit_spawn.ogg</audio>
+                        <audio>Audio/sounds/spells/dosaz_passive_unit_spawn.ogg</audio>
                     </entity>
                 </playAudio>
                 <removeEntity/>

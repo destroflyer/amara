@@ -1,6 +1,6 @@
 <template>
     <values>
-        <soundHit>Sounds/sounds/spells/melee_autoattack_cast.ogg</soundHit>
+        <soundHit>Audio/sounds/spells/melee_autoattack_cast.ogg</soundHit>
     </values>
     <entity id="spell">
         <name>Melee Autoattack</name>

@@ -12,7 +12,7 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/thunder.ogg</audio>
+                        <audio>Audio/sounds/spells/thunder.ogg</audio>
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>

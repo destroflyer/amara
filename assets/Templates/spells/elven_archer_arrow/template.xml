@@ -27,7 +27,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/elven_archer_arrow_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/elven_archer_arrow_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

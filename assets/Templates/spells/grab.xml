@@ -26,7 +26,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/grab_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/grab_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

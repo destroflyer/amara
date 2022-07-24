@@ -78,7 +78,7 @@
                         </addBuff>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dwarf_warrior_heal_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/dwarf_warrior_heal_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

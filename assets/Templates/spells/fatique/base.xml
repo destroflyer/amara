@@ -17,7 +17,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/fatique_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/fatique_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

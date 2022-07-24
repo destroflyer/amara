@@ -60,7 +60,7 @@
                     <entity>
                         <playAudio>
                             <entity id="loopAudio">
-                                <audio>Sounds/sounds/spells/recovery_loop.ogg</audio>
+                                <audio>Audio/sounds/spells/recovery_loop.ogg</audio>
                                 <audioLoop/>
                             </entity>
                         </playAudio>

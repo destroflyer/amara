@@ -17,7 +17,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/ember_hit.ogg</audio>
+                                <audio>Audio/sounds/spells/ember_hit.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

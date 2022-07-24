@@ -20,7 +20,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/kachujin_fling_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/kachujin_fling_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
@@ -78,7 +78,7 @@
                                         <addCollisionGroups targetOf="map|units" targets="units"/>
                                         <playAudio>
                                             <entity>
-                                                <audio>Sounds/sounds/spells/kachujin_fling_land.ogg</audio>
+                                                <audio>Audio/sounds/spells/kachujin_fling_land.ogg</audio>
                                                 <audioVolume>0.75</audioVolume>
                                             </entity>
                                         </playAudio>

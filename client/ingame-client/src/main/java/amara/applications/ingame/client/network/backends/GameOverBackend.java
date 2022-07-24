@@ -28,7 +28,7 @@ public class GameOverBackend implements MessageBackend {
                 ingameClientApplication.getStateManager().getState(IngameCameraAppState.class).setEnabled(false);
                 NiftyAppState niftyAppState = ingameClientApplication.getStateManager().getState(NiftyAppState.class);
                 niftyAppState.goToScreen(ScreenController_HUD.class, "gameOver");
-                ingameClientApplication.getStateManager().getState(AudioAppState.class).createAudioNode("Sounds/sounds/victory.ogg").play();
+                ingameClientApplication.getStateManager().getState(AudioAppState.class).createAudioNode("Audio/sounds/victory.ogg").play();
             });
         }
     }

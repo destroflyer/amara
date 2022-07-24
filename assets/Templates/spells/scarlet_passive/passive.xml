@@ -27,7 +27,7 @@
                                                 <removeBuff>[markBuff]</removeBuff>
                                                 <playAudio>
                                                     <entity>
-                                                        <audio>Sounds/sounds/spells/scarlet_passive_hit.ogg</audio>
+                                                        <audio>Audio/sounds/spells/scarlet_passive_hit.ogg</audio>
                                                     </entity>
                                                 </playAudio>
                                             </entity>

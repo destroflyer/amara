@@ -25,7 +25,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/tower_shot_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/tower_shot_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

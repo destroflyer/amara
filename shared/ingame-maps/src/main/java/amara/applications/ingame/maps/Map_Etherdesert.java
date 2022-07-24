@@ -41,7 +41,7 @@ public class Map_Etherdesert extends Map {
     @Override
     public void load(EntityWorld entityWorld, int teamPlayersCount) {
         EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
-        audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/desert_village.ogg"));
+        audioBackgroundMusic.setComponent(new AudioComponent("Audio/music/desert_village.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
         audioBackgroundMusic.setComponent(new AudioGlobalComponent());

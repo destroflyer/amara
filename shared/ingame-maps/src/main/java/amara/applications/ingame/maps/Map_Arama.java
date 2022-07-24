@@ -58,7 +58,7 @@ public class Map_Arama extends Map {
     @Override
     public void load(EntityWorld entityWorld, int teamPlayersCount){
         EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
-        audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/minds_eye.ogg"));
+        audioBackgroundMusic.setComponent(new AudioComponent("Audio/music/minds_eye.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(2));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
         audioBackgroundMusic.setComponent(new AudioGlobalComponent());

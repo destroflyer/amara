@@ -36,7 +36,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/kachujin_mind_of_the_monk_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/kachujin_mind_of_the_monk_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
@@ -79,7 +79,7 @@
                         </addBuff>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/kachujin_mind_of_the_monk_hit.ogg</audio>
+                                <audio>Audio/sounds/spells/kachujin_mind_of_the_monk_hit.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

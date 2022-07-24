@@ -22,7 +22,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/riftwalk_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/riftwalk_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

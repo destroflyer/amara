@@ -11,10 +11,10 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/wither_start.ogg</audio>
+                                <audio>Audio/sounds/spells/wither_start.ogg</audio>
                             </entity>
                             <entity id="audioLoop">
-                                <audio>Sounds/sounds/spells/wither_loop.ogg</audio>
+                                <audio>Audio/sounds/spells/wither_loop.ogg</audio>
                                 <audioLoop/>
                             </entity>
                         </playAudio>

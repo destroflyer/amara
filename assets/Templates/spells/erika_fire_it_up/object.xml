@@ -16,7 +16,7 @@
                 <activateHitbox/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/erika_e_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/erika_e_hit.ogg</audio>
                         <audioVolume>0.75</audioVolume>
                     </entity>
                 </playAudio>

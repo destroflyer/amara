@@ -85,7 +85,7 @@
                 </addBuff>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/aland_passive_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/aland_passive_hit.ogg</audio>
                         <audioVolume>1.5</audioVolume>
                     </entity>
                 </playAudio>

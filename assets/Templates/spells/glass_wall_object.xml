@@ -24,7 +24,7 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/glass_wall_block.ogg</audio>
+                        <audio>Audio/sounds/spells/glass_wall_block.ogg</audio>
                         <audioVolume>0.75</audioVolume>
                     </entity>
                 </playAudio>

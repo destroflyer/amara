@@ -43,7 +43,7 @@
                         </addBuff>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/youmuus_ghostblade_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/youmuus_ghostblade_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

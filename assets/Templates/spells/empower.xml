@@ -38,7 +38,7 @@
                                                 <magicDamage>75 + (0.6 * source.abilityPower)</magicDamage>
                                                 <playAudio>
                                                     <entity>
-                                                        <audio>Sounds/sounds/spells/empower_hit.ogg</audio>
+                                                        <audio>Audio/sounds/spells/empower_hit.ogg</audio>
                                                     </entity>
                                                 </playAudio>
                                             </entity>

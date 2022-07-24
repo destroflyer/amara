@@ -15,7 +15,7 @@
                 <removeEffectTriggers removeEntities="true">[newEffectTrigger1]</removeEffectTriggers>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/tristan_ult_collide.ogg</audio>
+                        <audio>Audio/sounds/spells/tristan_ult_collide.ogg</audio>
                         <audioVolume>2</audioVolume>
                     </entity>
                 </playAudio>

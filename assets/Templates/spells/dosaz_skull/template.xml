@@ -39,7 +39,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dosaz_skull_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/dosaz_skull_cast.ogg</audio>
                                 <audioVolume>1.5</audioVolume>
                             </entity>
                         </playAudio>

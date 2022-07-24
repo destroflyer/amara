@@ -1,8 +1,8 @@
 <template>
     <values>
         <model>Models/energy_projectile/skin.xml</model>
-        <soundCast>Sounds/sounds/spells/ranged_autoattack_cast.ogg</soundCast>
-        <soundHit>Sounds/sounds/spells/ranged_autoattack_hit.ogg</soundHit>
+        <soundCast>Audio/sounds/spells/ranged_autoattack_cast.ogg</soundCast>
+        <soundHit>Audio/sounds/spells/ranged_autoattack_hit.ogg</soundHit>
     </values>
     <entity id="spell">
         <name>Ranged Autoattack</name>

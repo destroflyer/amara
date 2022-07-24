@@ -46,7 +46,7 @@
                                                 </move>
                                                 <playAudio>
                                                     <entity>
-                                                        <audio>Sounds/sounds/spells/slap_hit.ogg</audio>
+                                                        <audio>Audio/sounds/spells/slap_hit.ogg</audio>
                                                     </entity>
                                                 </playAudio>
                                             </entity>

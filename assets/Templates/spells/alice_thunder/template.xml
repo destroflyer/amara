@@ -26,7 +26,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/alice_thunder_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/alice_thunder_cast.ogg</audio>
                                 <audioVolume>2</audioVolume>
                             </entity>
                         </playAudio>

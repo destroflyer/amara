@@ -11,7 +11,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/headbutt_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/headbutt_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
@@ -66,7 +66,7 @@
                                         </move>
                                         <playAudio>
                                             <entity>
-                                                <audio>Sounds/sounds/spells/headbutt_hit.ogg</audio>
+                                                <audio>Audio/sounds/spells/headbutt_hit.ogg</audio>
                                                 <audioVolume>0.75</audioVolume>
                                             </entity>
                                         </playAudio>

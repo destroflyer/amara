@@ -22,7 +22,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/tristan_ult_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/tristan_ult_cast.ogg</audio>
                                 <audioVolume>4</audioVolume>
                             </entity>
                         </playAudio>

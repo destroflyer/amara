@@ -11,11 +11,11 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dragons_rage_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/dragons_rage_cast.ogg</audio>
                                 <audioVolume>1.5</audioVolume>
                             </entity>
                             <entity>
-                                <audio>Sounds/sounds/spells/dragons_rage_hit_knockback.ogg</audio>
+                                <audio>Audio/sounds/spells/dragons_rage_hit_knockback.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>
@@ -75,7 +75,7 @@
                                         </addKnockup>
                                         <playAudio>
                                             <entity>
-                                                <audio>Sounds/sounds/spells/dragons_rage_hit_knockup.ogg</audio>
+                                                <audio>Audio/sounds/spells/dragons_rage_hit_knockup.ogg</audio>
                                                 <audioVolume>0.75</audioVolume>
                                             </entity>
                                         </playAudio>

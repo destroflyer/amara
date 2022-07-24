@@ -37,7 +37,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/erika_w_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/erika_w_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

@@ -33,7 +33,7 @@
                         </addBuff>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/scarlet_barrier_cast_[duration].ogg</audio>
+                                <audio>Audio/sounds/spells/scarlet_barrier_cast_[duration].ogg</audio>
                                 <audioVolume>2</audioVolume>
                             </entity>
                         </playAudio>

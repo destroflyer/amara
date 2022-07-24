@@ -28,7 +28,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dosaz_ult_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/dosaz_ult_cast.ogg</audio>
                                 <audioVolume>4</audioVolume>
                             </entity>
                         </playAudio>

@@ -11,7 +11,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity id="audio">
-                                <audio>Sounds/sounds/spells/sadism_loop.ogg</audio>
+                                <audio>Audio/sounds/spells/sadism_loop.ogg</audio>
                                 <audioLoop/>
                             </entity>
                         </playAudio>

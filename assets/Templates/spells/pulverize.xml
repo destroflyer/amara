@@ -15,7 +15,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/pulverize_hit.ogg</audio>
+                                <audio>Audio/sounds/spells/pulverize_hit.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

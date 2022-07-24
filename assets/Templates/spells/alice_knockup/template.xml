@@ -39,7 +39,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/alice_knockup_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/alice_knockup_cast.ogg</audio>
                                 <audioVolume>2</audioVolume>
                             </entity>
                         </playAudio>

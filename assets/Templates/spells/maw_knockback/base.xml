@@ -20,7 +20,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dragons_rage_hit_knockback.ogg</audio>
+                                <audio>Audio/sounds/spells/dragons_rage_hit_knockback.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

@@ -40,7 +40,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/alice_charm_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/alice_charm_cast.ogg</audio>
                                 <audioVolume>4</audioVolume>
                             </entity>
                         </playAudio>

@@ -92,7 +92,7 @@
                                                 <addStacks stacks="1">#buff</addStacks>
                                                 <playAudio>
                                                     <entity>
-                                                        <audio>Sounds/sounds/spells/aland_trap_hit_following.ogg</audio>
+                                                        <audio>Audio/sounds/spells/aland_trap_hit_following.ogg</audio>
                                                         <audioRemoveAfterPlaying/>
                                                     </entity>
                                                 </playAudio>
@@ -103,7 +103,7 @@
                                 </addEffectTriggers>
                                 <playAudio>
                                     <entity>
-                                        <audio>Sounds/sounds/spells/aland_trap_hit_following.ogg</audio>
+                                        <audio>Audio/sounds/spells/aland_trap_hit_following.ogg</audio>
                                         <audioRemoveAfterPlaying/>
                                     </entity>
                                 </playAudio>
@@ -114,7 +114,7 @@
                 </addEffectTriggers>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/aland_trap_hit_initial.ogg</audio>
+                        <audio>Audio/sounds/spells/aland_trap_hit_initial.ogg</audio>
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>

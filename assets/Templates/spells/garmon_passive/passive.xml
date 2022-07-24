@@ -35,7 +35,7 @@
                                                                         <removeBuff>#buff</removeBuff>
                                                                         <playAudio>
                                                                             <entity>
-                                                                                <audio>Sounds/sounds/spells/garmon_passive_hit.ogg</audio>
+                                                                                <audio>Audio/sounds/spells/garmon_passive_hit.ogg</audio>
                                                                             </entity>
                                                                         </playAudio>
                                                                         <customCleanup/>

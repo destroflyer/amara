@@ -23,7 +23,7 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/infected_cleaver_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/infected_cleaver_hit.ogg</audio>
                         <audioRemoveAfterPlaying/>
                     </entity>
                 </playAudio>

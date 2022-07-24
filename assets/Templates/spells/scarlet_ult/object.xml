@@ -16,7 +16,7 @@
                 <activateHitbox/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/scarlet_ult_cast.ogg</audio>
+                        <audio>Audio/sounds/spells/scarlet_ult_cast.ogg</audio>
                         <audioVolume>3</audioVolume>
                     </entity>
                 </playAudio>

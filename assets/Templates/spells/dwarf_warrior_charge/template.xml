@@ -21,7 +21,7 @@
                     <entity>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dwarf_warrior_charge_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/dwarf_warrior_charge_cast.ogg</audio>
                                 <audioVolume>2</audioVolume>
                             </entity>
                         </playAudio>
@@ -51,7 +51,7 @@
                         </move>
                         <playAudio>
                             <entity id="audioRun">
-                                <audio>Sounds/sounds/spells/dwarf_warrior_charge_run.ogg</audio>
+                                <audio>Audio/sounds/spells/dwarf_warrior_charge_run.ogg</audio>
                                 <audioVolume>1.5</audioVolume>
                             </entity>
                         </playAudio>
@@ -147,7 +147,7 @@
                         </addKnockup>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/dwarf_warrior_charge_hit.ogg</audio>
+                                <audio>Audio/sounds/spells/dwarf_warrior_charge_hit.ogg</audio>
                                 <audioVolume>3.5</audioVolume>
                             </entity>
                         </playAudio>

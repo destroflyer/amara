@@ -52,7 +52,7 @@
                         </addEffectTriggers>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/maria_slash_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/maria_slash_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

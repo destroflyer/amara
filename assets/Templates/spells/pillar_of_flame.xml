@@ -16,7 +16,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/pillar_of_flame_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/pillar_of_flame_cast.ogg</audio>
                                 <audioVolume>0.75</audioVolume>
                             </entity>
                         </playAudio>

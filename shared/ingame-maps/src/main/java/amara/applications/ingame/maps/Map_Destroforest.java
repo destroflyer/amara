@@ -38,7 +38,7 @@ public class Map_Destroforest extends Map {
     @Override
     public void load(EntityWorld entityWorld, int teamPlayersCount){
         EntityWrapper audioBackgroundMusic = entityWorld.getWrapped(entityWorld.createEntity());
-        audioBackgroundMusic.setComponent(new AudioComponent("Sounds/music/mystic_river.ogg"));
+        audioBackgroundMusic.setComponent(new AudioComponent("Audio/music/mystic_river.ogg"));
         audioBackgroundMusic.setComponent(new AudioVolumeComponent(1.75f));
         audioBackgroundMusic.setComponent(new AudioLoopComponent());
         audioBackgroundMusic.setComponent(new AudioGlobalComponent());

@@ -70,7 +70,7 @@
         <isStunnable/>
         <!--spells-->
         <autoAttack>
-            <entity template="spells/melee_autoattack(soundCast=Sounds/sounds/spells/maria_autoattack_cast.ogg)"/>
+            <entity template="spells/melee_autoattack(soundCast=Audio/sounds/spells/maria_autoattack_cast.ogg)"/>
         </autoAttack>
         <passives>
             <entity template="spells/maria_passive/passive(#spell1,#spell2,#spell3,#spell4)"/>

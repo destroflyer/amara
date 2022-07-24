@@ -20,7 +20,7 @@
                 <triggerSpellEffects>[spell]</triggerSpellEffects>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/unstoppable_force_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/unstoppable_force_hit.ogg</audio>
                         <audioVolume>1.5</audioVolume>
                     </entity>
                 </playAudio>

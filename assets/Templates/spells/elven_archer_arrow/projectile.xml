@@ -24,7 +24,7 @@
                 <triggerCastedSpellEffects/>
                 <playAudio>
                     <entity>
-                        <audio>Sounds/sounds/spells/elven_archer_arrow_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/elven_archer_arrow_hit.ogg</audio>
                         <audioVolume>0.25</audioVolume>
                     </entity>
                 </playAudio>

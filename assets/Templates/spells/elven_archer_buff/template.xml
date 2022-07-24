@@ -27,7 +27,7 @@
                         <triggerSpellEffects>#spell</triggerSpellEffects>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/elven_archer_buff_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/elven_archer_buff_cast.ogg</audio>
                                 <audioVolume>2</audioVolume>
                             </entity>
                         </playAudio>

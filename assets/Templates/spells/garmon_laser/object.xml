@@ -42,7 +42,7 @@
                 </addBuffArea>
                 <playAudio>
                     <entity id="audioLoop">
-                        <audio>Sounds/sounds/spells/ganfaul_laser_loop.ogg</audio>
+                        <audio>Audio/sounds/spells/ganfaul_laser_loop.ogg</audio>
                         <audioLoop/>
                         <audioVolume>0.75</audioVolume>
                     </entity>

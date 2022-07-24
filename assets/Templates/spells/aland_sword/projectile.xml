@@ -23,7 +23,7 @@
                 </addBuff>
                 <playAudio clone="true">
                     <entity>
-                        <audio>Sounds/sounds/spells/aland_sword_hit.ogg</audio>
+                        <audio>Audio/sounds/spells/aland_sword_hit.ogg</audio>
                         <audioVolume>1.25</audioVolume>
                         <audioRemoveAfterPlaying/>
                     </entity>

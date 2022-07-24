@@ -97,7 +97,7 @@ public class Map_Vegas extends Map {
         this.teamPlayersCount = teamPlayersCount;
 
         int audioBackgroundMusic = entityWorld.createEntity();
-        entityWorld.setComponent(audioBackgroundMusic, new AudioComponent("Sounds/music/citadel.ogg"));
+        entityWorld.setComponent(audioBackgroundMusic, new AudioComponent("Audio/music/citadel.ogg"));
         entityWorld.setComponent(audioBackgroundMusic, new AudioVolumeComponent(1.75f));
         entityWorld.setComponent(audioBackgroundMusic, new AudioLoopComponent());
         entityWorld.setComponent(audioBackgroundMusic, new AudioGlobalComponent());

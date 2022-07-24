@@ -39,7 +39,7 @@
                         </addEffectTriggers>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/spinning_slash_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/spinning_slash_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

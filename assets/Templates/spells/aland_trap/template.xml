@@ -25,7 +25,7 @@
                         </spawn>
                         <playAudio>
                             <entity>
-                                <audio>Sounds/sounds/spells/aland_trap_cast.ogg</audio>
+                                <audio>Audio/sounds/spells/aland_trap_cast.ogg</audio>
                             </entity>
                         </playAudio>
                     </entity>

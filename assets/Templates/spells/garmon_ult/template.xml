@@ -38,10 +38,10 @@
                     <entity>
                         <playAudio>
                             <entity id="audioStart">
-                                <audio>Sounds/sounds/spells/ganfaul_ult_cast_start.ogg</audio>
+                                <audio>Audio/sounds/spells/ganfaul_ult_cast_start.ogg</audio>
                             </entity>
                             <entity>
-                                <audio>Sounds/sounds/spells/ganfaul_ult_cast_end.ogg</audio>
+                                <audio>Audio/sounds/spells/ganfaul_ult_cast_end.ogg</audio>
                                 <audioSuccessor delay="[delay]">#audioStart</audioSuccessor>
                             </entity>
                         </playAudio>
