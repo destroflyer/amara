@@ -28,7 +28,7 @@
         <version.maven-compiler-plugin>3.8.1</version.maven-compiler-plugin>
         <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
         <version.mockito>4.6.1</version.mockito>
-        <version.mysql>8.0.20</version.mysql>
+        <version.mysql>8.0.28</version.mysql>
     </properties>
     <repositories>
         <repository>
