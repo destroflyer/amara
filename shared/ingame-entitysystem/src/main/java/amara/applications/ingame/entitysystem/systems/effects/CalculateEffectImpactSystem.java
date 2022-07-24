@@ -34,7 +34,7 @@ import amara.applications.ingame.entitysystem.systems.physics.PositionUtil;
 import amara.applications.ingame.entitysystem.systems.targets.TargetUtil;
 import amara.libraries.entitysystem.*;
 import amara.libraries.entitysystem.templates.EntityTemplate;
-import amara.libraries.expressions.*;
+import amara.libraries.expressions.ExpressionSpace;
 import amara.libraries.expressions.exceptions.ExpressionException;
 
 import java.util.LinkedList;
@@ -45,11 +45,11 @@ import java.util.stream.Stream;
 public class CalculateEffectImpactSystem implements EntitySystem {
 
     private LinkedList<Integer> appliedEffectEntities = new LinkedList<>();
+    private ExpressionSpace expressionSpace = new ExpressionSpace();
 
     @Override
     public void update(EntityWorld entityWorld, float deltaSeconds) {
         appliedEffectEntities.clear();
-        ExpressionSpace expressionSpace = GlobalExpressionSpace.getInstance();
         for (int effectCastEntity : getApplicableEffectCastEntities(entityWorld)) {
             EntityWrapper effectCast = entityWorld.getWrapped(effectCastEntity);
             EntityWrapper effect = entityWorld.getWrapped(effectCast.getComponent(PrepareEffectComponent.class).getEffectEntity());
