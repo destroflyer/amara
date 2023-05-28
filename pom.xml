@@ -14,21 +14,21 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.amara>0.8</version.amara>
-        <version.apache-httpclient>4.5.12</version.apache-httpclient>
+        <version.apache-httpclient>4.5.14</version.apache-httpclient>
         <version.bouncycastle>1.46</version.bouncycastle>
-        <version.jackson>2.11.0</version.jackson>
-        <version.java-jwt>3.10.3</version.java-jwt>
+        <version.jackson>2.15.1</version.jackson>
+        <version.java-jwt>4.4.0</version.java-jwt>
         <version.javax.activation>1.1.1</version.javax.activation>
-        <version.jaxb>2.3.0</version.jaxb>
-        <version.jdom>2.0.6</version.jdom>
-        <version.jme3>3.2.1-stable</version.jme3>
+        <version.jaxb>2.3.1</version.jaxb>
+        <version.jdom>2.0.6.1</version.jdom>
+        <version.jme3>3.6.0-stable</version.jme3>
         <version.jorbis>0.0.17.4</version.jorbis>
-        <version.junit>4.11</version.junit>
-        <version.lombok>1.18.24</version.lombok>
-        <version.maven-compiler-plugin>3.8.1</version.maven-compiler-plugin>
-        <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
-        <version.mockito>4.6.1</version.mockito>
-        <version.mysql>8.0.20</version.mysql>
+        <version.junit>4.13.2</version.junit>
+        <version.lombok>1.18.28</version.lombok>
+        <version.maven-compiler-plugin>3.11.0</version.maven-compiler-plugin>
+        <version.maven-surefire-plugin>3.1.0</version.maven-surefire-plugin>
+        <version.mockito>5.3.1</version.mockito>
+        <version.mysql>8.0.33</version.mysql>
     </properties>
     <repositories>
         <repository>
@@ -209,13 +209,14 @@
             </dependency>
             <dependency>
                 <groupId>org.jmonkeyengine</groupId>
-                <artifactId>jme3-lwjgl</artifactId>
+                <artifactId>jme3-lwjgl3</artifactId>
                 <version>${version.jme3}</version>
             </dependency>
             <dependency>
                 <groupId>org.jmonkeyengine</groupId>
                 <artifactId>jme3-desktop</artifactId>
                 <version>${version.jme3}</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>org.jmonkeyengine</groupId>

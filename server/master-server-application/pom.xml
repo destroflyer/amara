@@ -9,7 +9,7 @@
     </parent>
     <artifactId>master-server-application</artifactId>
     <properties>
-        <version.maven-assembly-plugin>3.3.0</version.maven-assembly-plugin>
+        <version.maven-assembly-plugin>3.6.0</version.maven-assembly-plugin>
     </properties>
     <dependencies>
         <dependency>

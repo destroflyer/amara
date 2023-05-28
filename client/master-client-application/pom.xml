@@ -9,8 +9,8 @@
     </parent>
     <artifactId>master-client-application</artifactId>
     <properties>
-        <version.maven-dependency-plugin>3.2.0</version.maven-dependency-plugin>
-        <version.maven-jar-plugin>3.2.0</version.maven-jar-plugin>
+        <version.maven-dependency-plugin>3.6.0</version.maven-dependency-plugin>
+        <version.maven-jar-plugin>3.3.0</version.maven-jar-plugin>
     </properties>
     <dependencies>
         <dependency>
@@ -71,19 +71,7 @@
         </dependency>
         <dependency>
             <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-effects</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
             <artifactId>jme3-networking</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-niftygui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jmonkeyengine</groupId>
-            <artifactId>jme3-terrain</artifactId>
         </dependency>
     </dependencies>
     <build>

@@ -13,7 +13,7 @@ public class TestGame_Team extends TestGame {
             // networkClient.sendMessage(new Message_AddLobbyBot(new LobbyPlayer_Bot(BotType.EASY, "Bot", new GameSelectionPlayerData(18, null))));
             networkClient.sendMessage(new Message_StartLobbyQueue());
             networkClient.sendMessage(new Message_AcceptGameSelection(true));
-            networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(17, null)));
+            networkClient.sendMessage(new Message_SetGameSelectionPlayerData(new GameSelectionPlayerData(22, null)));
             networkClient.sendMessage(new Message_LockInGameSelection());
         });
     }

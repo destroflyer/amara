@@ -20,7 +20,7 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Geometry;
-import org.lwjgl.opengl.Display;
+import com.jme3.system.lwjgl.LwjglWindow;
 
 public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication> implements ActionListener {
 
@@ -271,19 +271,16 @@ public class IngameCameraAppState extends BaseDisplayAppState<DisplayApplication
         this.zoomMaximumDistance = zoomMaximumDistance;
     }
 
-    private static boolean isMouseInWindow() {
+    private boolean isMouseInWindow() {
         PointerInfo pointerInfo = MouseInfo.getPointerInfo();
         if (pointerInfo != null) {
             int mouseX = pointerInfo.getLocation().x;
             int mouseY = pointerInfo.getLocation().y;
-            int minX = Display.getX();
-            int minY = Display.getY();
-            if (!Settings.getBoolean("fullscreen")) {
-                minX += 2;
-                minY += 26;
-            }
-            int maxX = (minX + Display.getWidth());
-            int maxY = (minY + Display.getHeight());
+            LwjglWindow lwjglWindow = (LwjglWindow) mainApplication.getContext();
+            int minX = lwjglWindow.getWindowXPosition();
+            int minY = lwjglWindow.getWindowYPosition();
+            int maxX = (minX + lwjglWindow.getSettings().getWidth());
+            int maxY = (minY + lwjglWindow.getSettings().getHeight());
             return !((mouseX < minX) || (mouseX > maxX) || (mouseY < minY) || (mouseY > maxY));
         }
         return false;

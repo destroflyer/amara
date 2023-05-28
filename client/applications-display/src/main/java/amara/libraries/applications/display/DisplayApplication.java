@@ -30,6 +30,7 @@ public class DisplayApplication extends SimpleApplication {
         settings.setHeight(Settings.getInteger("resolution_height"));
         settings.setSamples(Settings.getInteger("antialiasing"));
         settings.setVSync(Settings.getBoolean("vsync"));
+        settings.setGammaCorrection(false);
         setShowSettings(false);
     }
 
