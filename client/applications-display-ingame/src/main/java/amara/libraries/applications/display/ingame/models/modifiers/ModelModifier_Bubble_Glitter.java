@@ -1,11 +1,8 @@
 package amara.libraries.applications.display.ingame.models.modifiers;
 
-import amara.core.files.FileAssets;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
-import com.destroflyer.jme3.effekseer.model.ParticleEffectSettings;
-import com.destroflyer.jme3.effekseer.reader.EffekseerReader;
-import com.destroflyer.jme3.effekseer.renderer.EffekseerControl;
+import com.destroflyer.jme3.effekseer.nativ.EffekseerControl;
 import com.jme3.asset.AssetManager;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
@@ -22,14 +19,9 @@ public class ModelModifier_Bubble_Glitter extends ModelModifier {
         particleNodeExplode.setLocalTranslation(0, 2.5f, 0);
         particleNodeExplode.setLocalScale(0.5f);
         particleNodeExplode.setShadowMode(RenderQueue.ShadowMode.Off);
-        particleNodeExplode.addControl(new EffekseerControl(
-            new EffekseerReader().read(FileAssets.ROOT, FileAssets.ROOT + "Effekseer/bubble_explode.efkproj"),
-            ParticleEffectSettings.builder()
-                .loop(false)
-                .frameLength(1f / 50)
-                .build(),
-            assetManager
-        ));
+        EffekseerControl effect = new EffekseerControl(assetManager, "Effekseer/bubble_explode.efkefc");
+        effect.setSpeed(1.25f);
+        particleNodeExplode.addControl(effect);
         registeredModel.getNode().attachChild(particleNodeExplode);
         // Glitter
         Node particleNodeGlitter = new Node();
@@ -44,14 +36,9 @@ public class ModelModifier_Bubble_Glitter extends ModelModifier {
             protected void controlUpdate(float lastTimePerFrame) {
                 passedTime += lastTimePerFrame;
                 if (passedTime > 0.5f) {
-                    spatial.addControl(new EffekseerControl(
-                        new EffekseerReader().read(FileAssets.ROOT, FileAssets.ROOT + "Effekseer/bubble_glitter.efkproj"),
-                        ParticleEffectSettings.builder()
-                            .loop(false)
-                            .frameLength(4.5f / 120)
-                            .build(),
-                        assetManager
-                    ));
+                    EffekseerControl effect = new EffekseerControl(assetManager, "Effekseer/bubble_glitter.efkefc");
+                    effect.setSpeed(0.62f);
+                    spatial.addControl(effect);
                     spatial.removeControl(this);
                 }
             }

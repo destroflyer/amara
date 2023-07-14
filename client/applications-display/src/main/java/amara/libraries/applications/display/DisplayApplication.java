@@ -4,6 +4,7 @@ import amara.core.GameInfo;
 import amara.core.files.FileAssets;
 import amara.core.settings.Settings;
 import amara.libraries.applications.display.comparators.LayerGeometryComparator_Opaque;
+import com.destroflyer.jme3.effekseer.nativ.Effekseer;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.collision.CollisionResults;
@@ -39,6 +40,7 @@ public class DisplayApplication extends SimpleApplication {
         assetManager.registerLocator(FileAssets.ROOT, FileLocator.class);
         inputManager.deleteMapping(SimpleApplication.INPUT_MAPPING_EXIT);
         viewPort.getQueue().setGeometryComparator(RenderQueue.Bucket.Opaque, new LayerGeometryComparator_Opaque());
+        Effekseer.initialize(stateManager, viewPort, assetManager, context.getSettings().isGammaCorrection(), false, false);
         setDisplayStatView(false);
         setPauseOnLostFocus(false);
     }

@@ -22,6 +22,7 @@
         <version.jaxb>2.3.1</version.jaxb>
         <version.jdom>2.0.6.1</version.jdom>
         <version.jme3>3.6.0-stable</version.jme3>
+        <version.jme3-effekseer>f505042e7682ff5f2d0bdcdada97cf199a7ad9d7</version.jme3-effekseer>
         <version.jorbis>0.0.17.4</version.jorbis>
         <version.junit>4.13.2</version.junit>
         <version.lombok>1.18.28</version.lombok>
@@ -241,8 +242,15 @@
             <!--jME3 Effekseer-->
             <dependency>
                 <groupId>com.github.destroflyer.jme3-effekseer</groupId>
-                <artifactId>jme3-effekseer</artifactId>
-                <version>44aff53b24d90d5431b742bc2da16859c80f9b2a</version>
+                <artifactId>jme3-effekseer-native</artifactId>
+                <version>${version.jme3-effekseer}</version>
+                <exclusions>
+                    <!--Directly included in jme3-effekseer-native jar-->
+                    <exclusion>
+                        <groupId>effekseer</groupId>
+                        <artifactId>effekseer-native</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!--JUnit-->
             <dependency>

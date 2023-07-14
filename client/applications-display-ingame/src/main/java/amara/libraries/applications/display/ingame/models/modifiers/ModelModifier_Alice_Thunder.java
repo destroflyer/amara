@@ -1,13 +1,10 @@
 package amara.libraries.applications.display.ingame.models.modifiers;
 
-import amara.core.files.FileAssets;
 import amara.libraries.applications.display.ingame.models.util.FadeOutControl;
 import amara.libraries.applications.display.ingame.models.util.GroundTextures;
 import amara.libraries.applications.display.models.ModelModifier;
 import amara.libraries.applications.display.models.RegisteredModel;
-import com.destroflyer.jme3.effekseer.model.ParticleEffectSettings;
-import com.destroflyer.jme3.effekseer.reader.EffekseerReader;
-import com.destroflyer.jme3.effekseer.renderer.EffekseerControl;
+import com.destroflyer.jme3.effekseer.nativ.EffekseerControl;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.RenderState;
 import com.jme3.renderer.RenderManager;
@@ -35,23 +32,10 @@ public class ModelModifier_Alice_Thunder extends ModelModifier {
         particleNode.setShadowMode(RenderQueue.ShadowMode.Off);
         particleNode.addControl(new AbstractControl() {
 
-            private float passedTime;
-
             @Override
             protected void controlUpdate(float lastTimePerFrame) {
-                passedTime += lastTimePerFrame;
-                // Lightning has to hit ground (frame 22) at 0.5 --> Start at 0.5 - (22 / 120) = 0.3625
-                if (passedTime > 0.3625f) {
-                    spatial.addControl(new EffekseerControl(
-                        new EffekseerReader().read(FileAssets.ROOT, FileAssets.ROOT + "Effekseer/lightning_strike.efkproj"),
-                        ParticleEffectSettings.builder()
-                            .loop(false)
-                            .frameLength(0.75f / 120)
-                            .build(),
-                        assetManager
-                    ));
-                    spatial.removeControl(this);
-                }
+                spatial.addControl(new EffekseerControl(assetManager, "Effekseer/lightning_strike.efkefc"));
+                spatial.removeControl(this);
             }
 
             @Override

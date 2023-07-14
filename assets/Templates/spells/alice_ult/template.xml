@@ -7,7 +7,7 @@
     </values>
     <entity id="spell">
         <name>Protecting Bubbles</name>
-        <description>Channel for [castDuration] second and then summon a blue bubble around every allied characters for [buffDuration] seconds, making them invulnerable, untargetable, unable to cast spells or basic attacks and giving them a small walk speed buff.</description>
+        <description>Channel for [castDuration] second and then summon a blue bubble around every allied characters for [buffDuration] seconds, making them invulnerable, untargetable and unable to cast spells or basic attacks.</description>
         <spellVisualisation>alice_ult</spellVisualisation>
         <instantEffectTriggers>
             <!--trigger spell effects-->
