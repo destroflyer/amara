@@ -25,4 +25,6 @@ curl https://destrostudios.com:8080/apps/1/updateFiles
 
 # Deploy (Server)
 mv server/master-server-application/target/master-server-application-0.8-jar-with-dependencies.jar "${SERVER}amara.jar"
-sh "${SERVER}control.sh" restart
+mv ecosystem.config.js "${SERVER}"
+cd "${SERVER}"
+pm2 restart ecosystem.config.js
