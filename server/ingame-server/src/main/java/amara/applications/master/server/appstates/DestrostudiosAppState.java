@@ -40,7 +40,8 @@ public class DestrostudiosAppState extends BaseHeadlessAppState {
     }
 
     public DestrostudiosUser getUserByLogin(String login) {
-        return get("/users/byLogin?login=" + login, DestrostudiosUser.class);
+        // TODO: Escape
+        return get("/users/" + login, DestrostudiosUser.class);
     }
 
     private <T> T get(String endpoint, Class<T> responseClass) {
