@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        skipDefaultCheckout()
+        ansiColor('xterm')
+    }
+    parameters {
+        string(name: 'VERSION', defaultValue: 'master')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                sh 'git checkout $VERSION'
+            }
+        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-17-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'mkdir workspace'
+                sh 'echo -n ../assets/ > workspace/assets.ini'
+                sh 'mvn clean install'
+            }
+        }
+        stage('Deploy') {
+            environment {
+                CLIENT = '/var/destrostudios/apps/Amara'
+            }
+            steps {
+                // Server
+                sh 'mv server/master-server-application/target assets docker'
+                dir ('docker') {
+                    withCredentials([
+                        string(credentialsId: 'db-root-password', variable: 'DB_ROOT_PASSWORD'),
+                        string(credentialsId: 'destrostudios-auth-private-key-passphrase', variable: 'AUTH_PRIVATE_KEY_PASSPHRASE'),
+                        file(credentialsId: 'destrostudios-auth-private-key', variable: 'AUTH_PRIVATE_KEY')
+                    ]) {
+                        sh 'openssl rsa -in $AUTH_PRIVATE_KEY -passin pass:$AUTH_PRIVATE_KEY_PASSPHRASE -pubout -outform PEM -out public.pem'
+                        sh 'docker compose build --no-cache'
+                        sh 'docker compose up -d'
+                    }
+                }
+
+                // Client
+                sh 'rm -rf "$CLIENT"'
+                sh 'mkdir "$CLIENT"'
+                sh 'mv client/master-client-application/target/libs "$CLIENT"'
+                sh 'mv client/master-client-application/target/master-client-application-0.8.jar "$CLIENT/Amara.jar"'
+                sh 'mv docker/assets "$CLIENT"'
+                sh 'echo -n ./assets/ > "$CLIENT/assets.ini"'
+                sh 'curl -X POST https://destrostudios.com:8080/apps/1/updateFiles'
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}

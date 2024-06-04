@@ -1,0 +1,34 @@
+name: amara
+services:
+  db:
+    image: mysql:8.4.0
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+    volumes:
+      - /home/destroflyer/amara/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 3s
+      retries: 0
+    restart: always
+  db-ui:
+    image: destrostudios/phpmyadmin
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    ports:
+      - "33901:443"
+    restart: always
+  app:
+    build:
+      dockerfile: app.Dockerfile
+      args:
+        DB_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+    volumes:
+      - /home/destroflyer/amara/logs:/home/logs
+    ports:
+      - "33900:33900/tcp"
+      - "33900:33900/udp"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always

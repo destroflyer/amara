@@ -1,15 +1,32 @@
-node {
-    ansiColor('xterm') {
-        try {
-            stage('Checkout') {
+pipeline {
+    agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        skipDefaultCheckout()
+        ansiColor('xterm')
+    }
+    stages {
+        stage('Checkout') {
+            steps {
                 checkout scm
             }
-            stage('Build') {
-                sh 'mkdir workspace'
-                sh 'echo "../assets/" > workspace/assets.ini'
-                sh 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64;mvn clean install'
+        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-17-alpine'
+                    reuseNode true
+                }
             }
-        } finally {
+            steps {
+                sh 'mkdir workspace'
+                sh 'echo -n ../assets/ > workspace/assets.ini'
+                sh 'mvn clean install'
+            }
+        }
+    }
+    post {
+        always {
             cleanWs()
         }
     }
