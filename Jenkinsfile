@@ -19,6 +19,8 @@ pipeline {
                 }
             }
             steps {
+                sh 'mkdir workspace'
+                sh 'echo -n ../assets/ > workspace/assets.ini'
                 sh 'mvn clean install'
             }
         }
