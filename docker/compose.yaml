@@ -26,7 +26,8 @@ services:
     volumes:
       - /home/destroflyer/amara/logs:/home/logs
     ports:
-      - "33900:33900"
+      - "33900:33900/tcp"
+      - "33900:33900/udp"
     depends_on:
       db:
         condition: service_healthy
