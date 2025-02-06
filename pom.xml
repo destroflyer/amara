@@ -278,6 +278,17 @@
                 <groupId>com.auth0</groupId>
                 <artifactId>java-jwt</artifactId>
                 <version>${version.java-jwt}</version>
+                <exclusions>
+                    <!--A newer Jackson version is already included as dependency and otherwise leads to conflicts-->
+                    <exclusion>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!--PEMReader-->
             <dependency>
