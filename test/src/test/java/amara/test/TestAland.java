@@ -12,13 +12,10 @@ import amara.applications.ingame.network.messages.objects.commands.casting.CastS
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSingleTargetSpellCommand;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import com.jme3.math.Vector2f;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestAland extends CommandingPlayerTest {
 
     public TestAland() {

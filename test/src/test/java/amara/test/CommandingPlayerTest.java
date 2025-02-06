@@ -19,13 +19,13 @@ import amara.applications.ingame.entitysystem.systems.commands.ExecutePlayerComm
 import amara.applications.ingame.entitysystem.systems.units.shields.ShieldUtil;
 import amara.applications.ingame.network.messages.objects.commands.casting.SpellIndex;
 import com.jme3.math.Vector2f;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.function.Function;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CommandingPlayerTest extends GameLogicTest {
 
@@ -38,7 +38,7 @@ public class CommandingPlayerTest extends GameLogicTest {
     protected int player;
     protected int character;
 
-    @Before
+    @BeforeEach
     public void initializePlayer() {
         player = entityWorld.createEntity();
         character = createEntity(characterTemplate);

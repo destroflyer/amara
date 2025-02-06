@@ -11,15 +11,12 @@ import amara.applications.ingame.network.messages.objects.commands.casting.CastP
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSelfcastSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSingleTargetSpellCommand;
 import com.jme3.math.Vector2f;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestDosaz extends CommandingPlayerTest {
 
     public TestDosaz() {

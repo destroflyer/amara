@@ -14,7 +14,7 @@ import amara.applications.master.server.games.GamePlayerInfo_Human;
 import amara.applications.master.server.players.*;
 import amara.core.files.FileManager;
 import amara.libraries.network.*;
-import org.bouncycastle.openssl.PEMReader;
+import org.bouncycastle.openssl.PEMParser;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -65,8 +65,8 @@ public class ReceiveLoginsBackend implements MessageBackend {
     private PublicKey readPublicKey(String pathFilePath) {
         try {
             String publicKeyPath = FileManager.getFileContent(pathFilePath);
-            PEMReader pemReader = new PEMReader(new FileReader(publicKeyPath));
-            byte[] publicKeyBytes = pemReader.readPemObject().getContent();
+            PEMParser pemParser = new PEMParser(new FileReader(publicKeyPath));
+            byte[] publicKeyBytes = pemParser.readPemObject().getContent();
             return KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(publicKeyBytes));
         } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException ex) {
             ex.printStackTrace();

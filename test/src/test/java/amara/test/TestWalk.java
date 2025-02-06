@@ -4,13 +4,10 @@ import amara.applications.ingame.network.messages.objects.commands.StopWalkInDir
 import amara.applications.ingame.network.messages.objects.commands.WalkInDirectionCommand;
 import amara.applications.ingame.network.messages.objects.commands.WalkToTargetCommand;
 import com.jme3.math.Vector2f;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestWalk extends CommandingPlayerTest {
 
     @Test

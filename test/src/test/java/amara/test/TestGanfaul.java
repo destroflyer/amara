@@ -4,13 +4,10 @@ import amara.applications.ingame.entitysystem.components.physics.DirectionCompon
 import amara.applications.ingame.network.messages.objects.commands.casting.CastLinearSkillshotSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSelfcastSpellCommand;
 import com.jme3.math.Vector2f;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestGanfaul extends CommandingPlayerTest {
 
     public TestGanfaul() {

@@ -15,15 +15,15 @@ import amara.libraries.entitysystem.EntitySystem;
 import amara.libraries.entitysystem.EntityWorld;
 import amara.libraries.entitysystem.templates.EntityTemplate;
 import com.jme3.math.Vector2f;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.mockito.Mock;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class GameLogicTest {
@@ -34,17 +34,15 @@ public class GameLogicTest {
     private static boolean wasSetupDone = false;
 
     protected EntityWorld entityWorld = new EntityWorld();
-    @Mock
     private Game gameMock;
     private LinkedList<PlayerCommand> playerCommandsQueue = new LinkedList<>();
-    @Mock
     private ExecuteAIActionsSystem.EntityBotsMap entityBotsMapMock;
 
     private GameLogic gameLogic;
 
     private Set<Integer> initialEntities;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         if (!wasSetupDone) {
             FileAssets.readRootFile();
@@ -54,11 +52,15 @@ public class GameLogicTest {
         }
     }
 
-    @Before
+    @BeforeEach
     public void initializeGameLogic() {
+        gameMock = mock(Game.class);
+
         Map map = MapFileHandler.load("empty");
         when(gameMock.getMap()).thenReturn(map);
         when(gameMock.getTeamsCount()).thenReturn(2);
+
+        entityBotsMapMock = mock(ExecuteAIActionsSystem.EntityBotsMap.class);
 
         gameLogic = new GameLogic(entityWorld, gameMock, playerCommandsQueue, entityBotsMapMock);
 

@@ -8,15 +8,12 @@ import amara.applications.ingame.network.messages.objects.commands.UpgradeSpellC
 import amara.applications.ingame.network.messages.objects.commands.casting.CastLinearSkillshotSpellCommand;
 import amara.applications.ingame.network.messages.objects.commands.casting.CastSelfcastSpellCommand;
 import com.jme3.math.Vector2f;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestGarmon extends CommandingPlayerTest {
 
     public TestGarmon() {

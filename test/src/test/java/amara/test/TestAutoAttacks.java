@@ -4,13 +4,10 @@ import amara.applications.ingame.entitysystem.components.units.AutoAttackCompone
 import amara.applications.ingame.network.messages.objects.commands.AutoAttackCommand;
 import amara.applications.ingame.network.messages.objects.commands.StopCommand;
 import com.jme3.math.Vector2f;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TestAutoAttacks extends CommandingPlayerTest {
 
     @Test
