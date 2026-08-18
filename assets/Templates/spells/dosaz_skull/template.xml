@@ -6,7 +6,7 @@
     </values>
     <entity id="spell">
         <name>Skull Throw</name>
-        <description>Throws a skull to target position, that triggers all tombstones on its path. If an enemy was hit, it received magic damage - In addition, all ghosts gain attack speed and walk speed and aggro this target. If nothing was hit, a ghost is spawned at the target position.</description>
+        <description>Throws a skull to target position, that triggers all tombstones on its path. If an enemy was hit, it receives magic damage - In addition, all ghosts gain attack speed and walk speed and aggro this target. If nothing was hit, a ghost is spawned at the target position.</description>
         <spellVisualisation>dosaz_skull</spellVisualisation>
         <spellIndicator>
             <entity>
