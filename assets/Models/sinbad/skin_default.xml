@@ -1,0 +1,17 @@
+<skin name="sinbad">
+    <model normScale="0.5" scale="1.4">
+        <position>
+            <!--2.5*[scale]-->
+            <location>0,3.5,0</location>
+        </position>
+        <material>
+            <texture>body.png</texture>
+            <texture>body.png</texture>
+            <texture>clothes.png</texture>
+            <texture>body.png</texture>
+            <texture>sword.png</texture>
+            <texture>clothes.png</texture>
+            <texture>clothes.png</texture>
+        </material>
+    </model>
+</skin>

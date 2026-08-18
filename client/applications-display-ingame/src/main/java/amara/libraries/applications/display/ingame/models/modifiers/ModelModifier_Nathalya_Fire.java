@@ -11,11 +11,11 @@ public class ModelModifier_Nathalya_Fire extends ModelModifier {
 
     @Override
     public void modify(RegisteredModel registeredModel, AssetManager assetManager) {
-        Node swordNode = registeredModel.requestBoneAttachmentsNode("Bip01_R_Hand");
+        Node wandNode = registeredModel.requestBoneAttachmentsNode("Bip01_R_Hand");
         Spatial fire = assetManager.loadModel("Models/fireball/fireball.j3o");
         fire.setLocalTranslation(12, 2, 87);
         fire.setLocalScale(10, 10, 16);
         JMonkeyUtil.setLocalRotation(fire, new Vector3f(1, 1, 4));
-        swordNode.attachChild(fire);
+        wandNode.attachChild(fire);
     }
 }

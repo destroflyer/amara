@@ -41,7 +41,7 @@ public class MaterialFactory {
         return generateLightingMaterial(assetManager, textureFilePath, null);
     }
 
-    public static Material generateLightingMaterial(AssetManager assetManager, String textureFilePath, String normalMapFilePath){
+    public static Material generateLightingMaterial(AssetManager assetManager, String textureFilePath, String normalMapFilePath) {
         Material material = new Material(assetManager, DEFINITION_NAME_LIGHTING);
         Texture textureDiffuse = loadTexture(assetManager, textureFilePath);
         textureDiffuse.setWrap(Texture.WrapMode.Repeat);

@@ -141,7 +141,7 @@ public class ModelAppState extends BaseDisplayAppState<ModelViewerApplication> i
                 }
                 else{
                     backgroundWhiteOrBlack = (!backgroundWhiteOrBlack);
-                    mainApplication.getViewPort().setBackgroundColor(backgroundWhiteOrBlack?ColorRGBA.White:ColorRGBA.Black);
+                    mainApplication.getViewPort().setBackgroundColor(backgroundWhiteOrBlack ? ColorRGBA.White : ColorRGBA.Black);
                 }
             }
             else{
